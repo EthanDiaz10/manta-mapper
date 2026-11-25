@@ -1,0 +1,26 @@
+# Mission requirements for Manta Mapper. Any key left out uses the default in
+# src/manta_mapper/requirements.py. IDs refer to docs/requirements.md.
+
+[survey]
+area_min_ha = 25.0        # MIS-1
+area_stretch_ha = 50.0    # MIS-1
+gsd_target_m = 0.03       # MIS-2
+forward_overlap = 0.75    # MIS-3
+side_overlap = 0.65       # MIS-3
+design_wind_m_s = 5.0     # MIS-5
+
+[environment]
+field_elevation_m = 1220.0  # NMSU area, ~3900-4030 ft MSL
+temperature_offset_K = 25.0  # ~32 C at the field: hot-summer sizing case
+
+[limits]
+max_stall_speed_m_s = 9.0     # AC-1
+max_wing_loading_kg_m2 = 6.0  # AC-2
+battery_reserve = 0.30        # MIS-4
+energy_design_margin = 1.25   # MIS-4a: pack sized for 50 ha x 1.25
+min_airspeed_window_m_s = 3.0 # AC-9
+
+[camera]
+max_trigger_rate_hz = 1.0     # CAM-1: confirm with the bench test
+trigger_rate_margin = 0.7     # CAM-1a: plan uses <= 70 % of the proven rate
+long_side_across_track = false  # portrait: half the trigger rate, more flight lines
