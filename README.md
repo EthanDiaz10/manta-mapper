@@ -29,11 +29,14 @@ milestones.
 
 ## Status
 
-Phase 1, milestone 1: requirements and constraint analysis are working.
+Phase 1: requirements and constraint analysis (M1.1) and airfoil selection
+(M1.2) are working. The airfoils are S5010 on the outer panels and MH 78 on
+the centre body; [docs/airfoils.md](docs/airfoils.md) explains why.
 
 ```bash
 pip install -e ".[dev]"
 python -m manta_mapper config/mission.toml --plot constraint_diagram.png
+python -m manta_mapper.airfoils config/mission.toml --plots docs/img
 pytest
 ```
 
@@ -54,6 +57,7 @@ src/manta_mapper/
   atmosphere.py         ISA atmosphere
   survey.py             GSD, footprint, overlap, flight lines, trigger rate
   constraints.py        wing-loading / power-loading constraint analysis, sizing
+  airfoils.py           reflex airfoil comparison (NeuralFoil), gates, scores, plots
   geometry.py, aero.py, weights.py, propulsion.py, stability.py,
   optimize.py, cad.py, validation.py     (placeholders for later milestones)
 tests/

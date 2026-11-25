@@ -50,8 +50,9 @@ Verification methods: **A** analysis (pipeline), **T** test (bench or flight),
 | AC-10 | Structure: spar + skin carry launch, gust and landing loads | 4 g limit, 1.5 safety factor | A (FEA), T (wingtip load test) |
 | AC-11 | Removable outer panels; replaceable nose, tips and skid | yes | I |
 | AC-12 | Payload bay fits camera, Pi, battery with top hatch access | yes | I (CAD) |
-| AC-13 | Belly landing on a sacrificial skid without damage beyond the skid | 5 landings | T |
+| AC-13 | Durability: belly landings on the flying field (dirt, desert scrub) at up to 1.3 Vs needing nothing more than a replacement skid or wingtip. No repairs to the spar, centre pod or outer panels | ≥ 20 landings | T (landing log) |
 | AC-14 | Launch method | hand launch; bungee catapult is a stretch goal | D |
+| AC-15 | Build tolerance: airfoils are judged as built, with a 1 mm blunt trailing edge and early boundary-layer transition (foam/printed surface, tape seams). The chosen sections pass the pitch-trim gate in that state, and CL_max is taken from the as-built polar | yes | A (`airfoils.py`) |
 
 ## 4. Camera (CAM)
 
@@ -105,5 +106,5 @@ pipeline prediction for the as-built aircraft (as-built mass and CG).
 ## Open items
 
 - CAM-1 bench test result: if below 1 Hz, apply MIS-2a; if ≥ 1.4 Hz, consider landscape mounting (MIS-3a) to shorten flights.
-- Hybrid printed centre body + foam outer panels vs fully printed (affects weights and cost).
+- Hybrid printed centre body + foam outer panels vs fully printed (affects weights and cost). Material choice is open and must meet AC-13.
 - Possible extra: export the pipeline model to ArduPilot SITL.
