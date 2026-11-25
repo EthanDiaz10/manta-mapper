@@ -28,6 +28,16 @@ def density(altitude_m: float, temperature_offset_K: float = 0.0) -> float:
     return isa(altitude_m, temperature_offset_K)[2]
 
 
+def dynamic_viscosity(temperature_K: float) -> float:
+    """Air dynamic viscosity (Pa s) from Sutherland's law."""
+    mu_ref, t_ref, s = 1.716e-5, 273.15, 110.4
+    return mu_ref * (temperature_K / t_ref) ** 1.5 * (t_ref + s) / (temperature_K + s)
+
+
+def speed_of_sound(temperature_K: float) -> float:
+    return (1.4 * R_AIR * temperature_K) ** 0.5
+
+
 def density_altitude(rho: float) -> float:
     """Altitude in the standard atmosphere that has density ``rho``."""
     exponent = G0 / (LAPSE * R_AIR) - 1
@@ -35,4 +45,4 @@ def density_altitude(rho: float) -> float:
     return (T0 / LAPSE) * (1 - (rho / rho0) ** (1 / exponent))
 
 
-__all__ = ["isa", "density", "density_altitude"]
+__all__ = ["isa", "density", "density_altitude", "dynamic_viscosity", "speed_of_sound"]
