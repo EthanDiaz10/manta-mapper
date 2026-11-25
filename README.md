@@ -29,14 +29,17 @@ milestones.
 
 ## Status
 
-Phase 1: requirements and constraint analysis (M1.1) and airfoil selection
-(M1.2) are working. The airfoils are S5010 on the outer panels and MH 78 on
-the centre body; [docs/airfoils.md](docs/airfoils.md) explains why.
+Phase 1: requirements and constraint analysis (M1.1), airfoil selection
+(M1.2) and the parametric geometry (M1.3) are working. The airfoils are S5010
+on the outer panels and MH 78 on the centre body; [docs/airfoils.md](docs/airfoils.md)
+explains why. [docs/geometry.md](docs/geometry.md) explains every shape
+parameter and the baseline: 1.53 m span, 0.40 m² wing, 5° washout.
 
 ```bash
 pip install -e ".[dev]"
 python -m manta_mapper config/mission.toml --plot constraint_diagram.png
 python -m manta_mapper.airfoils config/mission.toml --plots docs/img
+python -m manta_mapper.geometry config/mission.toml --plots docs/img --vsp manta.vspscript
 pytest
 ```
 
@@ -46,6 +49,8 @@ trigger interval, flight-line length), the constraint-chart design point
 mass.
 
 ![Constraint diagram](docs/img/constraint_diagram.png)
+
+![Baseline geometry](docs/img/geometry_views.png)
 
 ## Repository layout
 
@@ -58,7 +63,8 @@ src/manta_mapper/
   survey.py             GSD, footprint, overlap, flight lines, trigger rate
   constraints.py        wing-loading / power-loading constraint analysis, sizing
   airfoils.py           reflex airfoil comparison (NeuralFoil), gates, scores, plots
-  geometry.py, aero.py, weights.py, propulsion.py, stability.py,
+  geometry.py           parametric BWB: AeroSandbox model, reference values, checks, OpenVSP export
+  aero.py, weights.py, propulsion.py, stability.py,
   optimize.py, cad.py, validation.py     (placeholders for later milestones)
 tests/
 ```
