@@ -1,0 +1,22 @@
+# Mission requirements for Manta Mapper. Any key left out uses the default in
+# src/manta_mapper/requirements.py. IDs refer to docs/requirements.md.
+
+[survey]
+area_min_ha = 25.0        # MIS-1
+area_stretch_ha = 50.0    # MIS-1
+gsd_target_m = 0.03       # MIS-2
+forward_overlap = 0.75    # MIS-3
+side_overlap = 0.65       # MIS-3
+design_wind_m_s = 5.0     # MIS-5
+
+[environment]
+field_elevation_m = 0.0   # TODO: set to your flying field
+temperature_offset_K = 15.0
+
+[limits]
+max_stall_speed_m_s = 9.0     # AC-1
+max_wing_loading_kg_m2 = 6.0  # AC-2
+battery_reserve = 0.30        # MIS-4
+
+[camera]
+max_trigger_rate_hz = 1.0     # CAM-1: confirm with the bench test
