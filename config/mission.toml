@@ -10,7 +10,7 @@ side_overlap = 0.65       # MIS-3
 design_wind_m_s = 5.0     # MIS-5
 
 [environment]
-field_elevation_m = 0.0   # TODO: set to your flying field
+field_elevation_m = 1220.0  # NMSU area, ~3900-4030 ft MSL
 temperature_offset_K = 15.0
 
 [limits]

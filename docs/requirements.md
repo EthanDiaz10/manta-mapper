@@ -99,7 +99,7 @@ pipeline prediction for the as-built aircraft (as-built mass and CG).
 
 ## Open items
 
-- Field elevation and typical summer temperature for the flying site (sets air density for AC-1).
+- Typical summer temperature at the flying site (field elevation set to 1220 m for the NMSU area; sets air density for AC-1).
 - CAM-1 bench test result: if 1 Hz full-res isn't sustainable, fall back per MIS-2a or reduce forward overlap.
 - Hybrid printed centre body + foam outer panels vs fully printed (affects weights and cost).
 - Possible extra: export the pipeline model to ArduPilot SITL.
