@@ -166,16 +166,17 @@ def plan_survey(
         max_groundspeed_m_s=v_down,
         trigger_interval_min_s=trigger_interval,
         trigger_rate_max_hz=trigger_rate,
-        trigger_ok=trigger_rate <= cam.max_trigger_rate_hz,
+        trigger_ok=trigger_rate <= cam.max_trigger_rate_hz * cam.trigger_rate_margin,
         max_exposure_s=max_exposure_for_blur(v_down, gsd, s.max_blur_px),
         survey_time_s=survey_time,
     )
 
 
 def max_airspeed_for_trigger(req: MissionRequirements, gsd_m: float | None = None) -> float:
-    """Highest airspeed at which the camera keeps up on the downwind leg."""
+    """Highest airspeed at which the camera keeps up (with margin) on the downwind leg."""
     s, cam = req.survey, req.camera
     gsd = s.gsd_target_m if gsd_m is None else gsd_m
     h = min(altitude_for_gsd(cam, gsd), s.max_altitude_agl_m)
     _, along = footprint(cam, h)
-    return along * (1 - s.forward_overlap) * cam.max_trigger_rate_hz - s.design_wind_m_s
+    rate = cam.max_trigger_rate_hz * cam.trigger_rate_margin
+    return along * (1 - s.forward_overlap) * rate - s.design_wind_m_s

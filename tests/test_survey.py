@@ -14,8 +14,10 @@ from manta_mapper.survey import (
     turn_radius,
 )
 
-REQ = MissionRequirements()
+REQ = MissionRequirements()  # baseline: portrait camera, 75 % / 65 % overlap
 CAM = REQ.camera
+# Landscape (long side across track) keeps the hand calcs below simple.
+LAND = replace(REQ, camera=replace(CAM, long_side_across_track=True))
 
 
 def test_altitude_for_3cm_gsd_matches_hand_calc():
@@ -28,10 +30,12 @@ def test_gsd_and_altitude_are_inverse():
         assert altitude_for_gsd(CAM, gsd_at_altitude(CAM, h)) == pytest.approx(h)
 
 
-def test_footprint_long_side_across_track():
-    across, along = footprint(CAM, altitude_for_gsd(CAM, 0.03))
-    assert across == pytest.approx(4608 * 0.03)
-    assert along == pytest.approx(2592 * 0.03)
+def test_footprint_orientation():
+    h = altitude_for_gsd(CAM, 0.03)
+    across, along = footprint(LAND.camera, h)
+    assert (across, along) == (pytest.approx(4608 * 0.03), pytest.approx(2592 * 0.03))
+    across, along = footprint(CAM, h)  # portrait baseline swaps them
+    assert (across, along) == (pytest.approx(2592 * 0.03), pytest.approx(4608 * 0.03))
 
 
 def test_turn_radius_30deg():
@@ -44,8 +48,8 @@ def test_blur_limit():
     assert max_exposure_for_blur(20, 0.03, 0.5) == pytest.approx(7.5e-4)
 
 
-def test_plan_25ha_square():
-    p = plan_survey(REQ, area_ha=25, airspeed_m_s=14)
+def test_plan_25ha_square_landscape():
+    p = plan_survey(LAND, area_ha=25, airspeed_m_s=14)
     assert not p.altitude_limited
     assert p.photo_spacing_m == pytest.approx(2592 * 0.03 * 0.25)
     assert p.line_spacing_m == pytest.approx(4608 * 0.03 * 0.35)
@@ -57,7 +61,16 @@ def test_plan_25ha_square():
     assert p.total_line_length_m >= p.ideal_line_length_m
     # Downwind leg: 19 m/s over 19.44 m -> 1.023 s between photos
     assert p.trigger_interval_min_s == pytest.approx(19.44 / 19.0)
-    assert p.trigger_ok
+    # 0.98 Hz needed but only 70 % of the 1 Hz camera may be used
+    assert not p.trigger_ok
+
+
+def test_portrait_baseline_halves_trigger_rate():
+    land = plan_survey(LAND, area_ha=25)
+    port = plan_survey(REQ, area_ha=25)
+    assert port.trigger_rate_max_hz == pytest.approx(land.trigger_rate_max_hz * 2592 / 4608)
+    assert port.trigger_ok
+    assert port.total_path_m > land.total_path_m  # the price: more lines
 
 
 def test_survey_time_includes_wind_penalty():
@@ -76,12 +89,14 @@ def test_fallback_4cm_is_altitude_limited():
 
 
 def test_trigger_rate_flagged_when_too_fast():
-    slow_cam = replace(REQ, camera=replace(CAM, max_trigger_rate_hz=0.5))
+    slow_cam = replace(REQ, camera=replace(CAM, max_trigger_rate_hz=0.7))
     assert not plan_survey(slow_cam).trigger_ok
 
 
 def test_max_airspeed_for_trigger():
-    assert max_airspeed_for_trigger(REQ) == pytest.approx(19.44 * 1.0 - 5.0)
+    # landscape: 19.44 m photo spacing x (0.7 x 1 Hz) - 5 m/s wind
+    assert max_airspeed_for_trigger(LAND) == pytest.approx(19.44 * 0.7 - 5.0)
+    assert max_airspeed_for_trigger(REQ) == pytest.approx(4608 * 0.03 * 0.25 * 0.7 - 5.0)
 
 
 def test_airspeed_must_beat_wind():

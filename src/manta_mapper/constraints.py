@@ -164,16 +164,30 @@ class SizingSummary:
     cruise_l_over_d: float
     cruise_power_elec_w: float  # propulsion only
     peak_power_elec_w: float  # max over all power curves (motor sizing)
-    airspeed_window_m_s: tuple[float, float]  # (1.3 Vs, camera trigger limit)
+    airspeed_window_m_s: tuple[float, float]  # (1.3 Vs, camera trigger limit with margin)
+    min_window_m_s: float  # AC-9
     survey: SurveyPlan
     mission_time_s: float
-    energy_required_wh: float  # usable energy incl. reserve
+    energy_used_wh: float  # energy THIS mission draws from the pack
+    energy_required_wh: float  # usable energy THIS mission needs incl. reserve
+    battery_energy_wh: float  # usable energy the pack must hold (stretch area, reserve, margin)
     battery_mass_kg: float
+
+    @property
+    def airspeed_window_width_m_s(self) -> float:
+        lo, hi = self.airspeed_window_m_s
+        return hi - lo
 
     @property
     def airspeed_window_ok(self) -> bool:
         lo, hi = self.airspeed_window_m_s
-        return lo <= self.survey.airspeed_m_s <= hi
+        in_window = lo <= self.survey.airspeed_m_s <= hi
+        return in_window and self.airspeed_window_width_m_s >= self.min_window_m_s
+
+    @property
+    def reserve_on_landing(self) -> float:
+        """Fraction of the pack's usable energy left after THIS mission."""
+        return 1 - self.energy_used_wh / self.battery_energy_wh
 
 
 def size_aircraft(
@@ -184,9 +198,9 @@ def size_aircraft(
 ) -> SizingSummary:
     """Turn the constraint-chart design point into wing area, power and battery.
 
-    Battery energy covers propulsion plus avionics for the survey and the fixed
-    overhead (launch, climb, transit, landing), then is scaled up so that the
-    reserve fraction is still in the pack on landing.
+    Mission energy covers propulsion plus avionics for the survey and the fixed
+    overhead (launch, climb, transit, landing). The pack is sized for the
+    stretch area with the reserve still in it on landing, times a design margin.
     """
     a, lim = req.assumptions, req.limits
     plan = plan_survey(req, area_ha=area_ha)
@@ -207,10 +221,19 @@ def size_aircraft(
     p_cruise = w * v * cd / cl / (a.eta_prop_cruise * a.eta_motor_esc)
     p_peak = w * result.design_power_loading
 
-    t_mission = plan.survey_time_s + req.survey.overhead_time_s
-    energy_used_wh = (p_cruise + a.avionics_power_w) * t_mission / 3600
+    def mission_energy(p: SurveyPlan) -> tuple[float, float]:
+        t = p.survey_time_s + req.survey.overhead_time_s
+        return t, (p_cruise + a.avionics_power_w) * t / 3600
+
+    t_mission, energy_used_wh = mission_energy(plan)
     energy_required_wh = energy_used_wh / (1 - lim.battery_reserve)
-    battery_mass = energy_required_wh / (a.battery_specific_energy_wh_kg * a.battery_usable_fraction)
+
+    # The pack is sized for the stretch area, then given a design margin, so
+    # the minimum mission lands with far more than the required reserve.
+    stretch = plan_survey(req, area_ha=max(plan.area_ha, req.survey.area_stretch_ha))
+    _, stretch_wh = mission_energy(stretch)
+    battery_energy_wh = stretch_wh / (1 - lim.battery_reserve) * lim.energy_design_margin
+    battery_mass = battery_energy_wh / (a.battery_specific_energy_wh_kg * a.battery_usable_fraction)
 
     return SizingSummary(
         mass_kg=mass_kg,
@@ -223,9 +246,12 @@ def size_aircraft(
         cruise_power_elec_w=p_cruise,
         peak_power_elec_w=p_peak,
         airspeed_window_m_s=(1.3 * vs, max_airspeed_for_trigger(req, plan.gsd_achieved_m)),
+        min_window_m_s=lim.min_airspeed_window_m_s,
         survey=plan,
         mission_time_s=t_mission,
+        energy_used_wh=energy_used_wh,
         energy_required_wh=energy_required_wh,
+        battery_energy_wh=battery_energy_wh,
         battery_mass_kg=battery_mass,
     )
 

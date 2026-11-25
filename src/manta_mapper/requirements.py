@@ -31,10 +31,17 @@ class Camera:
     height_px: int = 2592
     pixel_pitch_m: float = 1.4e-6
     focal_length_m: float = 4.74e-3
-    # Long side of the sensor across the flight track: widest swath, so the
-    # fewest flight lines. Along-track spacing is then set by the short side.
-    long_side_across_track: bool = True
-    max_trigger_rate_hz: float = 1.0  # CAM-1: what the Pi Zero 2 W must sustain
+    # Baseline: long side of the sensor ALONG the flight track ("portrait").
+    # Photos are then ~1.8x further apart, so the camera needs about half the
+    # trigger rate, at the cost of ~1.7x more flight-line length. Energy is
+    # cheap for this mission and the Pi's sustained still rate is the biggest
+    # unknown, so we spend energy to buy camera margin. If the CAM-1 bench test
+    # shows plenty of speed, set this True ("landscape") to halve flight time.
+    long_side_across_track: bool = False
+    max_trigger_rate_hz: float = 1.0  # CAM-1: sustained rate proven on the bench
+    # CAM-1a: the plan may use at most this fraction of the proven rate, leaving
+    # room for SD-card stalls, gusts and ground-speed spikes.
+    trigger_rate_margin: float = 0.7
     min_exposure_s: float = 1 / 4000
 
 
@@ -61,7 +68,8 @@ class Environment:
     """Atmosphere at the flying field. Set ``field_elevation_m`` to your site."""
 
     field_elevation_m: float = 0.0
-    temperature_offset_K: float = 15.0  # ISA + 15 K: a hot summer day is the sizing case
+    # ISA + 25 K: about 32 C at 1220 m, a hot Las Cruces summer afternoon.
+    temperature_offset_K: float = 25.0
 
 
 @dataclass(frozen=True)
@@ -72,6 +80,10 @@ class AircraftLimits:
     max_wing_loading_kg_m2: float = 6.0  # AC-2 (hand launch)
     max_takeoff_mass_kg: float = 2.0  # AC-3
     battery_reserve: float = 0.30  # MIS-4: fraction of usable energy left on landing
+    # MIS-4a: battery sized for the stretch area, then x1.25 for drag and
+    # efficiency guesses being optimistic. Costs ~100 g, removes a whole risk.
+    energy_design_margin: float = 1.25
+    min_airspeed_window_m_s: float = 3.0  # AC-9: room between 1.3 Vs and the camera limit
     min_climb_rate_m_s: float = 2.5  # AC-5
     launch_climb_gradient: float = 0.15  # AC-6: ~8.5 deg climb straight off the hand
 

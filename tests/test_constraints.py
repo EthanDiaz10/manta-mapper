@@ -1,4 +1,5 @@
 from dataclasses import replace
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -13,6 +14,7 @@ from manta_mapper.constraints import (
 from manta_mapper.requirements import G0, MissionRequirements
 
 REQ = MissionRequirements()
+ROOT = Path(__file__).resolve().parents[1]
 
 
 # --- atmosphere ---------------------------------------------------------------
@@ -44,12 +46,13 @@ def test_stall_limit_matches_hand_calc():
 
 
 def test_stall_drives_design_below_hand_launch_cap():
-    # With CL_max = 1.0 on a hot day, a 9 m/s stall allows only ~4.8 kg/m^2,
-    # so stall (not the 6 kg/m^2 cap) is the active wing-loading limit.
-    res = constraint_analysis(REQ)
+    # With CL_max = 1.0, a 9 m/s stall at 1220 m on an ISA+25 day allows only
+    # ~4.1 kg/m^2, so stall (not the 6 kg/m^2 cap) is the active limit.
+    req = MissionRequirements.from_toml(ROOT / "config" / "mission.toml")
+    res = constraint_analysis(req)
     assert res.driving_limit == "stall"
-    assert res.design_wing_loading_kg_m2 < REQ.limits.max_wing_loading_kg_m2
-    assert res.design_wing_loading_kg_m2 == pytest.approx(4.81, abs=0.02)
+    assert res.design_wing_loading_kg_m2 < req.limits.max_wing_loading_kg_m2
+    assert res.design_wing_loading_kg_m2 == pytest.approx(4.12, abs=0.02)
 
 
 def test_cap_drives_when_clmax_is_high():
@@ -94,7 +97,27 @@ def test_size_aircraft_consistency():
 def test_reserve_is_respected():
     sz = size_aircraft(REQ, mass_kg=1.5)
     used = (sz.cruise_power_elec_w + REQ.assumptions.avionics_power_w) * sz.mission_time_s / 3600
+    assert used == pytest.approx(sz.energy_used_wh)
     assert used / sz.energy_required_wh == pytest.approx(1 - REQ.limits.battery_reserve)
+
+
+def test_battery_sized_for_stretch_with_margin():
+    lim = REQ.limits
+    small = size_aircraft(REQ, 1.5, area_ha=25)
+    big = size_aircraft(REQ, 1.5, area_ha=50)
+    assert small.battery_energy_wh == pytest.approx(big.battery_energy_wh)
+    # Stretch mission lands with more than the reserve because of the margin:
+    # 1 - 0.7 / 1.25 = 0.44
+    assert big.reserve_on_landing == pytest.approx(1 - (1 - lim.battery_reserve) / lim.energy_design_margin)
+    assert small.reserve_on_landing > big.reserve_on_landing
+
+
+def test_airspeed_window_needs_minimum_width():
+    sz = size_aircraft(REQ, 1.5)
+    assert sz.airspeed_window_width_m_s >= REQ.limits.min_airspeed_window_m_s
+    assert sz.airspeed_window_ok
+    land = replace(REQ, camera=replace(REQ.camera, long_side_across_track=True))
+    assert not size_aircraft(land, 1.5).airspeed_window_ok  # landscape at 1 Hz is too tight
 
 
 def test_stretch_mission_needs_more_energy():

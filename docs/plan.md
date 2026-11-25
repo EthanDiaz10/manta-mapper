@@ -29,7 +29,7 @@ visible and mistakes surface early.
 | Milestone | Done when |
 |---|---|
 | M3.1 Build | airframe printed and assembled; mass and CG measured (VAL-4) |
-| M3.2 Bench tests | camera trigger at ≥ 1 Hz for 30 min (CAM-1); failsafes (REG-5); Remote ID |
+| M3.2 Bench tests | camera trigger at ≥ 1 Hz for 40 min (CAM-1) and distance triggering (CAM-1b); failsafes (REG-5); Remote ID |
 | M3.3 Glide test | manual hand-launched glide, trim and CG confirmed |
 | M3.4 Manual flights | stall, glides for the drag polar, cruise power, pitch doublets (VAL-1 to VAL-7) |
 | M3.5 Autonomous survey | 25 ha survey in AUTO, WebODM products (MIS-1, MIS-6) |

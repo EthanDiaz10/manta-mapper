@@ -23,7 +23,8 @@ def report(req: MissionRequirements, mass_kg: float) -> str:
             out(f"Photo every {sv.photo_spacing_m:.1f} m, lines every {sv.line_spacing_m:.1f} m")
             out(f"Downwind ground speed {sv.max_groundspeed_m_s:.1f} m/s -> trigger every "
                 f"{sv.trigger_interval_min_s:.2f} s ({sv.trigger_rate_max_hz:.2f} Hz, "
-                f"{'OK' if sv.trigger_ok else 'TOO FAST'} for {req.camera.max_trigger_rate_hz:g} Hz camera)")
+                f"{'OK' if sv.trigger_ok else 'TOO FAST'}: limit is {req.camera.trigger_rate_margin:.0%} "
+                f"of the {req.camera.max_trigger_rate_hz:g} Hz camera)")
             out(f"Shutter must be <= 1/{1/sv.max_exposure_s:.0f} s for {req.survey.max_blur_px} px blur")
             out("")
             out("== Constraint analysis ==")
@@ -37,14 +38,16 @@ def report(req: MissionRequirements, mass_kg: float) -> str:
                 f"mean chord {sz.mean_chord_m*1000:.0f} mm")
             out(f"Stall {sz.stall_speed_m_s:.1f} m/s, cruise CL {sz.cruise_cl:.2f}, L/D {sz.cruise_l_over_d:.1f}")
             lo, hi = sz.airspeed_window_m_s
-            out(f"Airspeed window {lo:.1f}-{hi:.1f} m/s, cruise {sv.airspeed_m_s:.1f} m/s "
-                f"{'OK' if sz.airspeed_window_ok else 'OUTSIDE WINDOW'}")
+            out(f"Airspeed window {lo:.1f}-{hi:.1f} m/s ({hi - lo:.1f} m/s wide, need >= {sz.min_window_m_s:g}), "
+                f"cruise {sv.airspeed_m_s:.1f} m/s {'OK' if sz.airspeed_window_ok else 'NOT OK'}")
+            out(f"Battery: >= {sz.battery_energy_wh:.0f} Wh usable (~{sz.battery_mass_kg*1000:.0f} g of cells), "
+                f"sized for {req.survey.area_stretch_ha:g} ha x {req.limits.energy_design_margin:g} margin")
             out(f"Cruise power {sz.cruise_power_elec_w:.0f} W, peak (motor sizing) {sz.peak_power_elec_w:.0f} W")
             out("")
             out("== Missions ==")
         out(f"{label:>8} {area:4.0f} ha: {sv.n_lines} lines, {sv.total_path_m/1000:.1f} km, {sv.n_photos} photos, "
-            f"{sz.mission_time_s/60:.1f} min, battery >= {sz.energy_required_wh:.1f} Wh "
-            f"(~{sz.battery_mass_kg*1000:.0f} g cells) with {req.limits.battery_reserve:.0%} reserve")
+            f"{sz.mission_time_s/60:.1f} min, uses {sz.energy_used_wh:.1f} Wh, "
+            f"lands with {sz.reserve_on_landing:.0%} left (need {req.limits.battery_reserve:.0%})")
     return "\n".join(lines)
 
 
