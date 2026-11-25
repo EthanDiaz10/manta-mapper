@@ -1,0 +1,81 @@
+== Manta Mapper: aerodynamics and stability (M1.4), 1.5 kg ==
+Cruise 14 m/s at 1322 m MSL, design day; survey window 11.3-19.2 m/s
+
+-- Longitudinal static stability --
+Lift slope 0.0738/deg (4.23/rad), zero-lift alpha 1.12 deg
+Neutral point x = 290 mm from the pod nose = 33.6 % MAC (MAC 293 mm, its LE at x = 191 mm)
+  static margin  5.0%: CG at x = 275 mm (28.6 % MAC), Cm0 about CG +0.0305
+  static margin  7.5%: CG at x = 268 mm (26.1 % MAC), Cm0 about CG +0.0305
+  static margin 10.0%: CG at x = 261 mm (23.6 % MAC), Cm0 about CG +0.0305
+CG range for AC-7 (5-10 %): x = 261 mm to 275 mm (15 mm wide)
+
+-- Trim (elevon: + = trailing edge down) --
+   SM condition                 V m/s    CL  alpha  elevon
+ 5.0% stall (trimmed CL_max)      8.6  1.00   15.4    -3.6
+ 5.0% hand launch, 1.2 Vs        10.3  0.69   10.7    -0.8
+ 5.0% slowest survey, 1.3 Vs     11.3  0.58    8.8    +0.3
+ 5.0% cruise                     14.0  0.38    5.8    +2.2
+ 5.0% fastest survey             19.2  0.20    3.0    +3.8
+ 7.5% stall (trimmed CL_max)      8.7  0.96   15.8    -7.8
+ 7.5% hand launch, 1.2 Vs        10.5  0.67   11.0    -3.7
+ 7.5% slowest survey, 1.3 Vs     11.3  0.58    9.4    -2.4
+ 7.5% cruise                     14.0  0.38    6.1    +0.4
+ 7.5% fastest survey             19.2  0.20    3.2    +2.9
+10.0% stall (trimmed CL_max)      8.9  0.93   16.2   -11.7
+10.0% hand launch, 1.2 Vs        10.7  0.65   11.2    -6.4
+10.0% slowest survey, 1.3 Vs     11.3  0.58   10.0    -5.0
+10.0% cruise                     14.0  0.38    6.5    -1.4
+10.0% fastest survey             19.2  0.20    3.4    +1.9
+AC-8 (cruise trim within 3 deg across the 5-10 % band): PASS
+Elevon pitch power about the CG -0.0065/deg; lift +0.0158/deg (effectiveness factor 0.75 on thin-airfoil theory)
+
+-- Drag (trimmed, as built: n_crit 5, 1 mm trailing edge) --
+At cruise: CL 0.378, CD 0.0233 = induced 0.0078 (e = 0.98) + wing profile 0.0111 + fins 0.0005 + extras 0.0038; L/D 16.2; aero power 12.7 W
+Zero-lift-ish drag (profile + fins + extras) 0.0154 vs constraint-analysis guess 0.025
+Best L/D 16.4 at 13.5 m/s; minimum sink 0.69 m/s at 9.5 m/s
+    V     CL      CD   L/D  sink P_aero W  (clean CD)
+  9.5  0.807  0.0589  13.7  0.69     10.2  (0.0602)
+ 10.5  0.665  0.0441  15.1  0.70     10.3  (0.0452)
+ 11.5  0.557  0.0349  15.9  0.72     10.6  (0.0361)
+ 12.5  0.472  0.0289  16.3  0.77     11.3  (0.0301)
+ 13.5  0.406  0.0248  16.4  0.83     12.1  (0.0259)
+ 14.5  0.352  0.0219  16.1  0.90     13.3  (0.0230)
+ 15.5  0.309  0.0198  15.6  1.00     14.6  (0.0208)
+ 16.5  0.273  0.0183  14.9  1.11     16.3  (0.0191)
+ 17.5  0.243  0.0170  14.2  1.23     18.1  (0.0178)
+ 18.5  0.217  0.0161  13.5  1.37     20.2  (0.0168)
+ 19.5  0.195  0.0154  12.7  1.53     22.5  (0.0160)
+ 20.5  0.177  0.0147  12.0  1.71     25.1  (0.0153)
+ 21.5  0.161  0.0142  11.3  1.90     28.0  (0.0148)
+
+-- Stall: where does it start? (critical-section method, trimmed, field, design day) --
+  SM  5.0%: wing CL_max 0.998 -> stall 8.57 m/s at 1.5 kg; alpha 15.8, elevon -3.9; first strip at y = 218 mm; outer elevon half at 92% of its CL_max
+  SM  7.5%: wing CL_max 0.963 -> stall 8.72 m/s at 1.5 kg; alpha 16.2, elevon -8.1; first strip at y = 207 mm; outer elevon half at 85% of its CL_max
+  SM 10.0%: wing CL_max 0.930 -> stall 8.88 m/s at 1.5 kg; alpha 16.7, elevon -12.2; first strip at y = 196 mm; outer elevon half at 78% of its CL_max
+Pod at 59% of its CL_max at the stall; panel joint at y = 180 mm
+AC-1 (stall <= 9 m/s at the design SM): PASS
+
+-- Lateral-directional (cruise, stability axes, per rad) --
+Cn_beta +0.0065 (want > 0), Cl_beta -0.0551 (want < 0), CY_beta -0.0151
+Cn_beta,dynamic +0.0135 (departure resistance, want > 0)
+Cl_p -0.453, Cn_p -0.0403, Cl_r +0.1016, Cn_r -0.0074
+Aileron: Cl_da +0.00413/deg, adverse yaw Cn_da -0.00016/deg
+Cn_r includes -0.0033 from section profile drag (not in the VLM)
+Steady roll at 10 deg differential: pb/2V 0.091 -> 72 deg/s at launch speed, 96 deg/s at cruise (OK: yardstick pb/2V >= 0.05 at half throw)
+
+-- Flight modes (cruise, design SM, placeholder inertia) --
+Inertia: Ixx 0.1009, Iyy 0.0209, Izz 0.1218 kg m^2 (k = 259 / 118 / 285 mm); placeholder mass model (45 % spread over planform, 7 % motor, 48 % payload block)
+Cm_alpha -0.317/rad, Cm_q -2.144, CL_q +12.119
+Short period: 1.80 Hz damped (15.1 rad/s natural), damping ratio 0.67 (OK: yardstick 0.3-2.0)
+   with Iyy x0.7: 2.05 Hz, damping 0.70
+   with Iyy x1.3: 1.60 Hz, damping 0.65
+   at SM 5%: 1.53 Hz, damping 0.71
+   at SM 10%: 1.99 Hz, damping 0.64
+Phugoid: period 7.3 s, damping ratio 0.024
+Dutch roll: period 2.35 s, damping ratio 0.053 (WATCH: yardstick >= 0.08)
+Roll subsidence: time constant 0.07 s
+Spiral: unstable, doubles in 26.5 s (OK: yardstick doubling >= 12 s)
+
+-- Camera tilt (CAM-4: within 3 deg of vertical) --
+A: tilted camera mount: panel root incidence +0.0 deg; pod pitch at cruise +6.1 deg (+3.2 to +9.4 over the survey window); cruise elevon +0.4; Cm0 about CG +0.0305; CD 0.0233; stall 8.72 m/s, outer elevon half at 85%
+B: more outer-panel incidence: panel root incidence +11.0 deg; pod pitch at cruise +0.1 deg (-2.9 to +3.4 over the survey window); cruise elevon -10.6; Cm0 about CG -0.0276; CD 0.0283; stall 10.97 m/s, outer elevon half at 52%
