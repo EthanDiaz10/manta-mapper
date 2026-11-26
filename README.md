@@ -31,7 +31,7 @@ milestones.
 
 Phase 1: requirements and constraint analysis (M1.1), airfoil selection
 (M1.2), the parametric geometry (M1.3), the aero and stability analysis
-(M1.4) and the weights and propulsion (M1.5) are working. The airfoils are S5010
+(M1.4), the weights and propulsion (M1.5) and the design-to-cost optimizer (M1.6) are working. The airfoils are S5010
 on the outer panels and MH 78 on the centre body; [docs/airfoils.md](docs/airfoils.md)
 explains why. [docs/geometry.md](docs/geometry.md) explains every shape
 parameter and the baseline: 1.53 m span, 0.40 m² wing, 5° washout.
@@ -41,6 +41,9 @@ flight modes and the camera tilt.
 [docs/weights_propulsion.md](docs/weights_propulsion.md) covers weights and
 propulsion (M1.5): what every part weighs and where it goes, the motor, prop
 and battery, and whether the 25 ha and 50 ha flights make it home with 30 %.
+[docs/optimizer.md](docs/optimizer.md) covers the design-to-cost optimizer
+(M1.6): ten shape variables, 24 constraints, and an optimum that fixes the
+baseline's one weak spot (Dutch roll damping) with margin, 32 g lighter.
 
 ```bash
 pip install -e ".[dev]"
@@ -49,6 +52,7 @@ python -m manta_mapper.airfoils config/mission.toml --plots docs/img
 python -m manta_mapper.geometry config/mission.toml --plots docs/img --vsp manta.vspscript
 python -m manta_mapper.stability config/mission.toml --plots docs/img --report docs/stability_report.txt
 python -m manta_mapper.weights config/mission.toml --plots docs/img --report docs/weights_report.txt
+python -m manta_mapper.optimize config/mission.toml --report docs/optimizer_report.txt --json docs/optimizer_result.json --plots docs/img
 pytest
 ```
 
@@ -77,7 +81,8 @@ src/manta_mapper/
   stability.py          neutral point, CG band, flight modes, camera tilt (M1.4)
   propulsion.py         prop (BEMT), motor, Li-ion pack, parts search, mission energy (M1.5)
   weights.py            weight build-up, CG placement, inertia, M1.5 report (M1.5)
-  optimize.py, cad.py, validation.py     (placeholders for later milestones)
+  optimize.py           design-to-cost optimizer: screen + COBYLA, coarse/full VLM (M1.6)
+  cad.py, validation.py (placeholders for later milestones)
 tests/
 ```
 

@@ -39,6 +39,7 @@ about 24-26 %. The VSPAERO run in M1.7 is the independent check (PIPE-4).
 from __future__ import annotations
 
 import math
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from functools import lru_cache
 
@@ -269,10 +270,17 @@ class VLMResult:
 
 def run_vlm(geom: BWBGeometry, flight: Flight, alpha: float, elevator_deg: float = 0.0, aileron_deg: float = 0.0,
             beta: float = 0.0, p: float = 0.0, q: float = 0.0, r: float = 0.0, xyz_ref=(0.0, 0.0, 0.0),
-            spanwise_resolution: int = SPANWISE_RESOLUTION,
-            chordwise_resolution: int = CHORDWISE_RESOLUTION) -> VLMResult:
-    """Run the vortex lattice. Rates p, q, r in rad/s, body axes (x fwd, y right, z down)."""
+            spanwise_resolution: int | None = None,
+            chordwise_resolution: int | None = None) -> VLMResult:
+    """Run the vortex lattice. Rates p, q, r in rad/s, body axes (x fwd, y right, z down).
+
+    Panel counts default to the module settings, which :func:`vlm_resolution`
+    can change for a block of code (the optimizer's coarse search tier).
+    """
     import aerosandbox as asb
+
+    spanwise_resolution = spanwise_resolution or SPANWISE_RESOLUTION
+    chordwise_resolution = chordwise_resolution or CHORDWISE_RESOLUTION
 
     ap = build_airplane(geom, xyz_ref, elevator_deg, aileron_deg)
     op = asb.OperatingPoint(atmosphere=flight.atmosphere(), velocity=flight.velocity, alpha=float(alpha),
@@ -285,6 +293,18 @@ def run_vlm(geom: BWBGeometry, flight: Flight, alpha: float, elevator_deg: float
     return VLMResult(alpha=float(alpha), elevator=float(elevator_deg), coeffs=coeffs,
                      centers=np.asarray(vlm.vortex_centers), forces=np.asarray(vlm.forces_geometry),
                      areas=np.asarray(vlm.areas), flight=flight)
+
+
+@contextmanager
+def vlm_resolution(spanwise: int, chordwise: int):
+    """Temporarily change the default VLM panel counts (``with vlm_resolution(2, 6): ...``)."""
+    global SPANWISE_RESOLUTION, CHORDWISE_RESOLUTION
+    old = SPANWISE_RESOLUTION, CHORDWISE_RESOLUTION
+    SPANWISE_RESOLUTION, CHORDWISE_RESOLUTION = spanwise, chordwise
+    try:
+        yield
+    finally:
+        SPANWISE_RESOLUTION, CHORDWISE_RESOLUTION = old
 
 
 def spanwise_cl(geom: BWBGeometry, res: VLMResult) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
