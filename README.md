@@ -30,16 +30,21 @@ milestones.
 ## Status
 
 Phase 1: requirements and constraint analysis (M1.1), airfoil selection
-(M1.2) and the parametric geometry (M1.3) are working. The airfoils are S5010
+(M1.2), the parametric geometry (M1.3) and the aero and stability analysis
+(M1.4) are working. The airfoils are S5010
 on the outer panels and MH 78 on the centre body; [docs/airfoils.md](docs/airfoils.md)
 explains why. [docs/geometry.md](docs/geometry.md) explains every shape
 parameter and the baseline: 1.53 m span, 0.40 m² wing, 5° washout.
+[docs/aero_stability.md](docs/aero_stability.md) covers aerodynamics and
+stability (M1.4): neutral point, CG range, trim, drag, where the stall starts,
+flight modes and the camera tilt.
 
 ```bash
 pip install -e ".[dev]"
 python -m manta_mapper config/mission.toml --plot constraint_diagram.png
 python -m manta_mapper.airfoils config/mission.toml --plots docs/img
 python -m manta_mapper.geometry config/mission.toml --plots docs/img --vsp manta.vspscript
+python -m manta_mapper.stability config/mission.toml --plots docs/img --report docs/stability_report.txt
 pytest
 ```
 

@@ -163,7 +163,9 @@ Things to keep in mind about the preview:
 - About 6° angle of attack at cruise means the pod flies nose-up. The camera
   must point straight down within 3° (CAM-4), so either the camera mount is
   tilted to match or the outer panels get more incidence relative to the pod
-  (`root_twist_deg`). M1.4 settles which, once trim is computed properly.
+  (`root_twist_deg`). M1.4 settled it: tilt the camera mount 6° forward;
+  panel incidence would need +11° and wreck trim and stall speed
+  ([aero_stability.md](aero_stability.md) section 7).
 
 ## Exports
 

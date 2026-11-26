@@ -10,7 +10,7 @@ visible and mistakes surface early.
 | M1.1 Requirements + constraint analysis | `python -m manta_mapper` prints survey geometry, the constraint-chart design point and first-cut sizing; tests pass in CI (done) |
 | M1.2 Airfoil selection | NeuralFoil polars for reflexed candidates at the real Reynolds numbers, clean and as built; S5010 outer, MH 78 centre ([airfoils.md](airfoils.md)) |
 | M1.3 Parametric geometry | `geometry.py` builds the BWB (centre pod, swept outer panels, drooped tip fins) from 14 design variables; baseline 1.53 m, 0.40 m², 5° washout ([geometry.md](geometry.md)) (done) |
-| M1.4 Aero + stability | AeroSandbox VLM gives CL, CD, Cm, neutral point; static margin and trim checked; spanwise CL vs local CL_max so the centre stalls before the tips (washout) |
+| M1.4 Aero + stability | VLM + NeuralFoil strip drag: neutral point 33.6 % MAC, CG band 261–275 mm, trims within ±3° at cruise, stall 8.7 m/s starting inboard, short period 1.8 Hz; camera mount tilted 6° ([aero_stability.md](aero_stability.md)) (done) |
 | M1.5 Weights + propulsion | weight build-up with CG; motor/prop/Li-ion pack matched to the power loadings |
 | M1.6 Optimizer | design-to-cost optimizer returns a feasible lowest-cost/lightest design |
 | M1.7 VSPAERO check | top 2–3 designs exported to OpenVSP; VSPAERO agrees with VLM within PIPE-4 |
