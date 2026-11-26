@@ -57,24 +57,24 @@ AC-1 (stall <= 9 m/s at the design SM): PASS
 
 -- Lateral-directional (cruise, stability axes, per rad) --
 Cn_beta +0.0065 (want > 0), Cl_beta -0.0551 (want < 0), CY_beta -0.0151
-Cn_beta,dynamic +0.0135 (departure resistance, want > 0)
+Cn_beta,dynamic +0.0141 (departure resistance, want > 0)
 Cl_p -0.453, Cn_p -0.0403, Cl_r +0.1016, Cn_r -0.0074
 Aileron: Cl_da +0.00413/deg, adverse yaw Cn_da -0.00016/deg
 Cn_r includes -0.0033 from section profile drag (not in the VLM)
 Steady roll at 10 deg differential: pb/2V 0.091 -> 72 deg/s at launch speed, 96 deg/s at cruise (OK: yardstick pb/2V >= 0.05 at half throw)
 
--- Flight modes (cruise, design SM, placeholder inertia) --
-Inertia: Ixx 0.1009, Iyy 0.0209, Izz 0.1218 kg m^2 (k = 259 / 118 / 285 mm); placeholder mass model (45 % spread over planform, 7 % motor, 48 % payload block)
+-- Flight modes (cruise, design SM, inertia from the M1.5 weight build-up) --
+Inertia: Ixx 0.0790, Iyy 0.0247, Izz 0.1032 kg m^2 (k = 229 / 128 / 262 mm); M1.5 weight build-up (28 items, scaled from 1.20 kg)
 Cm_alpha -0.317/rad, Cm_q -2.144, CL_q +12.119
-Short period: 1.80 Hz damped (15.1 rad/s natural), damping ratio 0.67 (OK: yardstick 0.3-2.0)
-   with Iyy x0.7: 2.05 Hz, damping 0.70
-   with Iyy x1.3: 1.60 Hz, damping 0.65
-   at SM 5%: 1.53 Hz, damping 0.71
-   at SM 10%: 1.99 Hz, damping 0.64
-Phugoid: period 7.3 s, damping ratio 0.024
-Dutch roll: period 2.35 s, damping ratio 0.053 (WATCH: yardstick >= 0.08)
-Roll subsidence: time constant 0.07 s
-Spiral: unstable, doubles in 26.5 s (OK: yardstick doubling >= 12 s)
+Short period: 1.67 Hz damped (13.9 rad/s natural), damping ratio 0.66 (OK: yardstick 0.3-2.0)
+   with Iyy x0.7: 1.94 Hz, damping 0.68
+   with Iyy x1.3: 1.48 Hz, damping 0.65
+   at SM 5%: 1.42 Hz, damping 0.70
+   at SM 10%: 1.85 Hz, damping 0.63
+Phugoid: period 7.3 s, damping ratio 0.021
+Dutch roll: period 2.20 s, damping ratio 0.073 (WATCH: yardstick >= 0.08)
+Roll subsidence: time constant 0.05 s
+Spiral: unstable, doubles in 25.6 s (OK: yardstick doubling >= 12 s)
 
 -- Camera tilt (CAM-4: within 3 deg of vertical) --
 A: tilted camera mount: panel root incidence +0.0 deg; pod pitch at cruise +6.1 deg (+3.2 to +9.4 over the survey window); cruise elevon +0.4; Cm0 about CG +0.0305; CD 0.0233; stall 8.72 m/s, outer elevon half at 85%

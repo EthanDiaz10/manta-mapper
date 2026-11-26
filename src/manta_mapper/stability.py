@@ -18,8 +18,8 @@ What it answers, in order:
    predicted response to a pitch doublet for the flight-test correlation (VAL-6).
 7. **Camera tilt** (CAM-4): tilted camera mount vs more outer-panel incidence.
 
-Masses and inertias are placeholders until the weight build-up (M1.5); see
-:func:`estimate_inertia`. Everything else comes from :mod:`manta_mapper.aero`.
+Inertias come from the M1.5 weight build-up (:func:`manta_mapper.weights.default_inertia`),
+scaled to the analysis mass; :func:`estimate_inertia` is the old placeholder, kept for comparison. Everything else comes from :mod:`manta_mapper.aero`.
 """
 
 from __future__ import annotations
@@ -49,7 +49,7 @@ ROLL_MIN_PB2V = 0.05  # steady roll rate p b / 2V at full aileron (typical floor
 
 
 # --------------------------------------------------------------------------
-# Mass properties (placeholder until M1.5)
+# Mass properties (placeholder model, superseded by weights.py in M1.5)
 # --------------------------------------------------------------------------
 
 
@@ -464,7 +464,9 @@ def analyse(geom: BWBGeometry, req: MissionRequirements, mass_kg: float = 1.5, c
 
     progress("Stability derivatives and flight modes ...")
     d = derivatives(geom, model, x_cg, fl, mass_kg, cruise)
-    inertia = estimate_inertia(geom, mass_kg, x_cg)
+    from .weights import default_inertia
+
+    inertia = default_inertia(geom, mass_kg, x_cg)  # M1.5 build-up, scaled to mass_kg
     modes = flight_modes(d, inertia, geom, fl)
     # sensitivity of the short period to the inertia guess
     sens = {}
@@ -475,7 +477,7 @@ def analyse(geom: BWBGeometry, req: MissionRequirements, mass_kg: float = 1.5, c
     for sm in (0.05, 0.10):
         x2 = model.cg_for_static_margin(sm)
         d2 = derivatives(geom, model, x2, fl, mass_kg, A.trimmed_point(geom, model, x2, fl, mass_kg)[0])
-        modes_sm[sm] = flight_modes(d2, estimate_inertia(geom, mass_kg, x2), geom, fl).short_period
+        modes_sm[sm] = flight_modes(d2, default_inertia(geom, mass_kg, x2), geom, fl).short_period
 
     cams = []
     if camera:
@@ -563,7 +565,7 @@ def report(an: Analysis) -> str:
         f"at launch speed, {math.degrees(pb2v*2*an.cruise.velocity/g.span_m):.0f} deg/s at cruise "
         f"({'OK' if pb2v >= ROLL_MIN_PB2V else 'WATCH'}: yardstick pb/2V >= {ROLL_MIN_PB2V} at half throw)")
     out("")
-    out("-- Flight modes (cruise, design SM, placeholder inertia) --")
+    out("-- Flight modes (cruise, design SM, inertia from the M1.5 weight build-up) --")
     kx, ky, kz = inr.radii_of_gyration_m
     out(f"Inertia: Ixx {inr.ixx:.4f}, Iyy {inr.iyy:.4f}, Izz {inr.izz:.4f} kg m^2 (k = {kx*1000:.0f} / {ky*1000:.0f} / "
         f"{kz*1000:.0f} mm); {inr.note}")
