@@ -1,0 +1,150 @@
+== Manta Mapper: weights and propulsion (M1.5) ==
+Wing 1.525 m, 0.402 m^2, sized at 1.5 kg; field 1220 m, ISA+25 K
+Drag: M1.4 trimmed polar recomputed at the CG target, quadratic fit; model best L/D 16.3 at CL 0.42
+
+-- Weight statement (as built = with growth allowance: bought 5 %, structure 20 %, wiring/hardware 30 %) --
+item                                                                                              g  +grow   x mm     $
+[structure]
+  Outer panels: EPP foam 1.9 lb/ft3 cores (hot-wired, elevons cut free)                         105    126    369    23
+  Outer panels: laminating film, hinge and leading-edge tape                                     23     28    396    20
+  Elevon stiffeners: 3 x 1 mm carbon strip                                                        4      5    493     3
+  Spar: 10 x 8 mm carbon tube, 2 x 732 mm                                                        64     67    332    12
+  Anti-rotation pins: 3 mm carbon rod at 60 % chord                                               3      3    328     1
+  Centre pod: LW-ASA (foamed) shell 0.8 mm + internal frames (+60%), hatch, spar sockets        269    322    214    19
+  Replaceable nose cap: TPU 95A, 15 % gyroid                                                     16     19     12     1
+  Motor mount plate + screws (printed ASA, in the pod trailing edge)                             10     12    432     1
+  Tip fins: EPP, laminated, pegged and taped on (replaceable)                                    10     11    512     2
+  Belly skid: EPP block + HDPE wear strip, velcro (replaceable)                                  19     22    198     4
+  subtotal                                                                                      522    617           85
+[propulsion]
+  ESC: 40 A BLHeli_S ESC                                                                         35     37    326    18
+  Motor: SunnySky X2216 1100KV                                                                   68     71    461    27
+  Prop: folding 10x6 (nylon blades, 40 mm yoke, spinner)                                         19     20    484    10
+  Battery: 3S1P Molicel P45B (49 Wh nominal)                                                    226    237    150    29
+  subtotal                                                                                      348    365           84
+[avionics]
+  Airspeed: Matek ASPD-4525 + pitot tube, silicone line                                          12     13     48    45
+  GPS + compass: Matek M10Q-5883                                                                  9      9     97    30
+  Flight controller: SpeedyBee F405 WING or Matek F405-WTE (ArduPilot; PDB, current sensor,      25     26    264    50
+  5 V 3 A buck BEC for the Pi (keeps camera noise off the FC rail)                                6      6    308     6
+  ELRS 2.4 GHz receiver with telemetry: RadioMaster RP2                                           2      2    321    18
+  Remote ID broadcast module (must be on the FAA DoC list)                                       12     13    317    45
+  Elevon servo: Emax ES08MD II, 12 g digital metal-gear (each) x2                                24     25    390    20
+  Servo horn, pushrod, clevis (each side) x2                                                      8      8    425     5
+  subtotal                                                                                       98    103          219
+[camera]
+  Camera Module 3 (standard lens) + 15 cm Zero ribbon                                             6      6    242    28
+  Printed camera mount on a 6 deg wedge + window                                                  8      8    242     0
+  Raspberry Pi Zero 2 W + heatsink                                                               13     14    277    17
+  32 GB high-endurance microSD                                                                    1      1    277     9
+  subtotal                                                                                       28     29           54
+[wiring]
+  Wiring: XT60 + 14 AWG power, motor leads, servo extensions with panel plugs, signal leads      37     48    221    12
+  Hardware: hatch magnets, nylon panel bolts, velcro straps, glue                                25     32    220    15
+  subtotal                                                                                       62     81           27
+TOTAL                                                                                          1058   1195    261   469
+
+Mass: 1058 g on paper, 1195 g as built; 305 g under the 1.5 kg design mass (wing loading 2.97 kg/m^2, AC-2 limit 6)
+Stall: 8.87 m/s at 1.5 kg -> 7.92 m/s as built
+CG: x = 261 mm (target 261), y = -1.2 mm, z = +2 mm; battery centre at x = 150 mm (it fits anywhere from 49 to 252 mm)
+  sliding the pack 10 mm moves the CG 2.0 mm, so the whole 261-275 mm band is 71 mm of pack travel; nose ballast needed: 0 g
+Fit check (inside height where each part sits): all fit
+Avionics power: 5.2 W at the parts, 6.1 W from the pack
+Parts cost: $469 (aircraft only; radio, charger, tools, spares not included)
+
+Pod shell options (as built, incl. internal frames):
+  LW-PLA 0.6 mm      207 g  $  10 filament  softens ~55 C
+  LW-ASA 0.8 mm      322 g  $  19 filament  softens ~95 C
+  ASA 0.8 mm         493 g  $   9 filament  softens ~95 C
+  PETG 0.8 mm        585 g  $   9 filament  softens ~75 C
+Outer panel core options (both panels, cores only, as built):
+  EPP foam 1.9 lb/ft3          126 g  $  23  springs back after impacts; fuzzy hot-wire cut
+  EPP foam 1.3 lb/ft3           88 g  $  22  lighter, floppier
+  EPS bead foam 1.5 lb/ft3     101 g  $  21  cheap, clean cut; dents and cracks
+  XPS (Foamular 150)           117 g  $  21  stiff, clean cut; snaps in a cartwheel
+
+-- Propulsion selection (150 combinations, checked at 1.5 kg, field/survey air on the design day) --
+Rule: pass every check, then the cheapest within 8% of the lowest cruise power
+Showing the sets that pass, then the 15 cheapest that don't
+set                                                                         $     g   T/W climb  Vmax  P_cr W  result
+SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B                   84   348  0.67   3.7  24.4    38.7  CHOSEN
+A2212/13T 1000KV (generic) + folding 8x6 + 3S1P Samsung 50E                55   314  0.30   1.0  18.8    37.2  fails: static thrust/weight, launch climb gradient (AC-6), climb rate (AC-5), top speed, cell current
+A2212/13T 1000KV (generic) + folding 9x6 + 3S1P Samsung 50E                55   317  0.41   1.7  20.3    37.6  fails: static thrust/weight, climb rate (AC-5), top speed, cell current
+A2212/13T 1000KV (generic) + folding 9x5 + 3S1P Samsung 50E                55   316  0.39   1.2  18.2    40.1  fails: static thrust/weight, climb rate (AC-5), top speed, cell current
+A2212/13T 1000KV (generic) + folding 10x7 + 3S1P Samsung 50E               56   320  0.53   2.7  23.1    36.8  fails: static thrust/weight, motor current, cell current
+A2212/13T 1000KV (generic) + folding 10x6 + 3S1P Samsung 50E               56   319  0.52   2.3  21.4    38.6  fails: static thrust/weight, climb rate (AC-5), top speed, motor current, cell current
+A2212/13T 1000KV (generic) + folding 8x6 + 3S1P Samsung 50S                60   323  0.31   1.2  19.2    37.2  fails: static thrust/weight, climb rate (AC-5), top speed
+A2212/13T 1000KV (generic) + folding 9x6 + 3S1P Samsung 50S                60   326  0.43   1.9  20.9    37.6  fails: static thrust/weight, climb rate (AC-5), top speed
+A2212/13T 1000KV (generic) + folding 9x5 + 3S1P Samsung 50S                60   325  0.41   1.4  18.6    40.1  fails: static thrust/weight, climb rate (AC-5), top speed
+A2212/13T 1000KV (generic) + folding 10x7 + 3S1P Samsung 50S               60   329  0.57   3.1  23.9    36.8  fails: static thrust/weight, motor current
+A2212/13T 1000KV (generic) + folding 10x6 + 3S1P Samsung 50S               60   328  0.56   2.6  22.0    38.6  fails: static thrust/weight, top speed, motor current
+A2212/13T 1000KV (generic) + folding 8x6 + 3S1P Molicel P45B               61   317  0.31   1.3  19.5    37.2  fails: static thrust/weight, climb rate (AC-5), top speed
+A2212/13T 1000KV (generic) + folding 9x6 + 3S1P Molicel P45B               61   320  0.45   2.1  21.2    37.6  fails: static thrust/weight, climb rate (AC-5), top speed, motor current
+A2212/13T 1000KV (generic) + folding 9x5 + 3S1P Molicel P45B               61   319  0.43   1.5  18.9    40.1  fails: static thrust/weight, climb rate (AC-5), top speed
+A2212/13T 1000KV (generic) + folding 10x7 + 3S1P Molicel P45B              62   323  0.59   3.4  24.4    36.8  fails: static thrust/weight, motor current
+A2212/13T 1000KV (generic) + folding 10x6 + 3S1P Molicel P45B              62   322  0.58   2.8  22.4    38.6  fails: static thrust/weight, motor current
+
+Chosen: SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B, 40 A BLHeli_S ESC
+  PASS  static thrust/weight: 0.67 (want >= 0.6, hot day, 80% charge)
+  PASS  launch climb gradient (AC-6): 0.41 at 10.6 m/s (want >= 0.15, L/D 10)
+  PASS  climb rate (AC-5): 3.7 m/s at 14.1 m/s (want >= 2.5, 30% charge, L/D 10)
+  PASS  top speed: 24.4 m/s (want >= 22.1)
+  PASS  motor current: 22.6 A peak (rated 26 A)
+  PASS  cell current: 23.0 A peak (cells rated 45 A)
+  PASS  ESC current: 23.0 A peak (40 A ESC)
+  PASS  cruise within throttle: throttle 53% at cruise
+  PASS  MIS-4a pack size: 41.3 Wh usable vs 39.2 Wh (1.25 x 50 ha on the model polar, with reserve)
+  PASS  50 ha at L/D 12: lands with 33%
+  PASS  25 ha at L/D 10: lands with 51%
+
+Operating points (chosen set):
+case                                            mass     V    rpm   T N I_bat A  P_el W  thr   eff
+design mass: static, field, 80 % charge         1.50   0.0  10005  9.86    21.6   237.3  97%  0.00
+design mass: hand launch 1.2 Vs, field          1.50  10.6   9825  7.61    23.0   252.2  97%  0.32
+design mass: full-power climb, 30 % charge      1.50  14.1   9078  5.34    18.9   188.2  97%  0.40
+design mass: cruise, survey height, L/D 12      1.50  14.0   5959  1.23     3.5    38.7  53%  0.45
+design mass: fastest survey speed, L/D 12       1.50  19.2   7554  1.55     6.1    67.1  68%  0.44
+as built: static, field, 80 % charge            1.20   0.0  10005  9.86    21.6   237.3  97%  0.00
+as built: hand launch 1.2 Vs, field             1.20   9.5   9825  7.89    23.0   252.2  97%  0.30
+as built: full-power climb, 30 % charge         1.20  14.0   9076  5.36    19.0   188.4  97%  0.40
+as built: cruise, survey height, L/D 12         1.20  14.0   5741  1.03     2.9    32.7  51%  0.44
+as built: fastest survey speed, L/D 12          1.20  19.2   7452  1.43     5.7    62.5  67%  0.44
+As built: static thrust/weight 0.84, launch climb gradient 0.57, climb 4.9 m/s, top speed 24.6 m/s (pessimistic drag)
+
+-- Missions (pack 41.3 Wh usable of 48.6 nominal; need 30% left on landing) --
+ mass drag case     area   time P_cruise  used Wh  left  verdict
+ 1.20 model           25  21.1m    25.2W     12.1   71%  OK
+ 1.20 model           50  34.4m    25.2W     19.1   54%  OK
+ 1.20 L/D 14          25  21.1m    28.6W     13.4   68%  OK
+ 1.20 L/D 14          50  34.4m    28.6W     21.2   49%  OK
+ 1.20 L/D 12          25  21.1m    32.7W     14.9   64%  OK
+ 1.20 L/D 12          50  34.4m    32.7W     23.6   43%  OK
+ 1.20 L/D 10          25  21.1m    38.7W     17.1   59%  OK
+ 1.20 L/D 10          50  34.4m    38.7W     27.2   34%  OK
+ 1.50 model           25  21.1m    29.4W     13.9   66%  OK
+ 1.50 model           50  34.4m    29.4W     22.0   47%  OK
+ 1.50 L/D 14          25  21.1m    33.6W     15.5   62%  OK
+ 1.50 L/D 14          50  34.4m    33.6W     24.5   41%  OK
+ 1.50 L/D 12          25  21.1m    38.7W     17.4   58%  OK
+ 1.50 L/D 12          50  34.4m    38.7W     27.5   33%  OK
+ 1.50 L/D 10          25  21.1m    46.0W     20.1   51%  OK
+ 1.50 L/D 10          50  34.4m    46.0W     32.0   23%  SHORT
+Endurance at 14 m/s down to the 30 % reserve:
+  1.20 kg, model       55.2 min
+  1.20 kg, L/D 14      49.7 min
+  1.20 kg, L/D 12      44.3 min
+  1.20 kg, L/D 10      38.4 min
+  1.50 kg, model       48.6 min
+  1.50 kg, L/D 14      43.4 min
+  1.50 kg, L/D 12      38.4 min
+  1.50 kg, L/D 10      32.9 min
+
+-- Flight modes with the real inertia (cruise, CG target) --
+as built (1.20 kg): Ixx 0.0629, Iyy 0.0213, Izz 0.0838 kg m^2 (k = 229 / 133 / 265 mm); placeholder was 0.0804 / 0.0180 / 0.0984
+  short period  1.98 Hz, damping 0.686 (placeholder: 2.12 Hz, 0.697)
+  Dutch roll    0.43 Hz, damping 0.079 (placeholder: 0.41 Hz, 0.064)
+  spiral        doubles in 45.6 s; phugoid 7.3 s, damping 0.028
+design mass (1.50 kg): Ixx 0.0790, Iyy 0.0267, Izz 0.1052 kg m^2 (k = 229 / 133 / 265 mm); placeholder was 0.1009 / 0.0226 / 0.1235
+  short period  1.84 Hz, damping 0.630 (placeholder: 1.98 Hz, 0.640)
+  Dutch roll    0.45 Hz, damping 0.072 (placeholder: 0.42 Hz, 0.053)
+  spiral        doubles in 23.4 s; phugoid 7.1 s, damping 0.022

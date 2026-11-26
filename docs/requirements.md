@@ -106,5 +106,5 @@ pipeline prediction for the as-built aircraft (as-built mass and CG).
 ## Open items
 
 - CAM-1 bench test result: if below 1 Hz, apply MIS-2a; if ≥ 1.4 Hz, consider landscape mounting (MIS-3a) to shorten flights.
-- Hybrid printed centre body + foam outer panels vs fully printed (affects weights and cost). Material choice is open and must meet AC-13.
+- Airframe materials (M1.5 recommendation, [weights_propulsion.md](weights_propulsion.md)): hot-wired EPP outer panels with laminating film, printed LW-ASA centre pod (heat-proof in a parked car), EPP skid and fins, TPU nose cap. Confirm with test prints (M2.4) and the landing log (AC-13).
 - Possible extra: export the pipeline model to ArduPilot SITL.

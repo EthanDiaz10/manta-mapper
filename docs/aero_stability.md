@@ -13,8 +13,8 @@ the way a forgiving flying wing should:
 | Stall speed (1.5 kg, field, 32 °C) | 8.7 m/s at the middle CG (8.6–8.9 across the band) | AC-1, ≤ 9 m/s ✔ |
 | Where does the stall start? | Just outboard of the panel joint. The outer half of the elevons is still 15 % below its limit, and the pod is at 59 % | "centre stalls first" ✔ |
 | Cruise drag | CD 0.023, L/D 16 at 14 m/s (probably optimistic, see below) | — |
-| Pitch dynamics | Short period 1.8 Hz, damping ratio 0.67 (well damped) | VAL-6 prediction |
-| Lateral | Stable, but the Dutch roll is lightly damped (ratio 0.05) | watch item |
+| Pitch dynamics | Short period 1.7 Hz, damping ratio 0.66 (well damped; real inertia from M1.5) | VAL-6 prediction |
+| Lateral | Stable; Dutch roll damping 0.07 with the M1.5 inertia (was 0.05 with the placeholder), just under the 0.08 yardstick | watch item |
 | Camera (CAM-4) | **Tilt the camera mount 6° forward.** Don't add panel incidence | CAM-4 ✔ |
 
 Everything comes from one command:
@@ -190,26 +190,30 @@ half of the total Cn_r.
 
 ![Doublet response and mode roots](img/stability_modes.png)
 
-The linear equations of motion, with the derivatives above and a placeholder
-mass model (45 % of the mass spread over the wing, 7 % motor, 48 % battery and
-electronics in the bay; the real build-up is M1.5):
+The linear equations of motion, with the derivatives above and the moments of
+inertia from the M1.5 weight build-up ([weights_propulsion.md](weights_propulsion.md)),
+scaled to 1.5 kg. (M1.4 first used a placeholder mass model; the table notes
+where the real inertia changed things.)
 
 | Mode | Prediction | Verdict |
 |---|---|---|
-| Short period (the quick pitch bob) | 1.8 Hz, damping ratio 0.67 | well damped |
+| Short period (the quick pitch bob) | 1.7 Hz, damping ratio 0.66 (placeholder: 1.8 Hz) | well damped |
 | Phugoid (slow speed-height swap) | 7.3 s period, damping 0.02 | normal for a clean glider; TECS handles it |
-| Dutch roll (yaw-roll wag) | 2.4 s period, damping 0.05 | **lightly damped, watch** |
-| Roll subsidence | 0.07 s time constant | crisp |
-| Spiral | slowly divergent, doubles in 27 s | fine (the autopilot holds wings level) |
+| Dutch roll (yaw-roll wag) | 2.2 s period, damping 0.07 (placeholder: 0.05) | **lightly damped, watch** |
+| Roll subsidence | 0.05 s time constant | crisp |
+| Spiral | slowly divergent, doubles in 26 s | fine (the autopilot holds wings level) |
 
 The short-period numbers are the VAL-6 target. The left plot is what a 3°
 elevon doublet should look like in the IMU pitch-rate log. The frequency
-depends on the pitch inertia, which is still a guess: ±30 % on it moves the
-frequency between 1.6 and 2.1 Hz, inside VAL-6's ±25 % band once the real
-inertia replaces the guess. Across the CG band it runs 1.5 Hz (5 %) to
-2.0 Hz (10 %).
+depends on the pitch inertia: ±30 % on it moves the frequency between 1.5 and
+1.9 Hz. Across the CG band it runs 1.4 Hz (5 %) to 1.85 Hz (10 %). As built
+(1.2 kg, CG 261 mm) the weights report predicts 2.0 Hz, damping 0.69: that is
+the number to compare the first doublets with.
 
-**The Dutch roll is the one real watch item.** A damping ratio of 0.05 means
+**The Dutch roll is the one real watch item.** (M1.5 update: with the real
+roll inertia, which is about 20 % lower than the placeholder, the damping is
+0.07 at 1.5 kg and 0.08 as built, so the case for bigger fins is much
+weaker. The sensitivity table below was run with the placeholder.) A damping ratio of 0.05 means
 a sideways gust sets off a gentle wag that takes a few cycles to die out. It
 is common on small tailless wings, it won't make the aircraft unstable, and
 the VLM probably understates the damping (it misses fin and pod side force
@@ -265,8 +269,8 @@ How to build it:
 
 ## What this changes downstream
 
-- **M1.5 weights**: put the CG at 261–275 mm from the pod nose; aim for 268 mm
-  and use 261 mm for the first flights. Replace the placeholder inertia.
+- **M1.5 weights** (done): CG lands on 261 mm with the battery at 150 mm and
+  no ballast; the placeholder inertia is replaced.
 - **M1.6 optimizer**: constraints to carry: static margin 5–10 %, trim
   within ±3° at cruise, stall ≤ 9 m/s via the critical-section method with
   trim, outer-elevon stall margin ≥ 10 %, Dutch roll damping ≥ 0.08. One
@@ -283,6 +287,6 @@ How to build it:
 - The stall is the first strip reaching its limit, not a post-stall model.
 - The 0.75 elevon effectiveness factor and the drag allowances are judgement
   calls; each is a named constant at the top of `aero.py`.
-- Masses and inertias are placeholders until M1.5.
+- Inertia comes from the M1.5 build-up, which has its own growth allowance and uncertainties.
 - One airspeed for the derivatives (cruise). Modes at launch speed come once
   the inertia is real.
