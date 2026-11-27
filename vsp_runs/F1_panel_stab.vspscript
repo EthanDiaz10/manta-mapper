@@ -299,14 +299,14 @@ void main()
     WriteVSPFile( "F1_panel_stab.vsp3", SET_ALL );
 
     //==== Geometry for VSPAERO (panel) ====//
+    // OpenVSP 3.57: VLM vs panel is chosen only by the sets (thin = VLM, thick = panel);
+    // stability derivatives are switched on with UnsteadyType = STABILITY_DEFAULT.
     array<int> thick = { SET_ALL };
     array<int> thin = { SET_NONE };
-    array<int> method = { PANEL };
     string cg = "VSPAEROComputeGeometry";
     SetAnalysisInputDefaults( cg );
     SetIntAnalysisInput( cg, "GeomSet", thick );
     SetIntAnalysisInput( cg, "ThinGeomSet", thin );
-    SetIntAnalysisInput( cg, "AnalysisMethod", method );
     string rcg = ExecAnalysis( cg );
 
     //==== Solver ====//
@@ -314,7 +314,6 @@ void main()
     SetAnalysisInputDefaults( sw );
     SetIntAnalysisInput( sw, "GeomSet", thick );
     SetIntAnalysisInput( sw, "ThinGeomSet", thin );
-    SetIntAnalysisInput( sw, "AnalysisMethod", method );
     array<int> manual = { MANUAL_REF };
     SetIntAnalysisInput( sw, "RefFlag", manual );
     array<double> sref = { 0.398952 };
@@ -333,15 +332,18 @@ void main()
     array<int> na = { 1 };
     array<double> mach = { 0.04002 };
     array<int> one = { 1 };
+    array<double> b0 = { 0.0000 };
+    array<double> b1 = { 0.0000 };
+    array<int> nb = { 1 };
     array<double> re = { 200163.3 };
     array<double> vinf = { 14.0000 };
     array<double> rho = { 0.98855 };
     SetDoubleAnalysisInput( sw, "AlphaStart", a0 );
     SetDoubleAnalysisInput( sw, "AlphaEnd", a1 );
     SetIntAnalysisInput( sw, "AlphaNpts", na );
-    SetDoubleAnalysisInput( sw, "BetaStart", zero );
-    SetDoubleAnalysisInput( sw, "BetaEnd", zero );
-    SetIntAnalysisInput( sw, "BetaNpts", one );
+    SetDoubleAnalysisInput( sw, "BetaStart", b0 );
+    SetDoubleAnalysisInput( sw, "BetaEnd", b1 );
+    SetIntAnalysisInput( sw, "BetaNpts", nb );
     SetDoubleAnalysisInput( sw, "MachStart", mach );
     SetDoubleAnalysisInput( sw, "MachEnd", mach );
     SetIntAnalysisInput( sw, "MachNpts", one );
@@ -354,8 +356,6 @@ void main()
     SetIntAnalysisInput( sw, "NCPU", ncpu );
     array<int> stab = { STABILITY_DEFAULT };
     SetIntAnalysisInput( sw, "UnsteadyType", stab );
-    SetIntAnalysisInput( sw, "StabilityType", stab );
-    SetIntAnalysisInput( sw, "StabilityCalcFlag", stab );
     PrintAnalysisInputs( sw );
     string rid = ExecAnalysis( sw );
     WriteResultsCSVFile( rid, "F1_panel_stab_results.csv" );

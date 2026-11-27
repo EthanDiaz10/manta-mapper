@@ -3,16 +3,22 @@
  "runs": [
   "F1_vlm_sweep",
   "F1_vlm_stab",
+  "F1_vlm_beta",
   "F1_panel_sweep",
   "F1_panel_stab",
+  "F1_panel_beta",
   "F2_vlm_sweep",
   "F2_vlm_stab",
+  "F2_vlm_beta",
   "F2_panel_sweep",
   "F2_panel_stab",
+  "F2_panel_beta",
   "F3_vlm_sweep",
   "F3_vlm_stab",
+  "F3_vlm_beta",
   "F3_panel_sweep",
-  "F3_panel_stab"
+  "F3_panel_stab",
+  "F3_panel_beta"
  ],
  "cases": [
   {
