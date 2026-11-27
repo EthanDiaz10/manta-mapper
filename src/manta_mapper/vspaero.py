@@ -576,6 +576,30 @@ class CaseResult:
     metrics: dict  # method -> comparison numbers
     dutch_roll: dict  # label -> damping
     modes: dict  # label -> Modes
+    invalid: dict = field(default_factory=dict)  # method -> why its output was rejected
+
+
+def solution_problems(sweep: dict, stab: StabTable | None) -> str:
+    """Why a VSPAERO solution can't be used ("" if it looks sane).
+
+    A broken thick-surface mesh shows up as surface-integrated lift far beyond
+    anything a wing can make, and as a nonsense neutral point.
+    """
+    if np.nanmax(np.abs(sweep["CL"])) > 3.0:
+        return f"surface-integrated CL up to {np.nanmax(np.abs(sweep['CL'])):.0f} (broken mesh)"
+    if stab is not None and (abs(stab.d("CMy", "base")) > 1.0 or abs(stab.scalars.get("SM", 0.0)) > 1.0):
+        return f"stability run nonsense (Cm {stab.d('CMy', 'base'):.1f}, SM {stab.scalars.get('SM', 0.0):.0f})"
+    return ""
+
+
+def override_beta(stab: StabTable, beta_sweep: dict) -> None:
+    """Replace the stability file's sideslip column with central differences of a +-beta sweep."""
+    b = np.radians(beta_sweep["Beta"])
+    o = np.argsort(b)
+    b = b[o]
+    for coef, col in (("CFy", "CFytot"), ("CMx", "CMxtot"), ("CMz", "CMztot"), ("CL", "CLtot"), ("CMy", "CMytot")):
+        y = beta_sweep[col][o]
+        stab.values[coef]["beta"] = float((y[-1] - y[0]) / (b[-1] - b[0]))
 
 
 def _slope(alpha_deg, y, lo=-2.0, hi=6.0):
@@ -608,7 +632,7 @@ def analyse_case(case: Case, runs_dir: str | Path, req: MissionRequirements, pro
     modes = {"AeroSandbox (pipeline)": S.flight_modes(d0, inertia, g, fl)}
 
     cl_cruise = A.cl_level(DESIGN_MASS_KG, g, fl)
-    metrics, vsp = {}, {}
+    metrics, vsp, invalid = {}, {}, {}
     ref_cla = _slope(ref_sweep["alpha"], ref_sweep["CL"])
     ref_cma = _slope(ref_sweep["alpha"], ref_sweep["CMy"])
     ref_np = case.x_cg - ref_cma / ref_cla * g.mac_m
@@ -619,12 +643,26 @@ def analyse_case(case: Case, runs_dir: str | Path, req: MissionRequirements, pro
     for m in METHODS:
         pol_p = find_output(runs_dir, f"{case.label}_{m}_sweep", ".polar")
         stab_p = find_output(runs_dir, f"{case.label}_{m}_stab", ".stab")
-        if pol_p is None or stab_p is None:
+        if pol_p is None:
             progress(f"{case.label}: no VSPAERO {m} output, skipped")
             continue
         sw = parse_polar(pol_p)
-        st = parse_stab(stab_p)
+        bad = solution_problems(sw, None)
+        if not bad and stab_p is None:
+            bad = "no stability run"
+        st = parse_stab(stab_p) if not bad else None
+        bad = bad or solution_problems(sw, st)
+        if bad:
+            invalid[m] = bad
+            progress(f"{case.label}: VSPAERO {m} rejected: {bad}")
+            continue
+        beta_p = find_output(runs_dir, f"{case.label}_{m}_beta", ".polar")
+        beta_src = "stability file (0.01 deg step)"
+        if beta_p is not None:
+            override_beta(st, parse_polar(beta_p))
+            beta_src = f"explicit +-{BETA_STEP_DEG:g} deg sideslip runs"
         conv = conventions(st, ref_body, case.alpha_cruise_deg)
+        conv.notes.append("sideslip derivatives from " + beta_src)
         dv = vsp_derivs(st, conv, case.alpha_cruise_deg)
         cla = _slope(sw["alpha"], sw["CL"])
         cma = _slope(sw["alpha"], sw["CMy"])
@@ -641,13 +679,18 @@ def analyse_case(case: Case, runs_dir: str | Path, req: MissionRequirements, pro
         for k in DerivSet.LATERAL + ("cl_a", "cm_a", "cl_q", "cm_q"):
             setattr(d1, k, getattr(d1, k) + getattr(dv, k) - getattr(ref, k))
         modes[f"VSPAERO {m}"] = S.flight_modes(d1, inertia, g, fl)
+        # the yaw-rate terms are where the two codes disagree most: show VSPAERO with AeroSandbox's
+        d2 = S.Derivatives(**asdict(d1))
+        for k in ("cy_r", "cl_r", "cn_r"):
+            setattr(d2, k, getattr(d0, k))
+        modes[f"VSPAERO {m}, AeroSandbox r-terms"] = S.flight_modes(d2, inertia, g, fl)
 
     # PIPE-4 total-CD check: profile + misc drag from the pipeline, induced from each code
     cd_total_ref = cruise.cd
     for k, mt in metrics.items():
         mt["cd_total_cruise"] = cd_total_ref - metrics["AeroSandbox"]["cdi_cruise"] + mt["cdi_cruise"]
     dr = {k: v.dutch_roll.damping for k, v in modes.items()}
-    return CaseResult(case, dict(sweep=ref_sweep, body=ref_body, derivs=ref), vsp, metrics, dr, modes)
+    return CaseResult(case, dict(sweep=ref_sweep, body=ref_body, derivs=ref), vsp, metrics, dr, modes, invalid)
 
 
 def pipe4(res: CaseResult) -> dict:
@@ -691,6 +734,8 @@ def report(results: list[CaseResult]) -> str:
         for name, key, mult, nd in rows:
             L.append(f"  {name:24s}" + "".join(f"{r.metrics[k][key]*mult:18.{nd}f}" for k in cols))
         L.append("")
+        for k, why in r.invalid.items():
+            L.append(f"  VSPAERO {k}: rejected, {why}")
         L.append("  PIPE-4 (VSPAERO vs AeroSandbox):")
         for k, v in pipe4(r).items():
             L.append(f"    {k:14s} CL_alpha {v['cl_alpha'][0]*100:+5.1f} % {'ok' if v['cl_alpha'][1] else 'FAIL'}   "
@@ -719,6 +764,7 @@ def to_json(results: list[CaseResult]) -> dict:
             dutch_roll={k: dict(damping=m.dutch_roll.damping, hz=m.dutch_roll.frequency_hz,
                                 spiral_s=m.spiral.time_constant_s) for k, m in r.modes.items()},
             conventions={k: dict(asdict(v["conv"])) for k, v in r.vsp.items()},
+            rejected=r.invalid,
         ))
     return out
 
@@ -746,7 +792,8 @@ def plot_comparison(results: list[CaseResult], path: str | None = None):  # prag
     axes[2].axhline(DUTCH_ROLL_MIN, color="#b00020", lw=1, ls="--", label="robust limit 0.09")
     axes[2].set(xticks=np.arange(len(labels)) + w * (len(keys) - 1) / 2, xticklabels=labels,
                 ylabel="Dutch roll damping ratio", title="Dutch roll")
-    axes[2].legend(frameon=False, fontsize=8)
+    axes[2].set_ylim(0, 0.14)
+    axes[2].legend(frameon=False, fontsize=8, loc="upper left")
     for ax in axes:
         ax.grid(alpha=0.3)
         for s in ("top", "right"):

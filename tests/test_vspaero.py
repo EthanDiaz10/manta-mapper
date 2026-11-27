@@ -103,8 +103,39 @@ def test_scripts_cover_every_run(tmp_path):
     res = json.loads((ROOT / "docs" / "optimizer_result.json").read_text())
     cases = V.build_cases(req, res, n=1)
     man = V.prepare(cases, tmp_path)
-    assert len(man["runs"]) == 4
+    assert len(man["runs"]) == 6  # vlm/panel x sweep/stab/beta
     text = (tmp_path / "F1_vlm_stab.vspscript").read_text()
     assert "STABILITY_DEFAULT" in text and "Sref" in text and "void main()" in text
     assert text.count("AddGeom") == 2  # wing and tip fins
     assert 0 < cases[0].alpha_cruise_deg < 8
+
+
+def test_rates_turn_about_the_cg_not_the_nose():
+    """Regression for the bug M1.7 found: a pitch rate must not change CL by turning about the pod nose."""
+    pytest.importorskip("aerosandbox")
+    from manta_mapper import aero as A
+    from manta_mapper import geometry as G
+
+    g = G.baseline()
+    fl = A.Flight(14.0, 1320.0)
+    V_, c = 14.0, g.mac_m
+    q = 0.01 * 2 * V_ / c
+    out = []
+    for x_ref in (0.20, 0.30):
+        b = A.run_vlm(g, fl, 4.0, xyz_ref=(x_ref, 0, 0))
+        r = A.run_vlm(g, fl, 4.0, q=q, xyz_ref=(x_ref, 0, 0))
+        out.append((r["CL"] - b["CL"]) / 0.01)
+    # CL_q about the CG is a few per unit q-hat and moves only modestly with the reference point;
+    # about the nose it was ~13
+    assert all(2.0 < v < 7.5 for v in out)
+
+
+def test_vspaero_vlm_results_parse_and_pass_sanity(tmp_path):
+    runs = ROOT / "vsp_runs"
+    if not (runs / "F1_vlm_sweep.polar").exists():
+        pytest.skip("no VSPAERO results checked in")
+    sw = V.parse_polar(runs / "F1_vlm_sweep.polar")
+    st = V.parse_stab(runs / "F1_vlm_stab.stab")
+    assert V.solution_problems(sw, st) == ""
+    bad = V.parse_polar(runs / "F1_panel_sweep.polar")
+    assert V.solution_problems(bad, None) != ""  # the broken thick mesh is caught
