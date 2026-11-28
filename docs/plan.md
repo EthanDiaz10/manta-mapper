@@ -12,7 +12,7 @@ visible and mistakes surface early.
 | M1.3 Parametric geometry | `geometry.py` builds the BWB (centre pod, swept outer panels, drooped tip fins) from 14 design variables; baseline 1.53 m, 0.40 m², 5° washout ([geometry.md](geometry.md)) (done) |
 | M1.4 Aero + stability | VLM + NeuralFoil strip drag: neutral point 33.6 % MAC, CG band 261–275 mm, trims within ±3° at cruise, stall 8.7 m/s starting inboard, short period 1.8 Hz; camera mount tilted 6° ([aero_stability.md](aero_stability.md)) (done) |
 | M1.5 Weights + propulsion | 1.20 kg as built (EPP panels, LW-ASA pod), CG on 261 mm with no ballast, real inertia; X2216 1100KV + 10x6 folding + 3S1P P45B; 25 ha lands with ≥ 51 %, 50 ha with ≥ 33 % except at 1.5 kg and L/D 10; ~$470 ([weights_propulsion.md](weights_propulsion.md)) (done) |
-| M1.6 Optimizer | design-to-cost optimizer returns a feasible lowest-cost/lightest design: 1.67 m span, AR 7.0, 1163 g as built, $468; fixes Dutch roll (0.073 → 0.092) and stalls at 8.70 m/s at the forward CG ([optimizer.md](optimizer.md)) (done) |
+| M1.6 Optimizer | design-to-cost optimizer returns a feasible lowest-cost/lightest design. Re-run after the M1.7 rate fix: 1.80 m span (at bound), AR 7.8, 1177 g as built, $470, Dutch roll 0.091, stall 8.79 m/s ([optimizer.md](optimizer.md)) (done) |
 | M1.7 VSPAERO check | top 3 designs run in VSPAERO 3.57 (VLM; panel mesh broken). Lift and drag agree, neutral point 3 % MAC forward (borderline PIPE-4). Found and fixed a rate-derivative bug: Dutch roll is really ~0.07, below the 0.09 margin ([vspaero.md](vspaero.md)) (done) |
 
 ## Phase 2: CFD and generated CAD
