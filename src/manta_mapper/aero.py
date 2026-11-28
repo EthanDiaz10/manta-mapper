@@ -268,11 +268,32 @@ class VLMResult:
         return self.coeffs[k]
 
 
+def _operating_point(flight: Flight, alpha, beta, p, q, r, center):
+    """An AeroSandbox operating point whose body rates turn about ``center`` (the CG).
+
+    AeroSandbox's VLM applies p, q, r about the geometry origin (here the pod
+    nose), not about the moment reference point. With the CG ~0.26 m aft of
+    the nose, a pitch rate then also raised the angle of attack everywhere
+    (Cm_q and CL_q ~60 % and ~3x too large) and a yaw rate added sideslip
+    (Cn_r, CY_r, Cl_r wrong). Found by the M1.7 VSPAERO check, which rotates
+    about Xcg. The rotation velocity is evaluated relative to ``center``.
+    """
+    import aerosandbox as asb
+
+    op = asb.OperatingPoint(atmosphere=flight.atmosphere(), velocity=flight.velocity, alpha=float(alpha),
+                            beta=float(beta), p=float(p), q=float(q), r=float(r))
+    c = np.asarray(center, dtype=float)
+    if np.any(c) and (p or q or r):
+        base = op.compute_rotation_velocity_geometry_axes
+        op.compute_rotation_velocity_geometry_axes = lambda points: base(np.asarray(points) - c)
+    return op
+
+
 def run_vlm(geom: BWBGeometry, flight: Flight, alpha: float, elevator_deg: float = 0.0, aileron_deg: float = 0.0,
             beta: float = 0.0, p: float = 0.0, q: float = 0.0, r: float = 0.0, xyz_ref=(0.0, 0.0, 0.0),
             spanwise_resolution: int | None = None,
             chordwise_resolution: int | None = None) -> VLMResult:
-    """Run the vortex lattice. Rates p, q, r in rad/s, body axes (x fwd, y right, z down).
+    """Run the vortex lattice. Rates p, q, r in rad/s, body axes (x fwd, y right, z down), about ``xyz_ref``.
 
     Panel counts default to the module settings, which :func:`vlm_resolution`
     can change for a block of code (the optimizer's coarse search tier).
@@ -283,8 +304,7 @@ def run_vlm(geom: BWBGeometry, flight: Flight, alpha: float, elevator_deg: float
     chordwise_resolution = chordwise_resolution or CHORDWISE_RESOLUTION
 
     ap = build_airplane(geom, xyz_ref, elevator_deg, aileron_deg)
-    op = asb.OperatingPoint(atmosphere=flight.atmosphere(), velocity=flight.velocity, alpha=float(alpha),
-                            beta=float(beta), p=float(p), q=float(q), r=float(r))
+    op = _operating_point(flight, alpha, beta, p, q, r, xyz_ref)
     vlm = asb.VortexLatticeMethod(ap, op, spanwise_resolution=spanwise_resolution,
                                   chordwise_resolution=chordwise_resolution,
                                   spanwise_spacing_function=np.linspace)

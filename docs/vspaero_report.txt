@@ -1,0 +1,99 @@
+Manta Mapper M1.7: VSPAERO check of the optimizer finalists
+==============================================================
+
+F1: span 1.668 m, area 0.3990 m^2, MAC 270 mm, CG 262 mm (SM 7.5 %), cruise 14.0 m/s, alpha 5.66 deg
+
+                                 AeroSandbox       VSPAERO vlm
+  CL_alpha, /rad                       4.542             4.372
+  CL at alpha 0                      -0.0474           -0.0336
+  neutral point, % MAC                 34.45             31.24
+  neutral point, mm                    282.1             273.5
+  CDi at cruise CL                   0.00597           0.00841
+  CD total at cruise                 0.02253           0.02497
+  CY_beta                            -0.0316           -0.0409
+  Cl_beta                            -0.0557           -0.0823
+  Cn_beta                             0.0069            0.0091
+  CY_p                                0.0987           -0.0088
+  Cl_p                               -0.4993           -0.4646
+  Cn_p                               -0.0461           -0.0391
+  CY_r                                0.0061            0.0174
+  Cl_r                                0.0929            0.0978
+  Cn_r                               -0.0020           -0.0111
+  Cm_q                               -1.5730           -1.4621
+
+  VSPAERO panel: rejected, surface-integrated CL up to 14 (broken mesh)
+  PIPE-4 (VSPAERO vs AeroSandbox):
+    VSPAERO vlm    CL_alpha  -3.8 % ok   NP -3.21 % MAC FAIL   CD +10.8 % ok
+
+  Dutch roll damping (same inertia, profile yaw damping and trim; VSPAERO rows swap in its derivatives):
+    AeroSandbox (pipeline)   zeta  0.070   0.45 Hz   BELOW 0.09   spiral   -21.5 s   roll tau 0.047 s
+    VSPAERO vlm              zeta  0.085   0.52 Hz   BELOW 0.09   spiral   +26.5 s   roll tau 0.050 s
+    VSPAERO vlm, AeroSandbox r-terms zeta  0.043   0.53 Hz   BELOW 0.09   spiral   -24.0 s   roll tau 0.050 s
+    [vlm] CY_beta raw -0.0409 -> beta sign +1; Cl_beta raw +0.0827 -> moment sign -1; Cl_p raw +0.4659 -> rate sign +1
+    [vlm] rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.66, stability 1.27)
+    [vlm] sideslip derivatives from explicit +-4 deg sideslip runs
+
+F2: span 1.670 m, area 0.4008 m^2, MAC 271 mm, CG 263 mm (SM 7.5 %), cruise 14.0 m/s, alpha 5.65 deg
+
+                                 AeroSandbox       VSPAERO vlm
+  CL_alpha, /rad                       4.521             4.352
+  CL at alpha 0                      -0.0488           -0.0349
+  neutral point, % MAC                 34.31             31.09
+  neutral point, mm                    283.3             274.6
+  CDi at cruise CL                   0.00596           0.00838
+  CD total at cruise                 0.02244           0.02486
+  CY_beta                            -0.0304           -0.0407
+  Cl_beta                            -0.0566           -0.0816
+  Cn_beta                             0.0067            0.0088
+  CY_p                                0.0947            0.0015
+  Cl_p                               -0.4939           -0.4893
+  Cn_p                               -0.0448           -0.0333
+  CY_r                                0.0065            0.0237
+  Cl_r                                0.0915            0.0775
+  Cn_r                               -0.0020           -0.0077
+  Cm_q                               -1.5751           -1.2213
+
+  VSPAERO panel: rejected, surface-integrated CL up to 653 (broken mesh)
+  PIPE-4 (VSPAERO vs AeroSandbox):
+    VSPAERO vlm    CL_alpha  -3.7 % ok   NP -3.22 % MAC FAIL   CD +10.8 % ok
+
+  Dutch roll damping (same inertia, profile yaw damping and trim; VSPAERO rows swap in its derivatives):
+    AeroSandbox (pipeline)   zeta  0.068   0.45 Hz   BELOW 0.09   spiral   -23.6 s   roll tau 0.047 s
+    VSPAERO vlm              zeta  0.066   0.50 Hz   BELOW 0.09   spiral   +34.6 s   roll tau 0.047 s
+    VSPAERO vlm, AeroSandbox r-terms zeta  0.046   0.50 Hz   BELOW 0.09   spiral   -24.7 s   roll tau 0.047 s
+    [vlm] CY_beta raw -0.0407 -> beta sign +1; Cl_beta raw +0.0820 -> moment sign -1; Cl_p raw +0.4890 -> rate sign +1
+    [vlm] rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.70, stability 1.41)
+    [vlm] sideslip derivatives from explicit +-4 deg sideslip runs
+
+F3: span 1.678 m, area 0.4035 m^2, MAC 271 mm, CG 260 mm (SM 7.5 %), cruise 14.0 m/s, alpha 5.59 deg
+
+                                 AeroSandbox       VSPAERO vlm
+  CL_alpha, /rad                       4.535             4.377
+  CL at alpha 0                      -0.0429           -0.0299
+  neutral point, % MAC                 34.08             31.03
+  neutral point, mm                    280.2             271.9
+  CDi at cruise CL                   0.00586           0.00822
+  CD total at cruise                 0.02231           0.02467
+  CY_beta                            -0.0306           -0.0392
+  Cl_beta                            -0.0568           -0.0829
+  Cn_beta                             0.0065            0.0085
+  CY_p                                0.0901           -0.0613
+  Cl_p                               -0.4949           -0.5438
+  Cn_p                               -0.0447           -0.0374
+  CY_r                                0.0069            0.0254
+  Cl_r                                0.0934            0.0934
+  Cn_r                               -0.0020           -0.0115
+  Cm_q                               -1.5460           -1.2956
+
+  VSPAERO panel: rejected, surface-integrated CL up to 337 (broken mesh)
+  PIPE-4 (VSPAERO vs AeroSandbox):
+    VSPAERO vlm    CL_alpha  -3.5 % ok   NP -3.05 % MAC FAIL   CD +10.6 % ok
+
+  Dutch roll damping (same inertia, profile yaw damping and trim; VSPAERO rows swap in its derivatives):
+    AeroSandbox (pipeline)   zeta  0.069   0.44 Hz   BELOW 0.09   spiral   -24.4 s   roll tau 0.047 s
+    VSPAERO vlm              zeta  0.092   0.49 Hz   ok   spiral   +19.5 s   roll tau 0.042 s
+    VSPAERO vlm, AeroSandbox r-terms zeta  0.047   0.49 Hz   BELOW 0.09   spiral   -29.0 s   roll tau 0.042 s
+    [vlm] CY_beta raw -0.0392 -> beta sign +1; Cl_beta raw +0.0833 -> moment sign -1; Cl_p raw +0.5442 -> rate sign +1
+    [vlm] rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.64, stability 1.42)
+    [vlm] sideslip derivatives from explicit +-4 deg sideslip runs
+

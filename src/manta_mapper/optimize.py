@@ -78,7 +78,7 @@ class Variable:
 #: CAD blends), root twist (M1.4 chose a tilted camera mount instead), elevon
 #: chord (25 %, generous for low-speed authority) and spar position (25 %).
 VARIABLES: tuple[Variable, ...] = (
-    Variable("span_m", 1.30, 1.80, "m", "tip to tip, wing only"),
+    Variable("span_m", 1.30, 2.40, "m", "tip to tip, wing only (no hard limit, Ethan 2026-11-27)"),
     Variable("root_chord_m", 0.22, 0.34, "m", "outer-panel root chord"),
     Variable("taper", 0.40, 0.90, "", "outer-panel tip chord / root chord"),
     Variable("sweep_le_deg", 12.0, 35.0, "deg", "outer-panel leading-edge sweep"),

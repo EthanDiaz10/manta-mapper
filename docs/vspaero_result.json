@@ -1,0 +1,322 @@
+{
+ "milestone": "M1.7",
+ "pipe4_limits": {
+  "cl_alpha_rel": 0.1,
+  "cd_cruise_rel": 0.2,
+  "np_pct_mac": 3.0
+ },
+ "cases": [
+  {
+   "label": "F1",
+   "x": {
+    "span_m": 1.6676292483975002,
+    "root_chord_m": 0.27866069076958633,
+    "taper": 0.45463898126144087,
+    "sweep_le_deg": 22.44340080916831,
+    "washout_deg": 3.288150467939973,
+    "dihedral_deg": 4.005839098457379,
+    "fin_length_m": 0.08452106618441363,
+    "fin_droop_deg": 43.950766098960926,
+    "pod_chord_m": 0.4222158508713156,
+    "pod_half_width_m": 0.08500215595405702
+   },
+   "metrics": {
+    "AeroSandbox": {
+     "cl_alpha": 4.542356759111093,
+     "x_np": 0.2821242737013337,
+     "np_pct_mac": 34.44870122100472,
+     "cdi_cruise": 0.005965873964026829,
+     "cl0": -0.04743717087146284,
+     "cy_b": -0.03160983417949967,
+     "cl_b": -0.05566143495051676,
+     "cn_b": 0.006942161586405625,
+     "cy_p": 0.09868759698688437,
+     "cl_p": -0.4993416587650754,
+     "cn_p": -0.04613105738493472,
+     "cy_r": 0.0061314583480618304,
+     "cl_r": 0.09294247926738775,
+     "cn_r": -0.001951519352750591,
+     "cm_q": -1.57297898913008,
+     "cd_total_cruise": 0.022529394816751536
+    },
+    "VSPAERO vlm": {
+     "cl_alpha": 4.371844444058964,
+     "x_np": 0.27346701119347,
+     "np_pct_mac": 31.243295995453785,
+     "cdi_cruise": 0.00840701600322672,
+     "cl0": -0.033585543434,
+     "cl_alpha_stab": 4.3885719,
+     "x_np_stab": 0.2768162,
+     "cy_b": -0.040948851043913055,
+     "cl_b": -0.0822502121128348,
+     "cn_b": 0.009064937568659387,
+     "cy_p": -0.008812688571900623,
+     "cl_p": -0.464581122111524,
+     "cn_p": -0.03907005408990726,
+     "cy_r": 0.017362919206881433,
+     "cl_r": 0.09775484591009274,
+     "cn_r": -0.011102277888475969,
+     "cm_q": -1.4620664,
+     "cd_total_cruise": 0.02497053685595143
+    }
+   },
+   "pipe4": {
+    "VSPAERO vlm": {
+     "cl_alpha": [
+      -0.0375382921453965,
+      true
+     ],
+     "np": [
+      -3.2054052255509333,
+      0.0
+     ],
+     "cd": [
+      0.1083536446076574,
+      1.0
+     ]
+    }
+   },
+   "dutch_roll": {
+    "AeroSandbox (pipeline)": {
+     "damping": 0.070139714463104,
+     "hz": 0.44925411894574735,
+     "spiral_s": -21.51870709441869
+    },
+    "VSPAERO vlm": {
+     "damping": 0.08501327324516295,
+     "hz": 0.5236454111448753,
+     "spiral_s": 26.50657765398799
+    },
+    "VSPAERO vlm, AeroSandbox r-terms": {
+     "damping": 0.04267690133626901,
+     "hz": 0.5258870343957025,
+     "spiral_s": -23.971744035457974
+    }
+   },
+   "conventions": {
+    "vlm": {
+     "beta_sign": 1.0,
+     "moment_sign": -1.0,
+     "rate_sign": 1.0,
+     "rates_axes": "body",
+     "notes": [
+      "CY_beta raw -0.0409 -> beta sign +1; Cl_beta raw +0.0827 -> moment sign -1; Cl_p raw +0.4659 -> rate sign +1",
+      "rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.66, stability 1.27)",
+      "sideslip derivatives from explicit +-4 deg sideslip runs"
+     ]
+    }
+   },
+   "rejected": {
+    "panel": "surface-integrated CL up to 14 (broken mesh)"
+   }
+  },
+  {
+   "label": "F2",
+   "x": {
+    "span_m": 1.6702094082023804,
+    "root_chord_m": 0.27786385020648663,
+    "taper": 0.46222741305957193,
+    "sweep_le_deg": 22.523845037783442,
+    "washout_deg": 3.3467089336817284,
+    "dihedral_deg": 3.9637828773570236,
+    "fin_length_m": 0.08054381963424137,
+    "fin_droop_deg": 45.60187706067196,
+    "pod_chord_m": 0.4230320746282538,
+    "pod_half_width_m": 0.08624476094525536
+   },
+   "metrics": {
+    "AeroSandbox": {
+     "cl_alpha": 4.521366628141817,
+     "x_np": 0.28327166838340995,
+     "np_pct_mac": 34.3109301288493,
+     "cdi_cruise": 0.0059553559973863825,
+     "cl0": -0.04876452345541675,
+     "cy_b": -0.030415181600934524,
+     "cl_b": -0.056592294303430796,
+     "cn_b": 0.006679639422927488,
+     "cy_p": 0.09466063048728532,
+     "cl_p": -0.49385802612665236,
+     "cn_p": -0.04475148553711423,
+     "cy_r": 0.006532207580741861,
+     "cl_r": 0.09154271785723475,
+     "cn_r": -0.001961997663984427,
+     "cm_q": -1.57510811903488,
+     "cd_total_cruise": 0.02243536452682872
+    },
+    "VSPAERO vlm": {
+     "cl_alpha": 4.35187522340322,
+     "x_np": 0.27456386828077856,
+     "np_pct_mac": 31.094156830246593,
+     "cdi_cruise": 0.008382681196578996,
+     "cl0": -0.034931502838,
+     "cl_alpha_stab": 4.3104598,
+     "x_np_stab": 0.2696363,
+     "cy_b": -0.04066209512841567,
+     "cl_b": -0.08156000465102754,
+     "cn_b": 0.008837492098709078,
+     "cy_p": 0.0014751331560697032,
+     "cl_p": -0.48932864191722564,
+     "cn_p": -0.03327924637720923,
+     "cy_r": 0.023743767728434843,
+     "cl_r": 0.07753865362279078,
+     "cn_r": -0.007679358082774385,
+     "cm_q": -1.2212606,
+     "cd_total_cruise": 0.02486268972602133
+    }
+   },
+   "pipe4": {
+    "VSPAERO vlm": {
+     "cl_alpha": [
+      -0.037486764219395896,
+      true
+     ],
+     "np": [
+      -3.216773298602707,
+      0.0
+     ],
+     "cd": [
+      0.10819192156605961,
+      1.0
+     ]
+    }
+   },
+   "dutch_roll": {
+    "AeroSandbox (pipeline)": {
+     "damping": 0.0683987412017379,
+     "hz": 0.4469671481713303,
+     "spiral_s": -23.55504811477895
+    },
+    "VSPAERO vlm": {
+     "damping": 0.06561213879207865,
+     "hz": 0.500431613919672,
+     "spiral_s": 34.56072294706207
+    },
+    "VSPAERO vlm, AeroSandbox r-terms": {
+     "damping": 0.04614500329392376,
+     "hz": 0.5022591744554137,
+     "spiral_s": -24.674459981345972
+    }
+   },
+   "conventions": {
+    "vlm": {
+     "beta_sign": 1.0,
+     "moment_sign": -1.0,
+     "rate_sign": 1.0,
+     "rates_axes": "body",
+     "notes": [
+      "CY_beta raw -0.0407 -> beta sign +1; Cl_beta raw +0.0820 -> moment sign -1; Cl_p raw +0.4890 -> rate sign +1",
+      "rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.70, stability 1.41)",
+      "sideslip derivatives from explicit +-4 deg sideslip runs"
+     ]
+    }
+   },
+   "rejected": {
+    "panel": "surface-integrated CL up to 653 (broken mesh)"
+   }
+  },
+  {
+   "label": "F3",
+   "x": {
+    "span_m": 1.6776263985749909,
+    "root_chord_m": 0.27964646381416136,
+    "taper": 0.4573094545986895,
+    "sweep_le_deg": 21.962939796617643,
+    "washout_deg": 3.098745743170618,
+    "dihedral_deg": 4.034808424400112,
+    "fin_length_m": 0.08111311017276202,
+    "fin_droop_deg": 45.304860145891254,
+    "pod_chord_m": 0.42359459522406995,
+    "pod_half_width_m": 0.08649859192853605
+   },
+   "metrics": {
+    "AeroSandbox": {
+     "cl_alpha": 4.535495342504124,
+     "x_np": 0.28019396726301016,
+     "np_pct_mac": 34.07995782215887,
+     "cdi_cruise": 0.005858965296784849,
+     "cl0": -0.04288205247401986,
+     "cy_b": -0.03060285025447346,
+     "cl_b": -0.05679196882670945,
+     "cn_b": 0.00645171208054864,
+     "cy_p": 0.09014448083360545,
+     "cl_p": -0.49488665242763913,
+     "cn_p": -0.04465734398778081,
+     "cy_r": 0.006930593745387816,
+     "cl_r": 0.0933827959115495,
+     "cn_r": -0.001998911164105932,
+     "cm_q": -1.5459607749621942,
+     "cd_total_cruise": 0.022306920628063852
+    },
+    "VSPAERO vlm": {
+     "cl_alpha": 4.377122428759831,
+     "x_np": 0.27190806737532963,
+     "np_pct_mac": 31.02671407044643,
+     "cdi_cruise": 0.008224386220668917,
+     "cl0": -0.02991080596,
+     "cl_alpha_stab": 4.4291609,
+     "x_np_stab": 0.2699189,
+     "cy_b": -0.03921973807909477,
+     "cl_b": -0.08288698873782895,
+     "cn_b": 0.008520001812287884,
+     "cy_p": -0.061255241835791605,
+     "cl_p": -0.5438083526549762,
+     "cn_p": -0.03736012567316155,
+     "cy_r": 0.025385187181675185,
+     "cl_r": 0.09339457432683845,
+     "cn_r": -0.01152124734502376,
+     "cm_q": -1.2956319,
+     "cd_total_cruise": 0.024672341551947922
+    }
+   },
+   "pipe4": {
+    "VSPAERO vlm": {
+     "cl_alpha": [
+      -0.034918548424052065,
+      true
+     ],
+     "np": [
+      -3.0532437517124364,
+      0.0
+     ],
+     "cd": [
+      0.10603977856576874,
+      1.0
+     ]
+    }
+   },
+   "dutch_roll": {
+    "AeroSandbox (pipeline)": {
+     "damping": 0.06940127369375354,
+     "hz": 0.4403118345454484,
+     "spiral_s": -24.370655108629798
+    },
+    "VSPAERO vlm": {
+     "damping": 0.09225757047359112,
+     "hz": 0.4907351301063441,
+     "spiral_s": 19.483044298868407
+    },
+    "VSPAERO vlm, AeroSandbox r-terms": {
+     "damping": 0.04738221632674758,
+     "hz": 0.4935290184584096,
+     "spiral_s": -28.954980081351188
+    }
+   },
+   "conventions": {
+    "vlm": {
+     "beta_sign": 1.0,
+     "moment_sign": -1.0,
+     "rate_sign": 1.0,
+     "rates_axes": "body",
+     "notes": [
+      "CY_beta raw -0.0392 -> beta sign +1; Cl_beta raw +0.0833 -> moment sign -1; Cl_p raw +0.5442 -> rate sign +1",
+      "rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.64, stability 1.42)",
+      "sideslip derivatives from explicit +-4 deg sideslip runs"
+     ]
+    }
+   },
+   "rejected": {
+    "panel": "surface-integrated CL up to 337 (broken mesh)"
+   }
+  }
+ ]
+}
