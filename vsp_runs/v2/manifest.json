@@ -1,0 +1,124 @@
+{
+ "milestone": "M1.7",
+ "runs": [
+  "F1_vlm_sweep",
+  "F1_vlm_stab",
+  "F1_vlm_beta",
+  "F1_panel_sweep",
+  "F1_panel_stab",
+  "F1_panel_beta",
+  "F2_vlm_sweep",
+  "F2_vlm_stab",
+  "F2_vlm_beta",
+  "F2_panel_sweep",
+  "F2_panel_stab",
+  "F2_panel_beta",
+  "F3_vlm_sweep",
+  "F3_vlm_stab",
+  "F3_vlm_beta",
+  "F3_panel_sweep",
+  "F3_panel_stab",
+  "F3_panel_beta"
+ ],
+ "cases": [
+  {
+   "label": "F1",
+   "x": {
+    "span_m": 1.8356287511325613,
+    "root_chord_m": 0.2585049171855362,
+    "taper": 0.4896953822262677,
+    "sweep_le_deg": 16.17140374636842,
+    "washout_deg": 3.329807867355754,
+    "dihedral_deg": 3.1709625651748716,
+    "fin_length_m": 0.10791245021956597,
+    "fin_droop_deg": 29.357830741364516,
+    "pod_chord_m": 0.4227909152729521,
+    "pod_half_width_m": 0.09132162348030388
+   },
+   "alpha_cruise_deg": 5.1998509158736335,
+   "elevon_cruise_deg": -1.0738879483695674,
+   "velocity": 14.0,
+   "mach": 0.04001719962003476,
+   "rho": 0.9885510581231849,
+   "re_cref": 192868.1188425373,
+   "x_cg": 0.2604976488176321,
+   "s_ref": 0.4191931395480177,
+   "b_ref": 1.8356287511325613,
+   "c_ref": 0.26023972632179726,
+   "optimizer_metrics": {
+    "dutch_roll_damping": 0.09269027171417488,
+    "np_pct_mac": 35.268283646983846,
+    "x_np_m": 0.28001562829176696,
+    "stall_speed_m_s": 8.709963112271573,
+    "mass_built_kg": 1.1815992359366805,
+    "cruise_ld": 17.062630727923597
+   }
+  },
+  {
+   "label": "F2",
+   "x": {
+    "span_m": 1.8424689549171207,
+    "root_chord_m": 0.2594978617946348,
+    "taper": 0.4883836038386217,
+    "sweep_le_deg": 16.055047177582242,
+    "washout_deg": 3.312447417725651,
+    "dihedral_deg": 3.2044768007687594,
+    "fin_length_m": 0.10759588857786974,
+    "fin_droop_deg": 29.967197203317575,
+    "pod_chord_m": 0.4315364871627112,
+    "pod_half_width_m": 0.09286794132530399
+   },
+   "alpha_cruise_deg": 5.158622757733796,
+   "elevon_cruise_deg": -1.0483220026647702,
+   "velocity": 14.0,
+   "mach": 0.04001719962003476,
+   "rho": 0.9885510581231849,
+   "re_cref": 195723.78863526369,
+   "x_cg": 0.26662126212476095,
+   "s_ref": 0.4244779336917525,
+   "b_ref": 1.8424689549171207,
+   "c_ref": 0.26409292263949075,
+   "optimizer_metrics": {
+    "dutch_roll_damping": 0.09253855115525736,
+    "np_pct_mac": 35.624776793536576,
+    "x_np_m": 0.2864282313227229,
+    "stall_speed_m_s": 8.691336835390427,
+    "mass_built_kg": 1.1915203661989482,
+    "cruise_ld": 17.014055395515182
+   }
+  },
+  {
+   "label": "F3",
+   "x": {
+    "span_m": 1.856948882842134,
+    "root_chord_m": 0.25887579457448673,
+    "taper": 0.4880797663382417,
+    "sweep_le_deg": 15.162561520583496,
+    "washout_deg": 3.2793286927885816,
+    "dihedral_deg": 3.1718678932211786,
+    "fin_length_m": 0.10632239636950205,
+    "fin_droop_deg": 31.12935145934945,
+    "pod_chord_m": 0.4465225470161073,
+    "pod_half_width_m": 0.09578433632699665
+   },
+   "alpha_cruise_deg": 5.124350691577826,
+   "elevon_cruise_deg": -1.0986111464043962,
+   "velocity": 14.0,
+   "mach": 0.04001719962003476,
+   "rho": 0.9885510581231849,
+   "re_cref": 200102.6302493057,
+   "x_cg": 0.2751434810547885,
+   "s_ref": 0.4319287762479498,
+   "b_ref": 1.856948882842134,
+   "c_ref": 0.2700013565998756,
+   "optimizer_metrics": {
+    "dutch_roll_damping": 0.09428661226005947,
+    "np_pct_mac": 36.1628354256772,
+    "x_np_m": 0.29539358279977923,
+    "stall_speed_m_s": 8.71110640173551,
+    "mass_built_kg": 1.206686435710944,
+    "cruise_ld": 16.922561682689576
+   }
+  }
+ ]
+}
