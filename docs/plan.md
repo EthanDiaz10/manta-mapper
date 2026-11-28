@@ -19,7 +19,7 @@ visible and mistakes surface early.
 
 | Milestone | Done when |
 |---|---|
-| M2.1 CFD | final design run in OpenFOAM (or ANSYS Student) at cruise and near stall; compared with VSPAERO |
+| M2.1 CFD | final design run in OpenFOAM (or ANSYS Student) at cruise and near stall; compared with VSPAERO. OpenFOAM v2406, k-ω SST, 0° to 14°: NP 279 mm (34.8 % MAC), between AeroSandbox and VSPAERO, so the M1.4 CG band holds; cruise CD 0.028 fully turbulent (upper bound); fin junction clean; stall starts inboard as predicted, CL_max not resolvable by SST at this Re ([cfd.md](cfd.md)) (done) |
 | M2.2 Structure | spar sized for AC-10; FEA of the spar/centre-body joint |
 | M2.3 Scripted CAD | Fusion 360 Python script builds the printable sections from the pipeline output |
 | M2.4 Test prints | joints, spar fit and hatch printed and checked; a pod section and an EPP panel weighed and fed back into `weights.py` |
