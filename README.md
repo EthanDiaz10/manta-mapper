@@ -10,6 +10,8 @@ Pi Zero 2 W + Camera Module 3, land with 30 % battery left, hand launch, belly
 landing, under 400 ft AGL in visual line of sight. Photos go to WebODM for an
 orthomosaic, elevation model and 3D model.
 
+![Manta Mapper in Fusion 360](docs/img/fusion/m23_hero.png)
+
 ## How the design is made
 
 ```

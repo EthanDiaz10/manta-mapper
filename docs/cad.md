@@ -58,10 +58,36 @@ Full numbers: [cad_report.txt](cad_report.txt).
 
 The script is about 250 lines and only interprets the recipe. It uses
 Fusion's loft for the airfoil bodies and the TemporaryBRepManager for boxes,
-cylinders, transforms and booleans. **It has not been run in Fusion yet**:
-Fusion isn't available in the cloud. Its first run is a laptop job. If an
-operation fails, it carries on and lists the problems at the end. Meanwhile,
-the committed STLs come from the same recipe.
+cylinders, transforms and booleans. **First run on the laptop, 2026-11-28:**
+it built the whole aircraft in one go. If an operation ever fails, it
+carries on and lists the problems at the end. The committed STLs come from
+the same recipe through manifold3d.
+
+### The model in Fusion
+
+![Hero view](img/fusion/m23_hero.png)
+
+*The assembled aircraft, straight out of the script: LW-ASA pod and nose,
+EPP outer panels with the drooped tip fins, the bolted nacelle aft.*
+
+![Exploded](img/fusion/m23_exploded.gif)
+
+*Exploded view: the four pod half-sections, TPU nose cap, hatch lids,
+nacelle, spar sleeves, panels, fins and skid rails
+([MP4](img/fusion/m23_exploded.mp4)).*
+
+![Section](img/fusion/m23_section.png)
+
+*Centreline section of the pod: the hollow nacelle and its firewall at
+the back (red), the 0.8 mm skin with its joint bands and hatch ledges, the
+payload bay with the battery tray, and the skid rail under the floor.*
+
+| Top | Front | Rear |
+|---|---|---|
+| ![Top](img/fusion/m23_top.png) | ![Front](img/fusion/m23_front.png) | ![Rear](img/fusion/m23_rear.png) |
+
+*Top: swept panels, tip fins and the pusher nacelle. Front: dihedral and
+the drooped tip fins. Rear: the two skid rails either side of the nacelle.*
 
 ## How the layout is decided
 
@@ -128,8 +154,8 @@ the root ribs, and printing the nacelle's cone in LW-ASA with a solid firewall.
 
 ## Things to check before or during the test prints (M2.4)
 
-- **First Fusion run** on the laptop: compare the built parts' volumes with
-  `cad_report.txt`.
+- **Fusion volumes**: the first run built every part. Compare the parts'
+  volumes (Inspect > Properties) with `cad_report.txt`.
 - **Camera Module 3 hole pattern** (21 x 12.5 mm, M2) and the lens offset on
   the wedge. Check them against the board before printing the mount.
 - **Pitot tube**: the airspeed sensor sits at x = 46 mm behind the nose cap.
