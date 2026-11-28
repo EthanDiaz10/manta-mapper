@@ -1,5 +1,18 @@
 # Design-to-cost optimizer (milestone M1.6)
 
+> **Re-run after M1.7 (2026-11-28).** The VSPAERO check found that AeroSandbox
+> applied pitch and yaw rates about the pod nose instead of the CG, so the
+> original optimum's Dutch roll damping (0.092) was really about 0.07 (see
+> [vspaero.md](vspaero.md)). With the fix, the optimizer was re-run with the
+> same robust margins (Dutch roll >= 0.09). **New optimum: span 1.80 m
+> (at the upper bound), AR 7.8, LE sweep 16°, dihedral 2.3°, fins 100 mm
+> drooped 23°, pod 428 x 182 mm; Dutch roll 0.091, stall 8.79 m/s, 1177 g as
+> built, $470.** All three finalists sit at the 1.80 m span bound, which means
+> the span limit is now an active constraint. [optimizer_report.txt](optimizer_report.txt), [optimizer_result.json](optimizer_result.json)
+> and the plots are from the re-run. The tables below still describe the
+> original run. The new optimum has not been through VSPAERO yet, and it
+> still uses the VLM neutral point, which VSPAERO puts about 3 % MAC further forward.
+
 ## The short answer
 
 | Question | Answer |
