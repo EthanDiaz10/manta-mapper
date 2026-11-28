@@ -1,5 +1,22 @@
 # VSPAERO check of the optimizer finalists (milestone M1.7)
 
+## Update: the re-run optimum (1.84 m), checked in VSPAERO
+
+After the rate-derivative fix and the span bound raise, the optimizer moved to
+a 1.84 m design. Its top 3 (F1 1.836 m, F2 1.842 m, F3 1.857 m) were run in
+VSPAERO VLM the same way as below (scripts and results in `vsp_runs/v2/`, full
+report in [vspaero_v2_report.txt](vspaero_v2_report.txt)).
+
+| Question | Answer (F1, the optimum; F2 and F3 within a few %) |
+|---|---|
+| Does Dutch roll damping hold up? | **Yes, with VSPAERO's own derivatives: 0.111 to 0.117**, above the pipeline's 0.093 and the 0.09 margin. The extra damping comes from VSPAERO's stronger yaw-rate damping (Cn_r -0.0073 vs -0.0010). If you only trust VSPAERO's sideslip and roll terms and keep AeroSandbox's yaw-rate terms, it drops to 0.069 to 0.072. That pessimistic row is the one to watch in flight test; it is not a blocker for the concept |
+| Lift and drag? | **Agree.** CL_alpha -3.2 to -3.7 % (limit 10 %), total cruise CD +9.6 to +9.7 % (limit 20 %) |
+| Neutral point? | **Same story as before:** VSPAERO puts it 2.9 to 3.1 % MAC forward (8 mm). F1 and F2 just miss the 3 % PIPE-4 limit, F3 just passes. At the planned CG the VSPAERO static margin is 5.7 to 6.1 %, not 7.5 % |
+| Spiral, roll | Spiral stays slow (VSPAERO time constants 124 to 300 s, well past the 12 s limit); roll time constant 0.04 s |
+| Recommendation | Keep the 1.84 m F1 as the design. **Move the CG band 8 mm forward** (F1: about 252 mm instead of 260 mm) so the VSPAERO static margin is back at 7.5 %, and let CFD (M2.1) settle the neutral point. Panel runs were skipped (mesh still breaks at the fin joint) |
+
+The rest of this page is the original M1.7 check of the earlier (pre-fix) finalists.
+
 ## The short answer
 
 | Question | Answer |
