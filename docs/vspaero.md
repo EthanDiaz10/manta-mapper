@@ -15,6 +15,20 @@ report in [vspaero_v2_report.txt](vspaero_v2_report.txt)).
 | Spiral, roll | Spiral stays slow (VSPAERO time constants 124 to 300 s, well past the 12 s limit); roll time constant 0.04 s |
 | Recommendation | Keep the 1.84 m F1 as the design. **Move the CG band 8 mm forward** (F1: about 252 mm instead of 260 mm) so the VSPAERO static margin is back at 7.5 %, and let CFD (M2.1) settle the neutral point. Panel runs were skipped (mesh still breaks at the fin joint) |
 
+### Where the lift goes (F1 at cruise)
+
+![Spanwise loading](img/v2/spanwise_loading.png)
+
+A single VSPAERO run at the cruise point (alpha 5.2°, 14 m/s, CL 0.37) gives the
+spanwise loading. It sits close to elliptic, slightly fuller over the centre
+body and slightly thinner out at the tips, which is what the 3.3° washout is
+for. The local section cl peaks at 0.45 at about 30 % semispan, just outboard of
+the pod, and falls to 0.2 to 0.3 near the tips. So the stall starts inboard,
+where the elevons are not, which agrees with the "inboard-first" stall from
+M1.4. The dip at the very tip strips is the junction with the drooped fins, a
+known VLM artifact. Plot it again with
+`python -m manta_mapper.vspaero spanload vsp_runs/v2/F1_vlm_cruise.lod --out docs/img/v2/spanwise_loading.png`.
+
 The rest of this page is the original M1.7 check of the earlier (pre-fix) finalists.
 
 ## The short answer
