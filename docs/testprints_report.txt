@@ -1,0 +1,62 @@
+== M2.4 test prints: checks ==
+0 pass, 0 fail, 35 not measured yet
+-- stage 1 calibrate --
+  [--- ] CAL-1     C0_skin_cal: wall thickness, average of 4 sides at mid-height
+  [--- ] CAL-2     C0_skin_cal: outside size (foam swell)
+  [--- ] CAL-3     C0_skin_cal: walls fused: no gaps between the two perimeters, squeeze doesn't split it
+  [--- ] CAL-4     C0_skin_cal: no warping: floor flat on the glass
+-- stage 2 gauges --
+  [--- ] G1-OD     14 mm sleeve tube: real tube outside diameter
+  [--- ] G1-TUBE   G1_fit_gauge: smallest bore the real tube slides through by hand (14.10 / 14.20 / 14.30 / 14.40 / 14.50)
+  [--- ] G1-MAG    G1_fit_gauge: smallest pocket the 10x3 magnet presses into with a thumb (10.00 / 10.10 / 10.20 / 10.30 / 10.40)
+  [--- ] G1-HMAG   G1_fit_gauge: smallest pocket the 6x2 magnet presses into (6.00 / 6.10 / 6.20 / 6.30 / 6.40)
+  [--- ] G1-PIN    G1_fit_gauge: smallest hole the 3 mm rod slides through (3.10 / 3.20 / 3.30 / 3.40 / 3.50)
+  [--- ] G1-M3     G1_fit_gauge: smallest hole an M3 bolt drops through (3.00 / 3.20 / 3.40 / 3.60 / 3.80)
+  [--- ] G2-JOINT  G2_joint_ladder: tightest spigot that slides fully home by hand with no rocking (dots 1-5 = 0.00 / 0.05 / 0.10 / 0.15 / 0.20 mm per side)
+-- stage 3 coupons --
+  [--- ] C1-A      C1_joint_cross: chordwise spigot slides fully home (8 mm) by hand, dry
+  [--- ] C1-B      C5_centre_floor: centreline spigot band slides under the left floor by hand, dry
+  [--- ] C1-C      C1_joint_cross: step between outer skins at the seams
+  [--- ] C1-D      C1_joint_cross: all four rings assemble at once without forcing (the centreline faces meet)
+  [--- ] C2-A      C2_root_face_R: real 14 mm tube slides through the root rib bore by hand
+  [--- ] C2-B      C2_root_face_R: magnet sits below the root face (never proud)
+  [--- ] C2-C      C2_root_face_R: 3 mm rod goes the full 30 mm into the pin hole
+  [--- ] C2-D      C2_root_face_R: root face flat: gap under a straightedge
+  [--- ] C3-A      C3_inner_rib_R: 10x1 carbon strip slides through floor and roof slots
+  [--- ] C3-B      C3_inner_rib_R: real 14 mm tube slides through the inner rib bore
+  [--- ] C4-A      C4_nose_ring + nose_cap: TPU nose cap pushes on fully and stays on when shaken
+  [--- ] P-NAC-A   nacelle (ASA): motor's M3 bolts go into the 16/19 mm pattern by hand
+  [--- ] P-NAC-B   nacelle (ASA): prop shaft / motor back clears the 10 mm centre hole
+  [--- ] P-CAM-A   camera_mount: Camera Module 3 M2 holes line up (21 x 12.5 mm)
+  [--- ] P-STOP-A  battery_stop (PETG): drops into a C1 tray slot without force, no rattle
+  [--- ] P-KERF    EPP test cut: hot-wire kerf (template assumes 1.0 mm)
+-- stage 4 tests --
+  [--- ] T-FIN     fin on scrap EPP: fin tape release force (2 pegs + tape as planned)
+  [--- ] T-MAG     C2 + EPP root scrap: panel magnet pull-off along the spar
+  [--- ] C2-E      C2_root_face_R: sleeve offcut bonded in the root rib boss (24 h cure) holds a push-out load
+-- stage 5 real pod --
+  [--- ] P-POD-A   pod_rear_L/R: straight 14 mm tube passes through both bosses each side (alignment)
+  [--- ] P-POD-B   pod + hatch lids: lids drop in, even gap, magnets hold with the pod upside down
+  [--- ] P-POD-C   pod + battery: pack goes in through the front hatch over the camera mount
+  [--- ] P-POD-D   pod + nacelle: nacelle tongue slides in, 3 bolt holes line up
+  [--- ] T-CG      assembled aircraft: balance point behind the nose cap tip, battery fitted
+
+== Mass ==
+LW-ASA density: no coupon weighed yet, using 0.70 g/cm3
+Printed airframe parts: 344 g measured/forecast vs 344 g from the CAD
+  part                 CAD g forecast measured   diff
+  pod_front_L           31.7     31.7                
+  pod_front_R           32.7     32.7                
+  pod_rear_L            90.4     90.4                
+  pod_rear_R            90.7     90.7                
+  nose_cap              20.0     20.0                
+  hatch_front_lid        8.6      8.6                
+  hatch_rear_lid         7.1      7.1                
+  nacelle               35.4     35.4                
+  camera_mount           7.2      7.2                
+  battery_stop          20.5     20.5                
+Lines weighed: 0 of 35 (the rest count at their as-built budget)
+Aircraft estimate: 1296 g
+  green <= 1275 g (optimizer cap), amber <= 1425 g (95 % of the 1500 g design mass), red above: [AMBER]
+Battery centre for CG 261 mm: x = 221 mm; tray stops reach 191-231 mm [OK]
+  Levers (docs/cad.md): 0.6 mm skin on the front sections, lightening holes in the root ribs, LW-ASA nacelle cone with a solid firewall, a lower print flow

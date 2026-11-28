@@ -1,0 +1,55 @@
+id,kind,item,material,count,target_g,budget_g,x_mm,volume_cm3,measured_g,notes
+pod_front_L,printed,pod_front_L,LW-ASA,1,31.7,38.1,95.0,45.31,,
+pod_front_R,printed,pod_front_R,LW-ASA,1,32.7,39.2,94.3,46.68,,
+pod_rear_L,printed,pod_rear_L,LW-ASA,1,90.4,108.4,264.4,129.08,,
+pod_rear_R,printed,pod_rear_R,LW-ASA,1,90.7,108.8,264.4,129.54,,
+nose_cap,printed,nose_cap,TPU 95A,1,20.0,23.9,11.0,16.49,,
+hatch_front_lid,printed,hatch_front_lid,LW-ASA,1,8.6,10.3,100.3,12.29,,
+hatch_rear_lid,printed,hatch_rear_lid,LW-ASA,1,7.1,8.6,263.5,10.19,,
+nacelle,printed,nacelle,"ASA (solid, not foamed)",1,35.4,42.5,361.3,33.1,,
+camera_mount,printed,camera_mount,LW-ASA,1,7.2,8.7,122.7,10.34,,
+battery_stop,printed,battery_stop,PETG,2,20.5,24.5,5.0,16.1,,
+W00,epp/structure,"Outer panels: EPP foam 1.9 lb/ft3 cores (hot-wired, elevons cut free)",,1,104.3,125.2,335.7,,,
+W01,epp/structure,"Outer panels: laminating film, hinge and leading-edge tape",,1,26.3,31.5,360.2,,,
+W02,epp/structure,Elevon stiffeners: 3 x 1 mm carbon strip,,1,5.2,6.2,443.5,,,
+W03,epp/structure,"Spar: telescoping carbon tubes 12x10 pultruded > 10x8 pultruded > 8x6 pultruded mm, both panels",,1,86.0,90.3,299.3,,,
+W04,epp/structure,Spar carry-through: 2 roll-wrapped sleeves + 2 carbon strip caps (10x1 mm),,1,21.2,22.2,211.7,,,
+W05,epp/structure,Anti-rotation pins: 3 mm carbon rod at 60 % chord,,1,3.3,3.5,319.4,,,
+W09,epp/structure,"Tip fins: EPP, laminated, pegged and taped on (replaceable)",,1,10.2,12.2,464.1,,,
+W10,epp/structure,"Belly skid: EPP block + HDPE wear strip, velcro (replaceable)",,1,18.1,21.8,190.3,,,
+W11,avionics,"Airspeed: Matek ASPD-4525 + pitot tube, silicone line",,1,12.0,12.6,46.2,,,
+W12,avionics,GPS + compass: Matek M10Q-5883,,1,9.0,9.4,93.0,,,
+W13,camera,Camera Module 3 (standard lens) + 15 cm Zero ribbon,,1,6.0,6.3,123.8,,,
+W15,camera,Raspberry Pi Zero 2 W + heatsink,,1,13.0,13.7,267.5,,,
+W16,camera,32 GB high-endurance microSD,,1,1.0,1.1,267.5,,,
+W17,avionics,"Flight controller: SpeedyBee F405 WING or Matek F405-WTE (ArduPilot; PDB, current sensor, BECs)",,1,25.0,26.3,295.0,,,
+W18,avionics,5 V 3 A buck BEC for the Pi (keeps camera noise off the FC rail),,1,6.0,6.3,295.0,,,
+W19,avionics,ELRS 2.4 GHz receiver with telemetry: RadioMaster RP2,,1,2.0,2.1,307.5,,,
+W20,avionics,Remote ID broadcast module (must be on the FAA DoC list),,1,12.0,12.6,315.0,,,
+W21,propulsion,ESC: 40 A BLHeli_S ESC,,1,35.0,36.8,312.5,,,
+W22,propulsion,Motor: SunnySky X2216 1100KV,,1,68.0,71.4,443.8,,,
+W23,propulsion,"Prop: folding 10x6 (nylon blades, 40 mm yoke, spinner)",,1,19.0,19.9,466.8,,,
+W24,wiring,"Wiring: XT60 + 14 AWG power, motor leads, servo extensions with panel plugs, signal leads",,1,37.0,48.1,212.0,,,
+W25,wiring,"Hardware: hatch magnets, nylon panel bolts, velcro straps, glue",,1,25.0,32.5,211.4,,,
+W26,avionics,"Elevon servo: Emax ES08MD II, 12 g digital metal-gear (each) x2",,1,24.0,25.2,358.4,,,
+W27,avionics,"Servo horn, pushrod, clevis (each side) x2",,1,8.0,8.4,393.4,,,
+W28,battery,Battery: 3S1P Molicel P45B (49 Wh nominal),,1,226.0,237.3,211.4,,,
+TOTAL,total,"assembled aircraft, ready to fly (overrides the sum)",,1,,,,,,
+C0_skin_cal,coupon,C0_skin_cal piece,LW-ASA,1,4.3,,,6.2,,weigh to 0.1 g; gives the foamed density
+G1_fit_gauge,coupon,G1_fit_gauge piece,LW-ASA,1,42.8,,,61.18,,weigh to 0.1 g; gives the foamed density
+joint_socket,coupon,G2_joint_ladder piece,LW-ASA,1,1.4,,,2.06,,weigh to 0.1 g; gives the foamed density
+joint_spigot_1,coupon,G2_joint_ladder piece,LW-ASA,1,2.2,,,3.14,,weigh to 0.1 g; gives the foamed density
+joint_spigot_2,coupon,G2_joint_ladder piece,LW-ASA,1,2.2,,,3.12,,weigh to 0.1 g; gives the foamed density
+joint_spigot_3,coupon,G2_joint_ladder piece,LW-ASA,1,2.2,,,3.11,,weigh to 0.1 g; gives the foamed density
+joint_spigot_4,coupon,G2_joint_ladder piece,LW-ASA,1,2.2,,,3.09,,weigh to 0.1 g; gives the foamed density
+joint_spigot_5,coupon,G2_joint_ladder piece,LW-ASA,1,2.2,,,3.07,,weigh to 0.1 g; gives the foamed density
+C1_pod_front_L,coupon,C1_joint_cross piece,LW-ASA,1,5.2,,,7.37,,weigh to 0.1 g; gives the foamed density
+C1_pod_front_R,coupon,C1_joint_cross piece,LW-ASA,1,5.2,,,7.38,,weigh to 0.1 g; gives the foamed density
+C1_pod_rear_L,coupon,C1_joint_cross piece,LW-ASA,1,7.2,,,10.25,,weigh to 0.1 g; gives the foamed density
+C1_pod_rear_R,coupon,C1_joint_cross piece,LW-ASA,1,7.2,,,10.25,,weigh to 0.1 g; gives the foamed density
+C2_root_face_R,coupon,C2_root_face_R piece,LW-ASA,1,22.5,,,32.19,,weigh to 0.1 g; gives the foamed density
+C3_inner_rib_R,coupon,C3_inner_rib_R piece,LW-ASA,1,12.4,,,17.69,,weigh to 0.1 g; gives the foamed density
+C4_pod_front_L,coupon,C4_nose_ring piece,LW-ASA,1,7.2,,,10.23,,weigh to 0.1 g; gives the foamed density
+C4_pod_front_R,coupon,C4_nose_ring piece,LW-ASA,1,7.2,,,10.23,,weigh to 0.1 g; gives the foamed density
+C5_pod_front_L,coupon,C5_centre_floor piece,LW-ASA,1,0.9,,,1.22,,weigh to 0.1 g; gives the foamed density
+C5_pod_front_R,coupon,C5_centre_floor piece,LW-ASA,1,1.8,,,2.54,,weigh to 0.1 g; gives the foamed density

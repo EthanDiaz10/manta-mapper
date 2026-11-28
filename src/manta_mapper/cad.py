@@ -93,6 +93,10 @@ class CadSettings:
     magnet_d_mm: float = 10.0  # 10 x 3 mm N52 discs, 2 per side: catch holds > 19 N, lets go well before damage
     magnet_t_mm: float = 3.0
     magnet_chord_fracs: tuple[float, float] = (0.12, 0.45)
+    # --- printed fits (radial clearance unless noted; the M2.4 fit gauge checks them) ---
+    pocket_clear_mm: float = 0.1  # magnet pockets, panel catch and hatch
+    pin_clear_mm: float = 0.15  # anti-rotation pin hole
+    bolt_hole_d_mm: float = 3.4  # M3 clearance (diameter): motor, nacelle tongue
     servo_lead_hole_mm: float = 9.0
     servo_lead_chord_frac: float = 0.70
     # --- hatches -----------------------------------------------------------
@@ -1131,11 +1135,11 @@ def build_recipe(lay: Layout) -> Recipe:
             mb = R.cyl(f"magnet_boss_raw_{side}{i}", P(m - [0, 8.0, 0]), P(m + [0, 1.0, 0]), st.magnet_d_mm / 2 + 3)
             core.append(R.inter(f"magnet_boss_{side}{i}", [mb, outer]))
             cuts.append(R.cyl(f"magnet_pocket_{side}{i}", P(m - [0, st.magnet_t_mm + 0.2, 0]), P(m + [0, 2.0, 0]),
-                              st.magnet_d_mm / 2 + 0.1))
+                              st.magnet_d_mm / 2 + st.pocket_clear_mm))
         cuts.append(R.cyl(f"sleeve_bore_{side}", P(on(-st.sleeve_len_mm - 5)), P(on(8)), r_sl + st.sleeve_bond_gap_mm))
         pp = lay.pin["p"]
         cuts.append(R.cyl(f"pin_hole_{side}", P(pp - lay.spar_dir * st.pin_depth_mm), P(pp + lay.spar_dir * 5),
-                          st.pin_d_mm / 2 + 0.15))
+                          st.pin_d_mm / 2 + st.pin_clear_mm))
         sh = lay.servo_hole
         cuts.append(R.cyl(f"servo_lead_hole_{side}", P(sh - [0, 12, 0]), P(sh + [0, 3, 0]), st.servo_lead_hole_mm / 2))
 
@@ -1214,12 +1218,12 @@ def build_recipe(lay: Layout) -> Recipe:
             core.append(R.inter(f"hatch_{n}_mboss_{j}", [R.cyl(f"hatch_{n}_mboss_raw_{j}", (mx, my, zr - w - 3.0 - 4.0),
                                                                (mx, my, zr - w - 3.0), st.hatch_magnet_d_mm / 2 + 2.0), cav]))
             cuts.append(R.cyl(f"hatch_{n}_mpocket_{j}", (mx, my, zr - 3.0 - st.hatch_magnet_t_mm - 0.2), (mx, my, zr - 2.9),
-                              st.hatch_magnet_d_mm / 2 + 0.1))
+                              st.hatch_magnet_d_mm / 2 + st.pocket_clear_mm))
             # lid side: boss down to the ledge, pocket from below
             lid_parts.append(R.inter(f"hatch_{n}_lboss_{j}", [R.cyl(f"hatch_{n}_lboss_raw_{j}", (mx, my, zr - 2.8),
                                                                     (mx, my, zr), st.hatch_magnet_d_mm / 2 + 1.6), lid_box, outer]))
             lid_cuts.append(R.cyl(f"hatch_{n}_lpocket_{j}", (mx, my, zr - 2.9), (mx, my, zr - 2.8 + st.hatch_magnet_t_mm + 0.2),
-                                  st.hatch_magnet_d_mm / 2 + 0.1))
+                                  st.hatch_magnet_d_mm / 2 + st.pocket_clear_mm))
         lid = R.union(f"hatch_{n}_lid_raw", lid_parts)
         lids.append((n, R.diff(f"hatch_{n}_lid", lid, lid_cuts)))
 
@@ -1232,7 +1236,7 @@ def build_recipe(lay: Layout) -> Recipe:
     nc = lay.nacelle
     cuts.append(R.cyl("nacelle_hole", (nc["x_a"], 0, nc["z"]), (nc["x_fw"] + 1, 0, nc["z"]), nc["r_a"] + 0.3, nc["r_b"] + 0.3))
     for i, (bx, by) in enumerate(nc["bolts"]):
-        cuts.append(R.cyl(f"tongue_bolt_{i}", (bx, by, -60), (bx, by, 30), 1.7))
+        cuts.append(R.cyl(f"tongue_bolt_{i}", (bx, by, -60), (bx, by, 30), st.bolt_hole_d_mm / 2))
 
     # ---- joints between pieces ---------------------------------------------------------
     edges = [st.nose_len_mm, *lay.cuts_x, pod.c0 + 50]
@@ -1307,11 +1311,11 @@ def build_recipe(lay: Layout) -> Recipe:
     tongue_box = R.box("tongue_box", (t["x0"], -t["w"] / 2, -BIG), (t["x1"], t["w"] / 2, BIG))
     tongue = R.inter("tongue", [tongue_box, R.diff("tongue_band", cav, [shifted(-t["t"])])])
     tongue = R.diff("tongue_trim", tongue, [bore])
-    holes = [R.cyl(f"motor_hole_{i}", (nc["x_te"] - 1, py, nc["z"] + pz), (nc["x_fw"] + 1, py, nc["z"] + pz), 1.7)
+    holes = [R.cyl(f"motor_hole_{i}", (nc["x_te"] - 1, py, nc["z"] + pz), (nc["x_fw"] + 1, py, nc["z"] + pz), st.bolt_hole_d_mm / 2)
              for i, (py, pz) in enumerate([(st.motor_pattern_mm[0] / 2, 0), (-st.motor_pattern_mm[0] / 2, 0),
                                             (0, st.motor_pattern_mm[1] / 2), (0, -st.motor_pattern_mm[1] / 2)])]
     holes.append(R.cyl("motor_shaft_hole", (nc["x_te"] - 1, 0, nc["z"]), (nc["x_fw"] + 1, 0, nc["z"]), 5.0))
-    holes += [R.cyl(f"nacelle_bolt_{i}", (bx, by, -60), (bx, by, 30), 1.7) for i, (bx, by) in enumerate(nc["bolts"])]
+    holes += [R.cyl(f"nacelle_bolt_{i}", (bx, by, -60), (bx, by, 30), st.bolt_hole_d_mm / 2) for i, (bx, by) in enumerate(nc["bolts"])]
     nac = R.diff("nacelle", R.union("nacelle_raw", [R.diff("nacelle_shell", cone, [bore]), tongue]), holes)
     R.part("nacelle", nac, "ASA (solid, not foamed)", orient="firewall down",
            note="slides in from behind; 3 M3 bolts through the tongue and the pod floor, nyloc nuts on top")
