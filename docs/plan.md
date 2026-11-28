@@ -20,7 +20,7 @@ visible and mistakes surface early.
 | Milestone | Done when |
 |---|---|
 | M2.1 CFD | final design run in OpenFOAM (or ANSYS Student) at cruise and near stall; compared with VSPAERO |
-| M2.2 Structure | spar sized for AC-10; FEA of the spar/centre-body joint |
+| M2.2 Structure | spar sized for AC-10 and AC-13: telescoping pultruded 12x10 > 10x8 > 8x6 tubes in a 14x12 roll-wrapped sleeve, carbon strip carry-through; set by fin tip strikes and gusts (+5.7 g), not the 4 g manoeuvre; +32 g, +$27 ([structures.md](structures.md)) (done, analytic; joint FEA replaced by the M2.4 pull test and the AC-10 wingtip load test) |
 | M2.3 Scripted CAD | Fusion 360 Python script builds the printable sections from the pipeline output |
 | M2.4 Test prints | joints, spar fit and hatch printed and checked; a pod section and an EPP panel weighed and fed back into `weights.py` |
 

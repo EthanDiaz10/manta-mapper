@@ -44,6 +44,9 @@ and battery, and whether the 25 ha and 50 ha flights make it home with 30 %.
 [docs/optimizer.md](docs/optimizer.md) covers the design-to-cost optimizer
 (M1.6): ten shape variables, 24 constraints, and an optimum that fixes the
 baseline's one weak spot (Dutch roll damping) with margin, 32 g lighter.
+[docs/structures.md](docs/structures.md) covers the spar and the panel joint
+(M2.2): load cases from gusts, hand launch, catapult, belly landings and fin
+tip strikes, and a telescoping carbon spar sized from off-the-shelf tubes.
 
 ```bash
 pip install -e ".[dev]"
@@ -53,6 +56,7 @@ python -m manta_mapper.geometry config/mission.toml --plots docs/img --vsp manta
 python -m manta_mapper.stability config/mission.toml --plots docs/img --report docs/stability_report.txt
 python -m manta_mapper.weights config/mission.toml --plots docs/img --report docs/weights_report.txt
 python -m manta_mapper.optimize config/mission.toml --report docs/optimizer_report.txt --json docs/optimizer_result.json --plots docs/img
+python -m manta_mapper.structures config/mission.toml --report docs/structures_report.txt --json docs/structures_result.json --plots docs/img
 pytest
 ```
 
@@ -82,6 +86,7 @@ src/manta_mapper/
   propulsion.py         prop (BEMT), motor, Li-ion pack, parts search, mission energy (M1.5)
   weights.py            weight build-up, CG placement, inertia, M1.5 report (M1.5)
   optimize.py           design-to-cost optimizer: screen + COBYLA, coarse/full VLM (M1.6)
+  structures.py         load cases, telescoping spar sizing, sleeve and carry-through (M2.2)
   cad.py, validation.py (placeholders for later milestones)
 tests/
 ```
