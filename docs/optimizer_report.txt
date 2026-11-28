@@ -1,79 +1,79 @@
 == Manta Mapper: design-to-cost optimizer (M1.6) ==
 Objective: parts cost + $100/kg x as-built mass. Checks at 1.5 kg, design day (1220 m, ISA+25).
-Evaluations: 455 coarse (66 feasible), 3 finalists at full resolution; 1 round(s). Time: calibrate 1.1 min, screen 3.0 min, polish 1 6.5 min, verify 1 1.1 min
+Evaluations: 457 coarse (22 feasible), 3 finalists at full resolution; 1 round(s). Time: calibrate 0.9 min, screen 3.6 min, polish 1 7.7 min, verify 1 1.1 min
 
 -- Design variables --
 variable            baseline   optimum          bounds  note
-span_m                 1.525     1.800   1.300-1.800    tip to tip, wing only
-root_chord_m           0.280     0.258   0.220-0.340    outer-panel root chord
+span_m                 1.525     1.836   1.300-2.400    tip to tip, wing only (no hard limit, Ethan 2026-11-27)
+root_chord_m           0.280     0.259   0.220-0.340    outer-panel root chord
 taper                  0.571     0.490   0.400-0.900    outer-panel tip chord / root chord
-sweep_le_deg          25.000    16.176  12.000-35.000   outer-panel leading-edge sweep
-washout_deg            5.000     3.558   2.000-8.000    tip nose-down twist
-dihedral_deg           3.000     2.261   0.000-6.000    outer-panel dihedral
-fin_length_m           0.065     0.100   0.050-0.110    drooped tip fin length
-fin_droop_deg         45.000    22.972  20.000-60.000   fin angle below horizontal
-pod_chord_m            0.440     0.428   0.380-0.500    centre pod chord
+sweep_le_deg          25.000    16.171  12.000-35.000   outer-panel leading-edge sweep
+washout_deg            5.000     3.330   2.000-8.000    tip nose-down twist
+dihedral_deg           3.000     3.171   0.000-6.000    outer-panel dihedral
+fin_length_m           0.065     0.108   0.050-0.110    drooped tip fin length
+fin_droop_deg         45.000    29.358  20.000-60.000   fin angle below horizontal
+pod_chord_m            0.440     0.423   0.380-0.500    centre pod chord
 pod_half_width_m       0.100     0.091   0.085-0.120    centreline to pod edge
 tip_chord_m            0.160     0.127
 
 -- Results (full resolution) --
                                           baseline   optimum
-span, m                                      1.525     1.800
-wing area, m^2                               0.402     0.413
-aspect ratio                                  5.79      7.84
-stall at forward CG, design mass, m/s         8.88      8.79
+span, m                                      1.525     1.836
+wing area, m^2                               0.402     0.419
+aspect ratio                                  5.79      8.04
+stall at forward CG, design mass, m/s         8.88      8.71
 outer elevon margin at stall, %                 22        27
-neutral point, % MAC                          33.6      35.4
+neutral point, % MAC                          33.6      35.3
 cruise L/D (model)                            16.2      17.1
-cruise power at L/D 12, design mass, W        38.7      39.9
-Dutch roll damping                           0.051     0.091
-short period, Hz                              1.84      2.06
-spiral divergence (1/doubling time), 1/s     0.039     0.045
-pod pitch at cruise, deg                       6.1       5.4
-fin ground clearance, mm                        23        27
-structure, as built, g                         617       599
-mass as built, kg                            1.195     1.177
+cruise power at L/D 12, design mass, W        38.7      40.1
+Dutch roll damping                           0.051     0.093
+short period, Hz                              1.84      2.09
+spiral divergence (1/doubling time), 1/s     0.039     0.047
+pod pitch at cruise, deg                       6.1       5.2
+fin ground clearance, mm                        23        26
+structure, as built, g                         617       603
+mass as built, kg                            1.195     1.182
 parts cost, $                                  469       470
-objective, $                                 588.6     587.6
+objective, $                                 588.6     588.4
 feasible                                     False      True
 Propulsion: baseline SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B; optimum SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B
 
 -- Constraints at the optimum (g <= 0 passes; g = -1 is one 'typical size' of margin) --
 constraint                                               value     limit       g  baseline g
-stall speed at forward CG, m/s (AC-1)                     8.79 <=8.8       -0.02    0.16
-Dutch roll damping                                     0.09138 >=0.09      -0.07    1.95
+Dutch roll damping                                     0.09269 >=0.09      -0.13    1.95
+fin ground clearance, m (AC-13)                        0.02578 >=0.025     -0.16    0.47
+stall speed at forward CG, m/s (AC-1)                     8.71 <=8.8       -0.18    0.16
 spar depth at tip, m                                   0.01238 >=0.012     -0.19   -1.83
-cruise elevon at SM 10 %, |deg| (AC-8)                   2.754 <=3         -0.25   -1.65
-fin ground clearance, m (AC-13)                         0.0271 >=0.025     -0.42    0.47
-elevon used at stall, deg                                13.64 <=15        -0.45   -0.95
+cruise elevon at SM 10 %, |deg| (AC-8)                    2.77 <=3         -0.23   -1.65
+elevon used at stall, deg                                13.65 <=15        -0.45   -0.95
 propulsion checks failed (AC-5, AC-6, MIS-4)                 0 <=0         -0.50   -0.50
 parts too tall for the pod                                   0 <=0         -0.50   -0.50
-tip chord, m (AC-13)                                    0.1265 >=0.12      -0.65   -4.00
-Cn_beta (weathercock), /rad                           0.003716 >=0         -0.74   -1.29
-battery aft room at SM 5 %, m                          0.01093 >=0         -1.09   -3.12
-pod pitch at cruise vs camera wedge, |deg| (CAM-4)      0.6464 <=2         -1.35   -1.85
-spiral divergence, 1/doubling time, 1/s                0.04459 <=0.08333   -1.94   -2.21
-as-built mass, kg (margin to design mass)                1.177 <=1.275     -1.95   -1.60
-stall starts inboard of elevon (rel. span)             -0.1065 <=0         -2.13   -1.87
-cruise elevon at SM 5 %, |deg| (AC-8)                   0.7371 <=3         -2.26   -0.83
-short-period damping                                     0.535 >=0.3       -2.35   -2.47
-wing loading, kg/m^2 (AC-2)                               3.63 <=6         -2.37   -2.27
-tip stall margin (centre stalls first)                  0.2657 >=0.1       -3.31   -2.35
-payload bay height margin, m (AC-12)                   0.02293 >=0         -4.59   -4.93
-airspeed window, m/s (AC-9)                              7.765 >=3         -4.77   -4.65
-payload floor / needed (AC-12)                           1.889 >=1         -8.89  -11.87
-battery fwd room at SM 10 %, m (no ballast)             0.1141 >=0        -11.41   -9.82
-short-period damping (upper)                             0.535 <=2        -14.65  -14.53
+battery aft room at SM 5 %, m                         0.006316 >=0         -0.63   -3.12
+tip chord, m (AC-13)                                    0.1266 >=0.12      -0.66   -4.00
+Cn_beta (weathercock), /rad                           0.004483 >=0         -0.90   -1.29
+pod pitch at cruise vs camera wedge, |deg| (CAM-4)      0.8001 <=2         -1.20   -1.85
+spiral divergence, 1/doubling time, 1/s                0.04714 <=0.08333   -1.81   -2.21
+as-built mass, kg (margin to design mass)                1.182 <=1.275     -1.87   -1.60
+stall starts inboard of elevon (rel. span)             -0.1069 <=0         -2.14   -1.87
+cruise elevon at SM 5 %, |deg| (AC-8)                   0.6219 <=3         -2.38   -0.83
+short-period damping                                    0.5401 >=0.3       -2.40   -2.47
+wing loading, kg/m^2 (AC-2)                              3.578 <=6         -2.42   -2.27
+tip stall margin (centre stalls first)                  0.2659 >=0.1       -3.32   -2.35
+payload bay height margin, m (AC-12)                   0.02218 >=0         -4.44   -4.93
+airspeed window, m/s (AC-9)                              7.869 >=3         -4.87   -4.65
+payload floor / needed (AC-12)                           1.843 >=1         -8.43  -11.87
+battery fwd room at SM 10 %, m (no ballast)             0.1137 >=0        -11.37   -9.82
+short-period damping (upper)                            0.5401 <=2        -14.60  -14.53
 
 -- Finalists (full resolution) --
-1. objective $587.6, 1177 g, $470, span 1.800 m, sweep 16.2 deg, feasible; tightest: stall speed at forward CG, m/s (AC-1) (g -0.02)
-2. objective $587.9, 1181 g, $470, span 1.800 m, sweep 16.5 deg, feasible; tightest: fin ground clearance, m (AC-13) (g -0.15)
-3. objective $588.4, 1184 g, $470, span 1.800 m, sweep 16.2 deg, feasible; tightest: Dutch roll damping (g -0.06)
+1. objective $588.4, 1182 g, $470, span 1.836 m, sweep 16.2 deg, feasible; tightest: Dutch roll damping (g -0.13)
+2. objective $589.9, 1192 g, $471, span 1.842 m, sweep 16.1 deg, feasible; tightest: Dutch roll damping (g -0.13)
+3. objective $592.3, 1207 g, $472, span 1.857 m, sweep 15.2 deg, feasible; tightest: fin ground clearance, m (AC-13) (g -0.05)
 
 -- Does the price on weight change the answer? (best feasible coarse design) --
-  $    0/kg: 1181 g, $470, span 1.800 m, root chord 0.262 m, taper 0.49, pod 0.426 x 0.180 m
-  $  100/kg: 1177 g, $470, span 1.800 m, root chord 0.258 m, taper 0.49, pod 0.428 x 0.182 m
-  $  300/kg: 1177 g, $470, span 1.800 m, root chord 0.258 m, taper 0.49, pod 0.428 x 0.182 m
+  $    0/kg: 1182 g, $470, span 1.836 m, root chord 0.259 m, taper 0.49, pod 0.423 x 0.183 m
+  $  100/kg: 1182 g, $470, span 1.836 m, root chord 0.259 m, taper 0.49, pod 0.423 x 0.183 m
+  $  300/kg: 1182 g, $470, span 1.836 m, root chord 0.259 m, taper 0.49, pod 0.423 x 0.183 m
 
 -- Coarse-to-full correction (added to coarse results; calibrated on the baseline) --
   np_pct_mac -0.0773, stall_speed_m_s +0.0541, tip_stall_margin -0.0146, stall_first_strip_rel -0.0215, stall_elevon_deg +1.49, cruise_elevon_sm5_deg +1.28, cruise_elevon_sm10_deg +1.29, pod_pitch_cruise_deg -0.158, cruise_ld +0.0457, dutch_roll_damping -0.00475, short_period_damping +0.00106, spiral_rate_per_s -0.0123, cn_beta -0.000821

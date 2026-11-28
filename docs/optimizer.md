@@ -4,12 +4,16 @@
 > applied pitch and yaw rates about the pod nose instead of the CG, so the
 > original optimum's Dutch roll damping (0.092) was really about 0.07 (see
 > [vspaero.md](vspaero.md)). With the fix, the optimizer was re-run with the
-> same robust margins (Dutch roll >= 0.09). **New optimum: span 1.80 m
-> (at the upper bound), AR 7.8, LE sweep 16°, dihedral 2.3°, fins 100 mm
-> drooped 23°, pod 428 x 182 mm; Dutch roll 0.091, stall 8.79 m/s, 1177 g as
-> built, $470.** All three finalists sit at the 1.80 m span bound, which means
-> the span limit is now an active constraint. [optimizer_report.txt](optimizer_report.txt), [optimizer_result.json](optimizer_result.json)
-> and the plots are from the re-run. The tables below still describe the
+> same robust margins (Dutch roll >= 0.09). With the old 1.80 m span bound,
+> the optimum sat on the bound (1.80 m, Dutch roll 0.091, 1177 g). Ethan has
+> no hard span limit (the panels are hot-wired foam; only the pod is printed,
+> in sections), so the bound was raised to 2.40 m. **New optimum: span 1.84 m,
+> AR 8.0, LE sweep 16°, dihedral 3.2°, fins 108 mm drooped 29°, pod
+> 423 x 182 mm; Dutch roll 0.093, stall 8.71 m/s, 1182 g as built, $470.**
+> The optimum is flat: the 1.80 m and 1.84 m designs are within $1 on the
+> objective, and the extra span buys stall and Dutch roll margin. Fin length
+> is now near its 110 mm bound. [optimizer_report.txt](optimizer_report.txt), [optimizer_result.json](optimizer_result.json)
+> and the plots are from this run. The tables below still describe the
 > original run. The new optimum has not been through VSPAERO yet, and it
 > still uses the VLM neutral point, which VSPAERO puts about 3 % MAC further forward.
 

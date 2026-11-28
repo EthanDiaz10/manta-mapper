@@ -231,147 +231,147 @@
  },
  "best": {
   "x": {
-   "span_m": 1.8,
-   "root_chord_m": 0.25829431843620254,
-   "taper": 0.4899082544380567,
-   "sweep_le_deg": 16.175954802709033,
-   "washout_deg": 3.5577316002167256,
-   "dihedral_deg": 2.2610461357036646,
-   "fin_length_m": 0.10019569673122482,
-   "fin_droop_deg": 22.972412699059984,
-   "pod_chord_m": 0.4280205975885422,
-   "pod_half_width_m": 0.09075643574164113
+   "span_m": 1.8356287511325613,
+   "root_chord_m": 0.2585049171855362,
+   "taper": 0.4896953822262677,
+   "sweep_le_deg": 16.17140374636842,
+   "washout_deg": 3.329807867355754,
+   "dihedral_deg": 3.1709625651748716,
+   "fin_length_m": 0.10791245021956597,
+   "fin_droop_deg": 29.357830741364516,
+   "pod_chord_m": 0.4227909152729521,
+   "pod_half_width_m": 0.09132162348030388
   },
-  "tip_chord_m": 0.12654051867634755,
+  "tip_chord_m": 0.12658866422854081,
   "feasible": true,
-  "objective": 587.6200794037175,
+  "objective": 588.3583253896438,
   "propulsion": "SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B",
   "metrics": {
-   "payload_floor_ratio": 1.8893667728162165,
-   "bay_height_margin_m": 0.022934242287130327,
-   "spar_depth_tip_m": 0.012378302762094779,
+   "payload_floor_ratio": 1.842861905922934,
+   "bay_height_margin_m": 0.02217751138809579,
+   "spar_depth_tip_m": 0.012383012401567813,
    "spar_needed_m": 0.012,
-   "fin_clearance_m": 0.027101519717655335,
-   "tip_chord_m": 0.12654051867634755,
-   "area_m2": 0.41323476927100733,
-   "span_m": 1.8,
-   "aspect_ratio": 7.8405793532710835,
-   "wing_loading_kg_m2": 3.6298978487366127,
-   "np_pct_mac": 35.361590203135854,
-   "x_np_m": 0.28216482143426413,
-   "mac_m": 0.26277606815424565,
-   "cruise_elevon_sm5_deg": 0.7371398763179576,
-   "cruise_elevon_sm10_deg": -2.7537238021090427,
-   "pod_pitch_cruise_deg": 5.353573381122977,
-   "stall_speed_m_s": 8.789940645977529,
-   "tip_stall_margin": 0.2656895020875353,
-   "stall_first_strip_rel": -0.10648823061271782,
-   "stall_elevon_deg": -13.643825861774204,
-   "cruise_ld": 17.107277533362492,
-   "cruise_cd": 0.0215146652146135,
-   "best_ld_model": 17.806825000841275,
+   "fin_clearance_m": 0.025779806727427843,
+   "tip_chord_m": 0.12658866422854081,
+   "area_m2": 0.4191931395480177,
+   "span_m": 1.8356287511325613,
+   "aspect_ratio": 8.038139449556793,
+   "wing_loading_kg_m2": 3.5783028358177082,
+   "np_pct_mac": 35.268283646983846,
+   "x_np_m": 0.28001562829176696,
+   "mac_m": 0.26023972632179726,
+   "cruise_elevon_sm5_deg": 0.6219371532780347,
+   "cruise_elevon_sm10_deg": -2.7697130500171867,
+   "pod_pitch_cruise_deg": 5.199850915873641,
+   "stall_speed_m_s": 8.709963112271573,
+   "tip_stall_margin": 0.2658503658972161,
+   "stall_first_strip_rel": -0.10694292291350747,
+   "stall_elevon_deg": -13.654666415383947,
+   "cruise_ld": 17.062630727923597,
+   "cruise_cd": 0.02126741358593101,
+   "best_ld_model": 17.887623383543968,
    "propulsion_fails": 0.0,
    "static_tw": 0.6703698588621211,
-   "cruise_power_w": 39.858266911300426,
-   "mass_built_kg": 1.1774659428499605,
-   "mass_paper_kg": 1.0450434226878724,
-   "cost_usd": 469.8734851187214,
+   "cruise_power_w": 40.09515643999974,
+   "mass_built_kg": 1.1815992359366805,
+   "mass_paper_kg": 1.0486902989380942,
+   "cost_usd": 470.1984017959758,
    "ballast_kg": 0.0,
-   "battery_fwd_margin_m": 0.11409728243165947,
-   "battery_aft_margin_m": 0.010933028863414768,
+   "battery_fwd_margin_m": 0.11368437287997202,
+   "battery_aft_margin_m": 0.006315584521227324,
    "fit_problems": 0.0,
-   "structure_g": 599.1659428499605,
-   "dutch_roll_damping": 0.09138335040017839,
-   "short_period_damping": 0.5349611119912601,
-   "short_period_hz": 2.0618725576937016,
-   "spiral_rate_per_s": 0.044589032351773465,
-   "cn_beta": 0.0037158772748783985,
-   "window_low_m_s": 11.426922839770787
+   "structure_g": 603.2992359366806,
+   "dutch_roll_damping": 0.09269027171417488,
+   "short_period_damping": 0.5400935492434176,
+   "short_period_hz": 2.0916103097080585,
+   "spiral_rate_per_s": 0.047137893168016254,
+   "cn_beta": 0.00448264348706694,
+   "window_low_m_s": 11.322952045953047
   },
   "constraints": {
    "stall speed at forward CG, m/s (AC-1)": {
-    "value": 8.789940645977529,
+    "value": 8.709963112271573,
     "limit": 8.8,
     "sense": "<=",
-    "g": -0.020118708044943645
+    "g": -0.18007377545685443
    },
    "tip stall margin (centre stalls first)": {
-    "value": 0.2656895020875353,
+    "value": 0.2658503658972161,
     "limit": 0.1,
     "sense": ">=",
-    "g": -3.313790041750705
+    "g": -3.317007317944322
    },
    "stall starts inboard of elevon (rel. span)": {
-    "value": -0.10648823061271782,
+    "value": -0.10694292291350747,
     "limit": 0.0,
     "sense": "<=",
-    "g": -2.1297646122543563
+    "g": -2.1388584582701493
    },
    "elevon used at stall, deg": {
-    "value": 13.643825861774204,
+    "value": 13.654666415383947,
     "limit": 15.0,
     "sense": "<=",
-    "g": -0.45205804607526545
+    "g": -0.44844452820535113
    },
    "cruise elevon at SM 5 %, |deg| (AC-8)": {
-    "value": 0.7371398763179576,
+    "value": 0.6219371532780347,
     "limit": 3.0,
     "sense": "<=",
-    "g": -2.2628601236820423
+    "g": -2.3780628467219653
    },
    "cruise elevon at SM 10 %, |deg| (AC-8)": {
-    "value": 2.7537238021090427,
+    "value": 2.7697130500171867,
     "limit": 3.0,
     "sense": "<=",
-    "g": -0.24627619789095734
+    "g": -0.2302869499828133
    },
    "pod pitch at cruise vs camera wedge, |deg| (CAM-4)": {
-    "value": 0.6464266188770234,
+    "value": 0.8001490841263594,
     "limit": 2.0,
     "sense": "<=",
-    "g": -1.3535733811229766
+    "g": -1.1998509158736406
    },
    "Dutch roll damping": {
-    "value": 0.09138335040017839,
+    "value": 0.09269027171417488,
     "limit": 0.09,
     "sense": ">=",
-    "g": -0.06916752000891979
+    "g": -0.134513585708744
    },
    "short-period damping": {
-    "value": 0.5349611119912601,
+    "value": 0.5400935492434176,
     "limit": 0.3,
     "sense": ">=",
-    "g": -2.3496111199126006
+    "g": -2.4009354924341757
    },
    "short-period damping (upper)": {
-    "value": 0.5349611119912601,
+    "value": 0.5400935492434176,
     "limit": 2.0,
     "sense": "<=",
-    "g": -14.650388880087398
+    "g": -14.599064507565824
    },
    "spiral divergence, 1/doubling time, 1/s": {
-    "value": 0.044589032351773465,
+    "value": 0.047137893168016254,
     "limit": 0.08333333333333333,
     "sense": "<=",
-    "g": -1.9372150490779931
+    "g": -1.8097720082658537
    },
    "Cn_beta (weathercock), /rad": {
-    "value": 0.0037158772748783985,
+    "value": 0.00448264348706694,
     "limit": 0.0,
     "sense": ">=",
-    "g": -0.7431754549756797
+    "g": -0.896528697413388
    },
    "wing loading, kg/m^2 (AC-2)": {
-    "value": 3.6298978487366127,
+    "value": 3.5783028358177082,
     "limit": 6.0,
     "sense": "<=",
-    "g": -2.3701021512633873
+    "g": -2.4216971641822918
    },
    "airspeed window, m/s (AC-9)": {
-    "value": 7.765077160229213,
+    "value": 7.869047954046954,
     "limit": 3.0,
     "sense": ">=",
-    "g": -4.765077160229213
+    "g": -4.869047954046954
    },
    "propulsion checks failed (AC-5, AC-6, MIS-4)": {
     "value": 0.0,
@@ -380,16 +380,16 @@
     "g": -0.5
    },
    "payload floor / needed (AC-12)": {
-    "value": 1.8893667728162165,
+    "value": 1.842861905922934,
     "limit": 1.0,
     "sense": ">=",
-    "g": -8.893667728162164
+    "g": -8.42861905922934
    },
    "payload bay height margin, m (AC-12)": {
-    "value": 0.022934242287130327,
+    "value": 0.02217751138809579,
     "limit": 0.0,
     "sense": ">=",
-    "g": -4.586848457426066
+    "g": -4.4355022776191575
    },
    "parts too tall for the pod": {
     "value": 0.0,
@@ -398,187 +398,187 @@
     "g": -0.5
    },
    "spar depth at tip, m": {
-    "value": 0.012378302762094779,
+    "value": 0.012383012401567813,
     "limit": 0.012,
     "sense": ">=",
-    "g": -0.1891513810473892
+    "g": -0.19150620078390612
    },
    "fin ground clearance, m (AC-13)": {
-    "value": 0.027101519717655335,
+    "value": 0.025779806727427843,
     "limit": 0.025,
     "sense": ">=",
-    "g": -0.4203039435310668
+    "g": -0.15596134548556823
    },
    "tip chord, m (AC-13)": {
-    "value": 0.12654051867634755,
+    "value": 0.12658866422854081,
     "limit": 0.12,
     "sense": ">=",
-    "g": -0.6540518676347556
+    "g": -0.6588664228540819
    },
    "battery fwd room at SM 10 %, m (no ballast)": {
-    "value": 0.11409728243165947,
+    "value": 0.11368437287997202,
     "limit": 0.0,
     "sense": ">=",
-    "g": -11.409728243165947
+    "g": -11.368437287997201
    },
    "battery aft room at SM 5 %, m": {
-    "value": 0.010933028863414768,
+    "value": 0.006315584521227324,
     "limit": 0.0,
     "sense": ">=",
-    "g": -1.0933028863414767
+    "g": -0.6315584521227324
    },
    "as-built mass, kg (margin to design mass)": {
-    "value": 1.1774659428499605,
+    "value": 1.1815992359366805,
     "limit": 1.275,
     "sense": "<=",
-    "g": -1.9506811430007875
+    "g": -1.8680152812663886
    }
   }
  },
  "finalists": [
   {
    "x": {
-    "span_m": 1.8,
-    "root_chord_m": 0.25829431843620254,
-    "taper": 0.4899082544380567,
-    "sweep_le_deg": 16.175954802709033,
-    "washout_deg": 3.5577316002167256,
-    "dihedral_deg": 2.2610461357036646,
-    "fin_length_m": 0.10019569673122482,
-    "fin_droop_deg": 22.972412699059984,
-    "pod_chord_m": 0.4280205975885422,
-    "pod_half_width_m": 0.09075643574164113
+    "span_m": 1.8356287511325613,
+    "root_chord_m": 0.2585049171855362,
+    "taper": 0.4896953822262677,
+    "sweep_le_deg": 16.17140374636842,
+    "washout_deg": 3.329807867355754,
+    "dihedral_deg": 3.1709625651748716,
+    "fin_length_m": 0.10791245021956597,
+    "fin_droop_deg": 29.357830741364516,
+    "pod_chord_m": 0.4227909152729521,
+    "pod_half_width_m": 0.09132162348030388
    },
-   "tip_chord_m": 0.12654051867634755,
+   "tip_chord_m": 0.12658866422854081,
    "feasible": true,
-   "objective": 587.6200794037175,
+   "objective": 588.3583253896438,
    "propulsion": "SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B",
    "metrics": {
-    "payload_floor_ratio": 1.8893667728162165,
-    "bay_height_margin_m": 0.022934242287130327,
-    "spar_depth_tip_m": 0.012378302762094779,
+    "payload_floor_ratio": 1.842861905922934,
+    "bay_height_margin_m": 0.02217751138809579,
+    "spar_depth_tip_m": 0.012383012401567813,
     "spar_needed_m": 0.012,
-    "fin_clearance_m": 0.027101519717655335,
-    "tip_chord_m": 0.12654051867634755,
-    "area_m2": 0.41323476927100733,
-    "span_m": 1.8,
-    "aspect_ratio": 7.8405793532710835,
-    "wing_loading_kg_m2": 3.6298978487366127,
-    "np_pct_mac": 35.361590203135854,
-    "x_np_m": 0.28216482143426413,
-    "mac_m": 0.26277606815424565,
-    "cruise_elevon_sm5_deg": 0.7371398763179576,
-    "cruise_elevon_sm10_deg": -2.7537238021090427,
-    "pod_pitch_cruise_deg": 5.353573381122977,
-    "stall_speed_m_s": 8.789940645977529,
-    "tip_stall_margin": 0.2656895020875353,
-    "stall_first_strip_rel": -0.10648823061271782,
-    "stall_elevon_deg": -13.643825861774204,
-    "cruise_ld": 17.107277533362492,
-    "cruise_cd": 0.0215146652146135,
-    "best_ld_model": 17.806825000841275,
+    "fin_clearance_m": 0.025779806727427843,
+    "tip_chord_m": 0.12658866422854081,
+    "area_m2": 0.4191931395480177,
+    "span_m": 1.8356287511325613,
+    "aspect_ratio": 8.038139449556793,
+    "wing_loading_kg_m2": 3.5783028358177082,
+    "np_pct_mac": 35.268283646983846,
+    "x_np_m": 0.28001562829176696,
+    "mac_m": 0.26023972632179726,
+    "cruise_elevon_sm5_deg": 0.6219371532780347,
+    "cruise_elevon_sm10_deg": -2.7697130500171867,
+    "pod_pitch_cruise_deg": 5.199850915873641,
+    "stall_speed_m_s": 8.709963112271573,
+    "tip_stall_margin": 0.2658503658972161,
+    "stall_first_strip_rel": -0.10694292291350747,
+    "stall_elevon_deg": -13.654666415383947,
+    "cruise_ld": 17.062630727923597,
+    "cruise_cd": 0.02126741358593101,
+    "best_ld_model": 17.887623383543968,
     "propulsion_fails": 0.0,
     "static_tw": 0.6703698588621211,
-    "cruise_power_w": 39.858266911300426,
-    "mass_built_kg": 1.1774659428499605,
-    "mass_paper_kg": 1.0450434226878724,
-    "cost_usd": 469.8734851187214,
+    "cruise_power_w": 40.09515643999974,
+    "mass_built_kg": 1.1815992359366805,
+    "mass_paper_kg": 1.0486902989380942,
+    "cost_usd": 470.1984017959758,
     "ballast_kg": 0.0,
-    "battery_fwd_margin_m": 0.11409728243165947,
-    "battery_aft_margin_m": 0.010933028863414768,
+    "battery_fwd_margin_m": 0.11368437287997202,
+    "battery_aft_margin_m": 0.006315584521227324,
     "fit_problems": 0.0,
-    "structure_g": 599.1659428499605,
-    "dutch_roll_damping": 0.09138335040017839,
-    "short_period_damping": 0.5349611119912601,
-    "short_period_hz": 2.0618725576937016,
-    "spiral_rate_per_s": 0.044589032351773465,
-    "cn_beta": 0.0037158772748783985,
-    "window_low_m_s": 11.426922839770787
+    "structure_g": 603.2992359366806,
+    "dutch_roll_damping": 0.09269027171417488,
+    "short_period_damping": 0.5400935492434176,
+    "short_period_hz": 2.0916103097080585,
+    "spiral_rate_per_s": 0.047137893168016254,
+    "cn_beta": 0.00448264348706694,
+    "window_low_m_s": 11.322952045953047
    },
    "constraints": {
     "stall speed at forward CG, m/s (AC-1)": {
-     "value": 8.789940645977529,
+     "value": 8.709963112271573,
      "limit": 8.8,
      "sense": "<=",
-     "g": -0.020118708044943645
+     "g": -0.18007377545685443
     },
     "tip stall margin (centre stalls first)": {
-     "value": 0.2656895020875353,
+     "value": 0.2658503658972161,
      "limit": 0.1,
      "sense": ">=",
-     "g": -3.313790041750705
+     "g": -3.317007317944322
     },
     "stall starts inboard of elevon (rel. span)": {
-     "value": -0.10648823061271782,
+     "value": -0.10694292291350747,
      "limit": 0.0,
      "sense": "<=",
-     "g": -2.1297646122543563
+     "g": -2.1388584582701493
     },
     "elevon used at stall, deg": {
-     "value": 13.643825861774204,
+     "value": 13.654666415383947,
      "limit": 15.0,
      "sense": "<=",
-     "g": -0.45205804607526545
+     "g": -0.44844452820535113
     },
     "cruise elevon at SM 5 %, |deg| (AC-8)": {
-     "value": 0.7371398763179576,
+     "value": 0.6219371532780347,
      "limit": 3.0,
      "sense": "<=",
-     "g": -2.2628601236820423
+     "g": -2.3780628467219653
     },
     "cruise elevon at SM 10 %, |deg| (AC-8)": {
-     "value": 2.7537238021090427,
+     "value": 2.7697130500171867,
      "limit": 3.0,
      "sense": "<=",
-     "g": -0.24627619789095734
+     "g": -0.2302869499828133
     },
     "pod pitch at cruise vs camera wedge, |deg| (CAM-4)": {
-     "value": 0.6464266188770234,
+     "value": 0.8001490841263594,
      "limit": 2.0,
      "sense": "<=",
-     "g": -1.3535733811229766
+     "g": -1.1998509158736406
     },
     "Dutch roll damping": {
-     "value": 0.09138335040017839,
+     "value": 0.09269027171417488,
      "limit": 0.09,
      "sense": ">=",
-     "g": -0.06916752000891979
+     "g": -0.134513585708744
     },
     "short-period damping": {
-     "value": 0.5349611119912601,
+     "value": 0.5400935492434176,
      "limit": 0.3,
      "sense": ">=",
-     "g": -2.3496111199126006
+     "g": -2.4009354924341757
     },
     "short-period damping (upper)": {
-     "value": 0.5349611119912601,
+     "value": 0.5400935492434176,
      "limit": 2.0,
      "sense": "<=",
-     "g": -14.650388880087398
+     "g": -14.599064507565824
     },
     "spiral divergence, 1/doubling time, 1/s": {
-     "value": 0.044589032351773465,
+     "value": 0.047137893168016254,
      "limit": 0.08333333333333333,
      "sense": "<=",
-     "g": -1.9372150490779931
+     "g": -1.8097720082658537
     },
     "Cn_beta (weathercock), /rad": {
-     "value": 0.0037158772748783985,
+     "value": 0.00448264348706694,
      "limit": 0.0,
      "sense": ">=",
-     "g": -0.7431754549756797
+     "g": -0.896528697413388
     },
     "wing loading, kg/m^2 (AC-2)": {
-     "value": 3.6298978487366127,
+     "value": 3.5783028358177082,
      "limit": 6.0,
      "sense": "<=",
-     "g": -2.3701021512633873
+     "g": -2.4216971641822918
     },
     "airspeed window, m/s (AC-9)": {
-     "value": 7.765077160229213,
+     "value": 7.869047954046954,
      "limit": 3.0,
      "sense": ">=",
-     "g": -4.765077160229213
+     "g": -4.869047954046954
     },
     "propulsion checks failed (AC-5, AC-6, MIS-4)": {
      "value": 0.0,
@@ -587,16 +587,16 @@
      "g": -0.5
     },
     "payload floor / needed (AC-12)": {
-     "value": 1.8893667728162165,
+     "value": 1.842861905922934,
      "limit": 1.0,
      "sense": ">=",
-     "g": -8.893667728162164
+     "g": -8.42861905922934
     },
     "payload bay height margin, m (AC-12)": {
-     "value": 0.022934242287130327,
+     "value": 0.02217751138809579,
      "limit": 0.0,
      "sense": ">=",
-     "g": -4.586848457426066
+     "g": -4.4355022776191575
     },
     "parts too tall for the pod": {
      "value": 0.0,
@@ -605,186 +605,186 @@
      "g": -0.5
     },
     "spar depth at tip, m": {
-     "value": 0.012378302762094779,
+     "value": 0.012383012401567813,
      "limit": 0.012,
      "sense": ">=",
-     "g": -0.1891513810473892
+     "g": -0.19150620078390612
     },
     "fin ground clearance, m (AC-13)": {
-     "value": 0.027101519717655335,
+     "value": 0.025779806727427843,
      "limit": 0.025,
      "sense": ">=",
-     "g": -0.4203039435310668
+     "g": -0.15596134548556823
     },
     "tip chord, m (AC-13)": {
-     "value": 0.12654051867634755,
+     "value": 0.12658866422854081,
      "limit": 0.12,
      "sense": ">=",
-     "g": -0.6540518676347556
+     "g": -0.6588664228540819
     },
     "battery fwd room at SM 10 %, m (no ballast)": {
-     "value": 0.11409728243165947,
+     "value": 0.11368437287997202,
      "limit": 0.0,
      "sense": ">=",
-     "g": -11.409728243165947
+     "g": -11.368437287997201
     },
     "battery aft room at SM 5 %, m": {
-     "value": 0.010933028863414768,
+     "value": 0.006315584521227324,
      "limit": 0.0,
      "sense": ">=",
-     "g": -1.0933028863414767
+     "g": -0.6315584521227324
     },
     "as-built mass, kg (margin to design mass)": {
-     "value": 1.1774659428499605,
+     "value": 1.1815992359366805,
      "limit": 1.275,
      "sense": "<=",
-     "g": -1.9506811430007875
+     "g": -1.8680152812663886
     }
    }
   },
   {
    "x": {
-    "span_m": 1.8,
-    "root_chord_m": 0.2622509768635088,
-    "taper": 0.4929991587673603,
-    "sweep_le_deg": 16.484291439493568,
-    "washout_deg": 3.5273504345029485,
-    "dihedral_deg": 1.952839570059992,
-    "fin_length_m": 0.1029245903823671,
-    "fin_droop_deg": 20.651254597414336,
-    "pod_chord_m": 0.4256114260898222,
-    "pod_half_width_m": 0.08997523201436627
+    "span_m": 1.8424689549171207,
+    "root_chord_m": 0.2594978617946348,
+    "taper": 0.4883836038386217,
+    "sweep_le_deg": 16.055047177582242,
+    "washout_deg": 3.312447417725651,
+    "dihedral_deg": 3.2044768007687594,
+    "fin_length_m": 0.10759588857786974,
+    "fin_droop_deg": 29.967197203317575,
+    "pod_chord_m": 0.4315364871627112,
+    "pod_half_width_m": 0.09286794132530399
    },
-   "tip_chord_m": 0.1292895109796283,
+   "tip_chord_m": 0.12673450093168034,
    "feasible": true,
-   "objective": 587.9377649889534,
+   "objective": 589.8892695715481,
    "propulsion": "SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B",
    "metrics": {
-    "payload_floor_ratio": 1.8444417190161642,
-    "bay_height_margin_m": 0.022585637074779293,
-    "spar_depth_tip_m": 0.012647211562031897,
+    "payload_floor_ratio": 1.9507200308707833,
+    "bay_height_margin_m": 0.023442988730568326,
+    "spar_depth_tip_m": 0.01239727827374986,
     "spar_needed_m": 0.012,
-    "fin_clearance_m": 0.025769317794557454,
-    "tip_chord_m": 0.1292895109796283,
-    "area_m2": 0.4174522196517286,
-    "span_m": 1.8,
-    "aspect_ratio": 7.761367283429617,
-    "wing_loading_kg_m2": 3.5932255941803777,
-    "np_pct_mac": 35.011366682138764,
-    "x_np_m": 0.2796014619410383,
-    "mac_m": 0.2634744185350476,
-    "cruise_elevon_sm5_deg": 0.7197353381591526,
-    "cruise_elevon_sm10_deg": -2.7150495404059276,
-    "pod_pitch_cruise_deg": 5.280850232358108,
-    "stall_speed_m_s": 8.693634213171451,
-    "tip_stall_margin": 0.25992445599940495,
-    "stall_first_strip_rel": -0.1065848677927876,
-    "stall_elevon_deg": -13.826187096799702,
-    "cruise_ld": 17.06557755107002,
-    "cruise_cd": 0.021351588752944146,
-    "best_ld_model": 17.809956012099853,
+    "fin_clearance_m": 0.025918206549835947,
+    "tip_chord_m": 0.12673450093168034,
+    "area_m2": 0.4244779336917525,
+    "span_m": 1.8424689549171207,
+    "aspect_ratio": 7.997334090630363,
+    "wing_loading_kg_m2": 3.5337525956985796,
+    "np_pct_mac": 35.624776793536576,
+    "x_np_m": 0.2864282313227229,
+    "mac_m": 0.26409292263949075,
+    "cruise_elevon_sm5_deg": 0.6434066041996549,
+    "cruise_elevon_sm10_deg": -2.7400506095292116,
+    "pod_pitch_cruise_deg": 5.158622757733801,
+    "stall_speed_m_s": 8.691336835390427,
+    "tip_stall_margin": 0.2677914055484877,
+    "stall_first_strip_rel": -0.10681557846500717,
+    "stall_elevon_deg": -13.676998200532003,
+    "cruise_ld": 17.014055395515182,
+    "cruise_cd": 0.021064825687710155,
+    "best_ld_model": 17.866299794392248,
     "propulsion_fails": 0.0,
     "static_tw": 0.6703698588621211,
-    "cruise_power_w": 39.92733331409759,
-    "mass_built_kg": 1.1807257872732444,
-    "mass_paper_kg": 1.0477777666891164,
-    "cost_usd": 469.86518626162893,
+    "cruise_power_w": 40.18260285641172,
+    "mass_built_kg": 1.1915203661989482,
+    "mass_paper_kg": 1.0569747229660442,
+    "cost_usd": 470.7372329516533,
     "ballast_kg": 0.0,
-    "battery_fwd_margin_m": 0.10527978962167303,
-    "battery_aft_margin_m": 0.01634066709911064,
+    "battery_fwd_margin_m": 0.12224442931627175,
+    "battery_aft_margin_m": 0.005358788700545902,
     "fit_problems": 0.0,
-    "structure_g": 602.4257872732445,
-    "dutch_roll_damping": 0.09323423487699689,
-    "short_period_damping": 0.5392878440757963,
-    "short_period_hz": 2.0722856906161184,
-    "spiral_rate_per_s": 0.04841471778376803,
-    "cn_beta": 0.0036650851411588565,
-    "window_low_m_s": 11.301724477122887
+    "structure_g": 613.220366198948,
+    "dutch_roll_damping": 0.09253855115525736,
+    "short_period_damping": 0.543514699595749,
+    "short_period_hz": 2.081528241565539,
+    "spiral_rate_per_s": 0.04690666754078912,
+    "cn_beta": 0.004495474249698723,
+    "window_low_m_s": 11.298737886007554
    },
    "constraints": {
     "stall speed at forward CG, m/s (AC-1)": {
-     "value": 8.693634213171451,
+     "value": 8.691336835390427,
      "limit": 8.8,
      "sense": "<=",
-     "g": -0.2127315736570985
+     "g": -0.21732632921914785
     },
     "tip stall margin (centre stalls first)": {
-     "value": 0.25992445599940495,
+     "value": 0.2677914055484877,
      "limit": 0.1,
      "sense": ">=",
-     "g": -3.1984891199880985
+     "g": -3.355828110969753
     },
     "stall starts inboard of elevon (rel. span)": {
-     "value": -0.1065848677927876,
+     "value": -0.10681557846500717,
      "limit": 0.0,
      "sense": "<=",
-     "g": -2.131697355855752
+     "g": -2.136311569300143
     },
     "elevon used at stall, deg": {
-     "value": 13.826187096799702,
+     "value": 13.676998200532003,
      "limit": 15.0,
      "sense": "<=",
-     "g": -0.3912709677334328
+     "g": -0.44100059982266576
     },
     "cruise elevon at SM 5 %, |deg| (AC-8)": {
-     "value": 0.7197353381591526,
+     "value": 0.6434066041996549,
      "limit": 3.0,
      "sense": "<=",
-     "g": -2.2802646618408473
+     "g": -2.356593395800345
     },
     "cruise elevon at SM 10 %, |deg| (AC-8)": {
-     "value": 2.7150495404059276,
+     "value": 2.7400506095292116,
      "limit": 3.0,
      "sense": "<=",
-     "g": -0.2849504595940724
+     "g": -0.25994939047078836
     },
     "pod pitch at cruise vs camera wedge, |deg| (CAM-4)": {
-     "value": 0.7191497676418921,
+     "value": 0.8413772422661987,
      "limit": 2.0,
      "sense": "<=",
-     "g": -1.280850232358108
+     "g": -1.1586227577338013
     },
     "Dutch roll damping": {
-     "value": 0.09323423487699689,
+     "value": 0.09253855115525736,
      "limit": 0.09,
      "sense": ">=",
-     "g": -0.1617117438498447
+     "g": -0.12692755776286813
     },
     "short-period damping": {
-     "value": 0.5392878440757963,
+     "value": 0.543514699595749,
      "limit": 0.3,
      "sense": ">=",
-     "g": -2.392878440757963
+     "g": -2.4351469959574903
     },
     "short-period damping (upper)": {
-     "value": 0.5392878440757963,
+     "value": 0.543514699595749,
      "limit": 2.0,
      "sense": "<=",
-     "g": -14.607121559242037
+     "g": -14.56485300404251
     },
     "spiral divergence, 1/doubling time, 1/s": {
-     "value": 0.04841471778376803,
+     "value": 0.04690666754078912,
      "limit": 0.08333333333333333,
      "sense": "<=",
-     "g": -1.7459307774782649
+     "g": -1.8213332896272103
     },
     "Cn_beta (weathercock), /rad": {
-     "value": 0.0036650851411588565,
+     "value": 0.004495474249698723,
      "limit": 0.0,
      "sense": ">=",
-     "g": -0.7330170282317713
+     "g": -0.8990948499397445
     },
     "wing loading, kg/m^2 (AC-2)": {
-     "value": 3.5932255941803777,
+     "value": 3.5337525956985796,
      "limit": 6.0,
      "sense": "<=",
-     "g": -2.4067744058196223
+     "g": -2.4662474043014204
     },
     "airspeed window, m/s (AC-9)": {
-     "value": 7.890275522877113,
+     "value": 7.893262113992446,
      "limit": 3.0,
      "sense": ">=",
-     "g": -4.890275522877113
+     "g": -4.893262113992446
     },
     "propulsion checks failed (AC-5, AC-6, MIS-4)": {
      "value": 0.0,
@@ -793,16 +793,16 @@
      "g": -0.5
     },
     "payload floor / needed (AC-12)": {
-     "value": 1.8444417190161642,
+     "value": 1.9507200308707833,
      "limit": 1.0,
      "sense": ">=",
-     "g": -8.44441719016164
+     "g": -9.507200308707832
     },
     "payload bay height margin, m (AC-12)": {
-     "value": 0.022585637074779293,
+     "value": 0.023442988730568326,
      "limit": 0.0,
      "sense": ">=",
-     "g": -4.5171274149558585
+     "g": -4.688597746113665
     },
     "parts too tall for the pod": {
      "value": 0.0,
@@ -811,186 +811,186 @@
      "g": -0.5
     },
     "spar depth at tip, m": {
-     "value": 0.012647211562031897,
+     "value": 0.01239727827374986,
      "limit": 0.012,
      "sense": ">=",
-     "g": -0.32360578101594833
+     "g": -0.19863913687493023
     },
     "fin ground clearance, m (AC-13)": {
-     "value": 0.025769317794557454,
+     "value": 0.025918206549835947,
      "limit": 0.025,
      "sense": ">=",
-     "g": -0.15386355891149062
+     "g": -0.18364130996718908
     },
     "tip chord, m (AC-13)": {
-     "value": 0.1292895109796283,
+     "value": 0.12673450093168034,
      "limit": 0.12,
      "sense": ">=",
-     "g": -0.9289510979628296
+     "g": -0.6734500931680348
     },
     "battery fwd room at SM 10 %, m (no ballast)": {
-     "value": 0.10527978962167303,
+     "value": 0.12224442931627175,
      "limit": 0.0,
      "sense": ">=",
-     "g": -10.527978962167303
+     "g": -12.224442931627175
     },
     "battery aft room at SM 5 %, m": {
-     "value": 0.01634066709911064,
+     "value": 0.005358788700545902,
      "limit": 0.0,
      "sense": ">=",
-     "g": -1.634066709911064
+     "g": -0.5358788700545902
     },
     "as-built mass, kg (margin to design mass)": {
-     "value": 1.1807257872732444,
+     "value": 1.1915203661989482,
      "limit": 1.275,
      "sense": "<=",
-     "g": -1.8854842545351103
+     "g": -1.6695926760210344
     }
    }
   },
   {
    "x": {
-    "span_m": 1.8,
-    "root_chord_m": 0.2616068254170443,
-    "taper": 0.4950797383017921,
-    "sweep_le_deg": 16.216527063464348,
-    "washout_deg": 3.451203171845752,
-    "dihedral_deg": 2.3300498496246953,
-    "fin_length_m": 0.098004238192236,
-    "fin_droop_deg": 25.05929830326176,
-    "pod_chord_m": 0.4290282668419222,
-    "pod_half_width_m": 0.09104527869547145
+    "span_m": 1.856948882842134,
+    "root_chord_m": 0.25887579457448673,
+    "taper": 0.4880797663382417,
+    "sweep_le_deg": 15.162561520583496,
+    "washout_deg": 3.2793286927885816,
+    "dihedral_deg": 3.1718678932211786,
+    "fin_length_m": 0.10632239636950205,
+    "fin_droop_deg": 31.12935145934945,
+    "pod_chord_m": 0.4465225470161073,
+    "pod_half_width_m": 0.09578433632699665
    },
-   "tip_chord_m": 0.12951623866543288,
+   "tip_chord_m": 0.12635203732654213,
    "feasible": true,
-   "objective": 588.4153475076334,
+   "objective": 592.3008139660184,
    "propulsion": "SunnySky X2216 1100KV + folding 10x6 + 3S1P Molicel P45B",
    "metrics": {
-    "payload_floor_ratio": 1.9000481550935804,
-    "bay_height_margin_m": 0.02308005123192349,
-    "spar_depth_tip_m": 0.012669390259960396,
+    "payload_floor_ratio": 2.1429464575825685,
+    "bay_height_margin_m": 0.025611459750698763,
+    "spar_depth_tip_m": 0.012359865353766564,
     "spar_needed_m": 0.012,
-    "fin_clearance_m": 0.02559058213404112,
-    "tip_chord_m": 0.12951623866543288,
-    "area_m2": 0.4184838078004485,
-    "span_m": 1.8,
-    "aspect_ratio": 7.7422350389838135,
-    "wing_loading_kg_m2": 3.584368073603617,
-    "np_pct_mac": 34.908612496494406,
-    "x_np_m": 0.28077676644333327,
-    "mac_m": 0.26487497030544205,
-    "cruise_elevon_sm5_deg": 0.6408542365010648,
-    "cruise_elevon_sm10_deg": -2.798700451561685,
-    "pod_pitch_cruise_deg": 5.300207397024363,
-    "stall_speed_m_s": 8.729520429970554,
-    "tip_stall_margin": 0.2634459443115311,
-    "stall_first_strip_rel": -0.10645206086521909,
-    "stall_elevon_deg": -13.775210215892734,
-    "cruise_ld": 17.05414933449384,
-    "cruise_cd": 0.021314023117492108,
-    "best_ld_model": 17.76766510186955,
+    "fin_clearance_m": 0.0252734037678617,
+    "tip_chord_m": 0.12635203732654213,
+    "area_m2": 0.4319287762479498,
+    "span_m": 1.856948882842134,
+    "aspect_ratio": 7.983397594952479,
+    "wing_loading_kg_m2": 3.4727947811907796,
+    "np_pct_mac": 36.1628354256772,
+    "x_np_m": 0.29539358279977923,
+    "mac_m": 0.2700013565998756,
+    "cruise_elevon_sm5_deg": 0.6111183391892328,
+    "cruise_elevon_sm10_deg": -2.8083406319980275,
+    "pod_pitch_cruise_deg": 5.124350691577825,
+    "stall_speed_m_s": 8.71110640173551,
+    "tip_stall_margin": 0.27797733716818607,
+    "stall_first_strip_rel": -0.10659135202501714,
+    "stall_elevon_deg": -13.778160140835917,
+    "cruise_ld": 16.922561682689576,
+    "cruise_cd": 0.020817407044937446,
+    "best_ld_model": 17.83017934684604,
     "propulsion_fails": 0.0,
     "static_tw": 0.6703698588621211,
-    "cruise_power_w": 39.888380396724415,
-    "mass_built_kg": 1.183650552106933,
-    "mass_paper_kg": 1.0501955838807384,
-    "cost_usd": 470.0502922969401,
+    "cruise_power_w": 40.30441986881723,
+    "mass_built_kg": 1.206686435710944,
+    "mass_paper_kg": 1.069630655438614,
+    "cost_usd": 471.63217039492395,
     "ballast_kg": 0.0,
-    "battery_fwd_margin_m": 0.10428182293901853,
-    "battery_aft_margin_m": 0.02131286269286789,
+    "battery_fwd_margin_m": 0.13031012909973366,
+    "battery_aft_margin_m": 0.01054631508317097,
     "fit_problems": 0.0,
-    "structure_g": 605.350552106933,
-    "dutch_roll_damping": 0.09125761943611212,
-    "short_period_damping": 0.5380197596346616,
-    "short_period_hz": 2.0536457343815964,
-    "spiral_rate_per_s": 0.04617497962886503,
-    "cn_beta": 0.003822331088547822,
-    "window_low_m_s": 11.348376558961721
+    "structure_g": 628.3864357109438,
+    "dutch_roll_damping": 0.09428661226005947,
+    "short_period_damping": 0.5454752160769291,
+    "short_period_hz": 2.058745931084325,
+    "spiral_rate_per_s": 0.048126562395436515,
+    "cn_beta": 0.00444416901531738,
+    "window_low_m_s": 11.324438322256164
    },
    "constraints": {
     "stall speed at forward CG, m/s (AC-1)": {
-     "value": 8.729520429970554,
+     "value": 8.71110640173551,
      "limit": 8.8,
      "sense": "<=",
-     "g": -0.14095914005889298
+     "g": -0.1777871965289819
     },
     "tip stall margin (centre stalls first)": {
-     "value": 0.2634459443115311,
+     "value": 0.27797733716818607,
      "limit": 0.1,
      "sense": ">=",
-     "g": -3.268918886230622
+     "g": -3.559546743363721
     },
     "stall starts inboard of elevon (rel. span)": {
-     "value": -0.10645206086521909,
+     "value": -0.10659135202501714,
      "limit": 0.0,
      "sense": "<=",
-     "g": -2.1290412173043816
+     "g": -2.1318270405003426
     },
     "elevon used at stall, deg": {
-     "value": 13.775210215892734,
+     "value": 13.778160140835917,
      "limit": 15.0,
      "sense": "<=",
-     "g": -0.4082632613690886
+     "g": -0.4072799530546944
     },
     "cruise elevon at SM 5 %, |deg| (AC-8)": {
-     "value": 0.6408542365010648,
+     "value": 0.6111183391892328,
      "limit": 3.0,
      "sense": "<=",
-     "g": -2.359145763498935
+     "g": -2.3888816608107675
     },
     "cruise elevon at SM 10 %, |deg| (AC-8)": {
-     "value": 2.798700451561685,
+     "value": 2.8083406319980275,
      "limit": 3.0,
      "sense": "<=",
-     "g": -0.20129954843831488
+     "g": -0.19165936800197247
     },
     "pod pitch at cruise vs camera wedge, |deg| (CAM-4)": {
-     "value": 0.699792602975637,
+     "value": 0.875649308422175,
      "limit": 2.0,
      "sense": "<=",
-     "g": -1.300207397024363
+     "g": -1.124350691577825
     },
     "Dutch roll damping": {
-     "value": 0.09125761943611212,
+     "value": 0.09428661226005947,
      "limit": 0.09,
      "sense": ">=",
-     "g": -0.062880971805606
+     "g": -0.21433061300297346
     },
     "short-period damping": {
-     "value": 0.5380197596346616,
+     "value": 0.5454752160769291,
      "limit": 0.3,
      "sense": ">=",
-     "g": -2.3801975963466164
+     "g": -2.4547521607692904
     },
     "short-period damping (upper)": {
-     "value": 0.5380197596346616,
+     "value": 0.5454752160769291,
      "limit": 2.0,
      "sense": "<=",
-     "g": -14.619802403653383
+     "g": -14.54524783923071
     },
     "spiral divergence, 1/doubling time, 1/s": {
-     "value": 0.04617497962886503,
+     "value": 0.048126562395436515,
      "limit": 0.08333333333333333,
      "sense": "<=",
-     "g": -1.857917685223415
+     "g": -1.7603385468948407
     },
     "Cn_beta (weathercock), /rad": {
-     "value": 0.003822331088547822,
+     "value": 0.00444416901531738,
      "limit": 0.0,
      "sense": ">=",
-     "g": -0.7644662177095644
+     "g": -0.8888338030634759
     },
     "wing loading, kg/m^2 (AC-2)": {
-     "value": 3.584368073603617,
+     "value": 3.4727947811907796,
      "limit": 6.0,
      "sense": "<=",
-     "g": -2.415631926396383
+     "g": -2.5272052188092204
     },
     "airspeed window, m/s (AC-9)": {
-     "value": 7.843623441038279,
+     "value": 7.867561677743836,
      "limit": 3.0,
      "sense": ">=",
-     "g": -4.843623441038279
+     "g": -4.867561677743836
     },
     "propulsion checks failed (AC-5, AC-6, MIS-4)": {
      "value": 0.0,
@@ -999,16 +999,16 @@
      "g": -0.5
     },
     "payload floor / needed (AC-12)": {
-     "value": 1.9000481550935804,
+     "value": 2.1429464575825685,
      "limit": 1.0,
      "sense": ">=",
-     "g": -9.000481550935802
+     "g": -11.429464575825685
     },
     "payload bay height margin, m (AC-12)": {
-     "value": 0.02308005123192349,
+     "value": 0.025611459750698763,
      "limit": 0.0,
      "sense": ">=",
-     "g": -4.616010246384699
+     "g": -5.122291950139752
     },
     "parts too tall for the pod": {
      "value": 0.0,
@@ -1017,40 +1017,40 @@
      "g": -0.5
     },
     "spar depth at tip, m": {
-     "value": 0.012669390259960396,
+     "value": 0.012359865353766564,
      "limit": 0.012,
      "sense": ">=",
-     "g": -0.3346951299801979
+     "g": -0.1799326768832819
     },
     "fin ground clearance, m (AC-13)": {
-     "value": 0.02559058213404112,
+     "value": 0.0252734037678617,
      "limit": 0.025,
      "sense": ">=",
-     "g": -0.11811642680822354
+     "g": -0.05468075357233995
     },
     "tip chord, m (AC-13)": {
-     "value": 0.12951623866543288,
+     "value": 0.12635203732654213,
      "limit": 0.12,
      "sense": ">=",
-     "g": -0.9516238665432886
+     "g": -0.6352037326542131
     },
     "battery fwd room at SM 10 %, m (no ballast)": {
-     "value": 0.10428182293901853,
+     "value": 0.13031012909973366,
      "limit": 0.0,
      "sense": ">=",
-     "g": -10.428182293901852
+     "g": -13.031012909973366
     },
     "battery aft room at SM 5 %, m": {
-     "value": 0.02131286269286789,
+     "value": 0.01054631508317097,
      "limit": 0.0,
      "sense": ">=",
-     "g": -2.131286269286789
+     "g": -1.054631508317097
     },
     "as-built mass, kg (margin to design mass)": {
-     "value": 1.183650552106933,
+     "value": 1.206686435710944,
      "limit": 1.275,
      "sense": "<=",
-     "g": -1.8269889578613396
+     "g": -1.36627128578112
     }
    }
   }
