@@ -49,7 +49,9 @@ Full numbers: [cad_report.txt](cad_report.txt).
 1. `python -m manta_mapper.cad --json cad/manta_cad.json` (the committed file
    is current for the merged design; rerun it after any geometry change).
 2. In Fusion: **Utilities > Add-Ins > Scripts and Add-Ins**, then **+** next
-   to My Scripts, pick `cad/fusion/MantaMapperCAD`, then **Run**.
+   to My Scripts, pick `cad/fusion/MantaMapperCAD`, then **Run**. No repo
+   checkout? Copy `cad/manta_cad.json` into the `MantaMapperCAD` folder: the
+   script uses a recipe sitting next to it first, and writes the STLs beside it.
 3. It opens a new design, builds the 18 parts (one component each; the
    left-hand panel, fin, sleeve and skid rail are mirrored copies of the right),
    and offers to export the printed parts as STL to `cad/stl_fusion/`.

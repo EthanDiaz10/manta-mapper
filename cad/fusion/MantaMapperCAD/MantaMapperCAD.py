@@ -34,8 +34,15 @@ import adsk.fusion
 
 CM = 0.1  # the recipe is in mm; Fusion's internal length unit is the cm
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_JSON = os.path.normpath(os.path.join(HERE, "..", "..", "manta_cad.json"))
-DEFAULT_STL = os.path.normpath(os.path.join(HERE, "..", "..", "stl_fusion"))
+# Standalone download: manta_cad.json sits next to this script and the STLs
+# go beside it. Inside the repo: cad/manta_cad.json and cad/stl_fusion.
+_LOCAL_JSON = os.path.join(HERE, "manta_cad.json")
+if os.path.exists(_LOCAL_JSON):
+    DEFAULT_JSON = _LOCAL_JSON
+    DEFAULT_STL = os.path.join(HERE, "stl_fusion")
+else:
+    DEFAULT_JSON = os.path.normpath(os.path.join(HERE, "..", "..", "manta_cad.json"))
+    DEFAULT_STL = os.path.normpath(os.path.join(HERE, "..", "..", "stl_fusion"))
 
 
 def P(p):
