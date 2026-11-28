@@ -1,0 +1,96 @@
+Manta Mapper M1.7: VSPAERO check of the optimizer finalists
+==============================================================
+
+F1: span 1.836 m, area 0.4192 m^2, MAC 260 mm, CG 260 mm (SM 7.5 %), cruise 14.0 m/s, alpha 5.20 deg
+
+                                 AeroSandbox       VSPAERO vlm
+  CL_alpha, /rad                       4.820             4.643
+  CL at alpha 0                      -0.0537           -0.0389
+  neutral point, % MAC                 35.38             32.29
+  neutral point, mm                    280.3             272.3
+  CDi at cruise CL                   0.00469           0.00676
+  CD total at cruise                 0.02127           0.02334
+  CY_beta                            -0.0220           -0.0308
+  Cl_beta                            -0.0372           -0.0510
+  Cn_beta                             0.0046            0.0062
+  CY_p                                0.0905           -0.0060
+  Cl_p                               -0.5749           -0.5302
+  Cn_p                               -0.0443           -0.0328
+  CY_r                                0.0002            0.0082
+  Cl_r                                0.0904            0.0946
+  Cn_r                               -0.0010           -0.0073
+  Cm_q                               -1.5239           -1.4301
+
+  PIPE-4 (VSPAERO vs AeroSandbox):
+    VSPAERO vlm    CL_alpha  -3.7 % ok   NP -3.09 % MAC FAIL   CD  +9.7 % ok
+
+  Dutch roll damping (same inertia, profile yaw damping and trim; VSPAERO rows swap in its derivatives):
+    AeroSandbox (pipeline)   zeta  0.093   0.34 Hz   ok   spiral   -21.2 s   roll tau 0.040 s
+    VSPAERO vlm              zeta  0.111   0.39 Hz   ok   spiral  -299.5 s   roll tau 0.043 s
+    VSPAERO vlm, AeroSandbox r-terms zeta  0.069   0.39 Hz   BELOW 0.09   spiral   -19.0 s   roll tau 0.043 s
+    [vlm] CY_beta raw -0.0308 -> beta sign +1; Cl_beta raw +0.0514 -> moment sign -1; Cl_p raw +0.5315 -> rate sign +1
+    [vlm] rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.62, stability 1.22)
+    [vlm] sideslip derivatives from explicit +-4 deg sideslip runs
+
+F2: span 1.842 m, area 0.4245 m^2, MAC 264 mm, CG 267 mm (SM 7.5 %), cruise 14.0 m/s, alpha 5.16 deg
+
+                                 AeroSandbox       VSPAERO vlm
+  CL_alpha, /rad                       4.796             4.624
+  CL at alpha 0                      -0.0531           -0.0384
+  neutral point, % MAC                 35.74             32.67
+  neutral point, mm                    286.7             278.6
+  CDi at cruise CL                   0.00459           0.00664
+  CD total at cruise                 0.02106           0.02310
+  CY_beta                            -0.0225           -0.0313
+  Cl_beta                            -0.0371           -0.0508
+  Cn_beta                             0.0046            0.0062
+  CY_p                                0.0886           -0.0073
+  Cl_p                               -0.5701           -0.5299
+  Cn_p                               -0.0436           -0.0322
+  CY_r                                0.0006            0.0092
+  Cl_r                                0.0889            0.0893
+  Cn_r                               -0.0010           -0.0075
+  Cm_q                               -1.5054           -1.4323
+
+  PIPE-4 (VSPAERO vs AeroSandbox):
+    VSPAERO vlm    CL_alpha  -3.6 % ok   NP -3.06 % MAC FAIL   CD  +9.7 % ok
+
+  Dutch roll damping (same inertia, profile yaw damping and trim; VSPAERO rows swap in its derivatives):
+    AeroSandbox (pipeline)   zeta  0.093   0.35 Hz   ok   spiral   -21.3 s   roll tau 0.040 s
+    VSPAERO vlm              zeta  0.111   0.39 Hz   ok   spiral  +240.0 s   roll tau 0.042 s
+    VSPAERO vlm, AeroSandbox r-terms zeta  0.069   0.39 Hz   BELOW 0.09   spiral   -19.3 s   roll tau 0.042 s
+    [vlm] CY_beta raw -0.0313 -> beta sign +1; Cl_beta raw +0.0511 -> moment sign -1; Cl_p raw +0.5308 -> rate sign +1
+    [vlm] rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.59, stability 1.28)
+    [vlm] sideslip derivatives from explicit +-4 deg sideslip runs
+
+F3: span 1.857 m, area 0.4319 m^2, MAC 270 mm, CG 275 mm (SM 7.5 %), cruise 14.0 m/s, alpha 5.12 deg
+
+                                 AeroSandbox       VSPAERO vlm
+  CL_alpha, /rad                       4.759             4.605
+  CL at alpha 0                      -0.0524           -0.0376
+  neutral point, % MAC                 36.28             33.38
+  neutral point, mm                    295.7             287.9
+  CDi at cruise CL                   0.00446           0.00645
+  CD total at cruise                 0.02082           0.02281
+  CY_beta                            -0.0229           -0.0321
+  Cl_beta                            -0.0353           -0.0486
+  Cn_beta                             0.0045            0.0059
+  CY_p                                0.0849           -0.0092
+  Cl_p                               -0.5624           -0.5245
+  Cn_p                               -0.0423           -0.0318
+  CY_r                                0.0010            0.0104
+  Cl_r                                0.0872            0.0872
+  Cn_r                               -0.0010           -0.0077
+  Cm_q                               -1.4493           -1.3387
+
+  PIPE-4 (VSPAERO vs AeroSandbox):
+    VSPAERO vlm    CL_alpha  -3.2 % ok   NP -2.90 % MAC ok   CD  +9.6 % ok
+
+  Dutch roll damping (same inertia, profile yaw damping and trim; VSPAERO rows swap in its derivatives):
+    AeroSandbox (pipeline)   zeta  0.094   0.34 Hz   ok   spiral   -20.8 s   roll tau 0.039 s
+    VSPAERO vlm              zeta  0.117   0.38 Hz   ok   spiral  +124.4 s   roll tau 0.042 s
+    VSPAERO vlm, AeroSandbox r-terms zeta  0.072   0.39 Hz   BELOW 0.09   spiral   -19.6 s   roll tau 0.042 s
+    [vlm] CY_beta raw -0.0321 -> beta sign +1; Cl_beta raw +0.0489 -> moment sign -1; Cl_p raw +0.5253 -> rate sign +1
+    [vlm] rates read as body axes (mismatch vs AeroSandbox on Cl_r, Cn_p, Cn_r: body 0.58, stability 1.28)
+    [vlm] sideslip derivatives from explicit +-4 deg sideslip runs
+

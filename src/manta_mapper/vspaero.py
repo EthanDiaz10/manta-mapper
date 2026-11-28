@@ -42,6 +42,7 @@ import argparse
 import json
 import math
 import re
+import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -792,7 +793,7 @@ def plot_comparison(results: list[CaseResult], path: str | None = None):  # prag
     axes[2].axhline(DUTCH_ROLL_MIN, color="#b00020", lw=1, ls="--", label="robust limit 0.09")
     axes[2].set(xticks=np.arange(len(labels)) + w * (len(keys) - 1) / 2, xticklabels=labels,
                 ylabel="Dutch roll damping ratio", title="Dutch roll")
-    axes[2].set_ylim(0, 0.14)
+    axes[2].set_ylim(0, 0.16)
     axes[2].legend(frameon=False, fontsize=8, loc="upper left")
     for ax in axes:
         ax.grid(alpha=0.3)
@@ -805,6 +806,73 @@ def plot_comparison(results: list[CaseResult], path: str | None = None):  # prag
 
 
 # --------------------------------------------------------------------------
+# Spanwise loading (.lod)
+# --------------------------------------------------------------------------
+
+
+def parse_lod(path: str) -> dict:
+    """Read a VSPAERO .lod file: reference values and the strip table, keyed by column name."""
+    refs, rows, header = {}, [], None
+    for line in Path(path).read_text().splitlines():
+        parts = line.split()
+        if not parts or parts[0].startswith("#"):
+            continue
+        if parts[0] == "Iter":
+            header = parts
+        elif header is None and len(parts) >= 2:
+            try:
+                refs[parts[0].rstrip("_")] = float(parts[1])
+            except ValueError:
+                pass
+        elif header is not None and len(parts) >= len(header):
+            rows.append([float(x) for x in parts[: len(header)]])
+    table = {h: np.array([r[i] for r in rows]) for i, h in enumerate(header or [])}
+    return {"refs": refs, "strips": table}
+
+
+def plot_span_loading(lod_path: str, path: str, title: str = "") -> dict:  # pragma: no cover - visual
+    """Spanwise lift: the main wing's cl*c/(CL*cref) against the elliptic loading, and local cl."""
+    import matplotlib.pyplot as plt
+
+    d = parse_lod(lod_path)
+    st, refs = d["strips"], d["refs"]
+    wing = st["VortexSheet"] == 1
+    y, c, cl, da = (st[k][wing] for k in ("Yavg", "Chord", "Cl", "dArea"))
+    order = np.argsort(y)
+    y, c, cl, da = y[order], c[order], cl[order], da[order]
+    CL = float(np.sum(cl * da) / np.sum(da))
+    b2 = refs.get("Bref", 2 * np.max(np.abs(y))) / 2
+    load = cl * c / (CL * refs["Cref"])
+    eta = y / b2
+    area_ratio = np.trapezoid(load, eta) if hasattr(np, "trapezoid") else np.trapz(load, eta)
+    ell = (4 / np.pi) * np.sqrt(np.clip(1 - np.linspace(-1, 1, 201) ** 2, 0, None)) * area_ratio / 2
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+    axes[0].plot(eta, load, "-", color="#2a6fdb", lw=2, label="VSPAERO VLM")
+    axes[0].plot(np.linspace(-1, 1, 201), ell, "--", color="#444444", label="elliptic, same lift")
+    axes[0].set_xlabel("spanwise station  2y/b")
+    axes[0].set_ylabel("load  cl c / (CL c_ref)")
+    axes[0].set_title("spanwise lift distribution")
+    axes[0].legend(loc="lower center", frameon=False)
+    axes[1].plot(eta, cl, "-", color="#2a6fdb", lw=2)
+    axes[1].axhline(CL, color="#444444", ls="--", lw=1)
+    axes[1].text(0.0, CL + 0.01, f"aircraft CL {CL:.2f}", ha="center", va="bottom", color="#444444")
+    axes[1].set_xlabel("spanwise station  2y/b")
+    axes[1].set_ylabel("local section cl")
+    axes[1].set_title("local lift coefficient (peak sets where stall starts)")
+    for ax in axes:
+        ax.grid(alpha=0.3)
+        ax.spines[["top", "right"]].set_visible(False)
+        ax.set_xlim(-1.02, 1.02)
+    if title:
+        fig.suptitle(title)
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
+    i = int(np.argmax(cl))
+    return {"CL": CL, "cl_max": float(cl[i]), "eta_at_cl_max": float(abs(eta[i]))}
+
+
+# --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
 
@@ -814,6 +882,14 @@ def main(argv: list[str] | None = None) -> None:  # pragma: no cover - CLI
     sub = p.add_subparsers(dest="cmd", required=True)
     pp = sub.add_parser("prepare", help="write OpenVSP scripts for the optimizer finalists")
     pa = sub.add_parser("analyse", help="compare VSPAERO output with the AeroSandbox VLM")
+    if argv is None and len(sys.argv) > 1 and sys.argv[1] == "spanload" or argv and argv[0] == "spanload":
+        ps = argparse.ArgumentParser(prog="python -m manta_mapper.vspaero spanload")
+        ps.add_argument("lod")
+        ps.add_argument("--out", required=True)
+        ps.add_argument("--title", default="")
+        a = ps.parse_args((argv if argv is not None else sys.argv[1:])[1:])
+        print(plot_span_loading(a.lod, a.out, a.title))
+        return
     for q in (pp, pa):
         q.add_argument("mission", help="mission TOML")
         q.add_argument("--optimizer", default="docs/optimizer_result.json")

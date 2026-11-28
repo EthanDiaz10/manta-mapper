@@ -13,7 +13,7 @@ visible and mistakes surface early.
 | M1.4 Aero + stability | VLM + NeuralFoil strip drag: neutral point 33.6 % MAC, CG band 261–275 mm, trims within ±3° at cruise, stall 8.7 m/s starting inboard, short period 1.8 Hz; camera mount tilted 6° ([aero_stability.md](aero_stability.md)) (done) |
 | M1.5 Weights + propulsion | 1.20 kg as built (EPP panels, LW-ASA pod), CG on 261 mm with no ballast, real inertia; X2216 1100KV + 10x6 folding + 3S1P P45B; 25 ha lands with ≥ 51 %, 50 ha with ≥ 33 % except at 1.5 kg and L/D 10; ~$470 ([weights_propulsion.md](weights_propulsion.md)) (done) |
 | M1.6 Optimizer | design-to-cost optimizer returns a feasible lowest-cost/lightest design. Re-run after the M1.7 rate fix, span bound raised to 2.4 m: 1.84 m span, AR 8.0, 1182 g as built, $470, Dutch roll 0.093, stall 8.71 m/s ([optimizer.md](optimizer.md)) (done) |
-| M1.7 VSPAERO check | top 3 designs run in VSPAERO 3.57 (VLM; panel mesh broken). Lift and drag agree, neutral point 3 % MAC forward (borderline PIPE-4). Found and fixed a rate-derivative bug: Dutch roll is really ~0.07, below the 0.09 margin ([vspaero.md](vspaero.md)) (done) |
+| M1.7 VSPAERO check | top 3 designs run in VSPAERO 3.57 (VLM; panel mesh broken). Lift and drag agree, neutral point 3 % MAC forward (borderline PIPE-4). Found and fixed a rate-derivative bug: Dutch roll is really ~0.07, below the 0.09 margin. Re-checked on the 1.84 m re-run optimum: Dutch roll 0.11 with VSPAERO derivatives (0.07 pessimistic), NP still 3 % MAC forward, so CG band moves 8 mm forward ([vspaero.md](vspaero.md)) (done) |
 
 ## Phase 2: CFD and generated CAD
 

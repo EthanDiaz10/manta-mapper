@@ -139,3 +139,17 @@ def test_vspaero_vlm_results_parse_and_pass_sanity(tmp_path):
     assert V.solution_problems(sw, st) == ""
     bad = V.parse_polar(runs / "F1_panel_sweep.polar")
     assert V.solution_problems(bad, None) != ""  # the broken thick mesh is caught
+
+
+def test_parse_lod_reads_cruise_strips():
+    from manta_mapper.vspaero import parse_lod
+
+    d = parse_lod("vsp_runs/v2/F1_vlm_cruise.lod")
+    st = d["strips"]
+    assert abs(d["refs"]["AoA"] - 5.2) < 1e-3
+    wing = st["VortexSheet"] == 1
+    assert wing.sum() == 138 and (st["VortexSheet"] > 1).sum() == 18
+    # symmetric loading, peak section cl outboard of the centre body
+    cl = st["Cl"][wing]
+    assert abs(cl[:69] - cl[::-1][:69]).max() < 0.01
+    assert 0.40 < cl.max() < 0.50
