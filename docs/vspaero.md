@@ -17,6 +17,16 @@ report in [vspaero_v2_report.txt](vspaero_v2_report.txt)).
 
 ### Where the lift goes (F1 at cruise)
 
+![VSPAERO pressure on F1](img/v2/F1_cp_render.png)
+
+The surface is coloured by VSPAERO's lifting pressure difference ΔCp (red is
+lifting, negative by VSPAERO's convention). Most of the lift comes from the outer
+panels' leading edges. The pod's leading edge also lifts strongly. The white-to-blue
+band along the trailing edge is the reflexed aft part of the airfoil, which carries
+a small download. That download is what trims a tailless wing. The render was made
+on the laptop from VSPAERO's binary `.adb` output and cross-checked against its own
+centreline pressure slice.
+
 ![Spanwise loading](img/v2/spanwise_loading.png)
 
 A single VSPAERO run at the cruise point (alpha 5.2°, 14 m/s, CL 0.37) gives the
