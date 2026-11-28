@@ -11,7 +11,7 @@ the fin joint, so until now nothing had looked at thickness effects.
 
 | Question | Answer |
 |---|---|
-| Where is the neutral point? | **279 mm from the pod nose (34.8 % MAC).** That falls between AeroSandbox (281 mm) and VSPAERO (273 mm), much closer to AeroSandbox. At the planned 260.5 mm CG the static margin is **7.1 %** (pipeline 8.1 %, VSPAERO 5.0 %). The 8 mm forward CG shift recommended after VSPAERO is not needed for stability. Keeping the 252 mm first-flight CG still costs nothing and adds margin |
+| Where is the neutral point? | **279 mm from the pod nose (34.8 % MAC).** That falls between AeroSandbox (281 mm) and VSPAERO (273 mm), much closer to AeroSandbox. At the planned 260.5 mm CG the static margin is **7.1 %** (pipeline 8.1 %, VSPAERO 5.0 %). The fine mesh puts it 4 mm further aft (285 mm, SM 9.3 %), so 279 mm is the conservative figure. The 8 mm forward CG shift recommended after VSPAERO is not needed for stability. Keeping the 252 mm first-flight CG still costs nothing and adds margin |
 | Lift slope? | 4.47 /rad: 7 % below AeroSandbox and 4 % below VSPAERO (PIPE-4 limit 10 %) ✔ |
 | Trim at cruise? | Cruise CL 0.362 at **alpha 4.9°**, the same in all three codes. Cm at the CG is +0.006 with the elevons neutral, a small nose-up moment: a fraction of a degree of down-elevon |
 | Spanwise loading? | Lies on top of VSPAERO's from the blend to the tip. The pod carries slightly less, because the thick pod and real blend are not a flat VLM sheet |
@@ -84,7 +84,8 @@ the size of difference that resolving the trailing-edge flow on the reflexed
 S5010 produces with SST, so the medium-mesh lift slope (4.47 /rad) may be
 a few per cent low; it is still inside PIPE-4's 10 % of both VLMs. Whether
 the neutral point moves with the mesh is being checked with fine-mesh runs at
-2.5° and 8° (section 3).
+2.5° and 8° (section 3): it moves about 4 mm aft, so the medium-mesh
+neutral point is the conservative one.
 
 ![Force convergence](img/cfd/cfd_convergence.png)
 
@@ -101,17 +102,31 @@ precise numbers.
 |---|---|---|---|---|
 | AeroSandbox VLM | 4.80 | 281.5 | 35.8 | 8.1 % |
 | VSPAERO VLM | 4.64 | 273.5 | 32.8 | 5.0 % |
-| **CFD** | **4.47** | **278.8** | **34.8** | **7.1 %** |
+| **CFD, medium mesh** | **4.47** | **278.8** | **34.8** | **7.1 %** |
+| CFD, fine mesh (2.5° to 8°) | 4.58 | 284.6 | 37.0 | 9.3 % |
 
 All three are fitted over alpha 0° to 8°. CFD's Cm(CL) is slightly curved:
 the static margin grows from about 5 % near zero lift to about 8.5 % at
 CL 0.5, as the first trailing-edge separation unloads the outer panels. The
 7.1 % is the slope through the cruise point.
 
+**Fine-mesh check.** The fine mesh (4.7 M cells) was run at 2.5° (laptop),
+5.2° (laptop) and 8° (cloud). Over the same three angles the medium mesh puts
+the neutral point at 281.0 mm, the fine mesh at 284.6 mm: 3.6 mm (1.4 % MAC)
+further aft, with a 3 % steeper lift slope. Refining the mesh makes the wing
+more stable, not less, so the medium-mesh 278.8 mm used in the table above is
+the conservative figure, and the mesh-converged value is probably 282 to
+285 mm, at or just behind AeroSandbox. At cruise the fine mesh gives alpha
+4.6°, Cm at the CG −0.001 and CD 0.028, the same picture as the medium one.
+The fine 2.5° force history stays on the laptop
+(`cfd/runs/F1_fine_ap02_5`); its final values are CL 0.1872, CD 0.02288,
+Cm +0.0144.
+
 The neutral-point question from M1.7 is answered. VSPAERO's forward shift
 came from its stronger induced loading. The CFD, with thickness and viscosity,
-lands much closer to the AeroSandbox pipeline (1 % MAC aft of it is within
-PIPE-4's 3 %; VSPAERO is 2 % MAC forward of the CFD). The CG band from M1.4
+lands much closer to the AeroSandbox pipeline (1 % MAC forward of it on the medium mesh,
+1 % aft on the fine mesh, both well within PIPE-4's 3 %; VSPAERO is 2 to 4 %
+MAC forward of the CFD). The CG band from M1.4
 (261 to 275 mm, SM 10 to 5 %) is correct to within about 1 % MAC.
 
 ## 4. Where the lift goes, and the fin junction
