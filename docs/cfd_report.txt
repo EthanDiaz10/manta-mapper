@@ -1,0 +1,32 @@
+M2.1 CFD check: F1, span 1.836 m, S 0.4192 m^2, MAC 260 mm
+OpenFOAM v2406 simpleFoam, k-omega SST (fully turbulent), half model; 14.0 m/s, rho 0.9886, Re_MAC 1.93e+05; moments about x = 260.5 mm (the pipeline's SM 7.5 % CG); elevons neutral, no prop, no skid
+
+Mesh study at alpha 5.20 deg:
+  mesh         cells      CL       CD      CDf       Cm
+  coarse      379233  0.3958  0.03249  0.01197  -0.0011
+  medium     1450724  0.3853  0.02896  0.01313   0.0040
+  fine       4689556  0.4150  0.02944  0.01433  -0.0055
+
+Alpha sweep (medium mesh):
+   alpha      CL       CD      CDp      CDf    Cm_cg    L/D
+    0.00 -0.0284  0.02263  0.01014  0.01249   0.0298   -1.3
+    2.50  0.1678  0.02264  0.00928  0.01337   0.0197    7.4
+    5.20  0.3853  0.02896  0.01583  0.01313   0.0040   13.3
+    8.00  0.5939  0.04399  0.03230  0.01169  -0.0139   13.5
+   11.00  0.7005  0.08707  0.07746  0.00961  -0.0330    8.0
+   14.00  0.7427  0.15080  0.14205  0.00875  -0.0457    4.9
+
+Lift slope and neutral point (alpha 0-8 deg):
+                     CL_alpha /rad  x_np mm  NP % MAC  SM at CG %
+  AeroSandbox VLM            4.796    281.5      35.8         8.1
+  VSPAERO VLM                4.638    273.5      32.8         5.0
+  CFD (this)                 4.472    278.8      34.8         7.1
+
+Cruise (CL 0.362 for 1.5 kg at 14 m/s): alpha 4.91 deg (AeroSandbox 4.95, VSPAERO 4.95), Cm at CG +0.0057, CD 0.0283 (friction 0.0132), L/D 12.8
+Highest CL in the sweep: 0.743 at alpha 14.0 deg
+Pipeline cruise CD for comparison: pipeline (VLM + NeuralFoil, transitional) 0.0213, VSPAERO induced + NeuralFoil profile 0.0233
+
+Turbulence-model check, S5010 alone (2-D, same settings, Re 1.93e+05):
+  alpha 4: cl 0.425, alpha 8: cl 0.764, alpha 11: cl 0.754, alpha 14: cl 0.552
+  NeuralFoil, natural transition (n_crit 9): cl_max 1.26 at 14 deg
+  NeuralFoil, tripped at the leading edge: cl_max 1.22 at 13.5 deg

@@ -44,6 +44,8 @@ and battery, and whether the 25 ha and 50 ha flights make it home with 30 %.
 [docs/optimizer.md](docs/optimizer.md) covers the design-to-cost optimizer
 (M1.6): ten shape variables, 24 constraints, and an optimum that fixes the
 baseline's one weak spot (Dutch roll damping) with margin, 32 g lighter.
+[docs/cfd.md](docs/cfd.md) covers the RANS CFD check (M2.1): OpenFOAM on the
+real thick shape, which settles the neutral point and brackets cruise drag.
 
 ```bash
 pip install -e ".[dev]"
