@@ -37,7 +37,7 @@ will fit.
 | | `C3_inner_rib_R`: inner rib with floor and roof | LW-ASA | 12 g | Inner boss bore, 10x1 strip slots |
 | | `C4_nose_ring`: front 25 mm of the pod, both halves | LW-ASA | 14 g | TPU nose cap fit |
 | | `C5_centre_floor`: front floor strip, both halves | LW-ASA | 3 g | Centreline spigot band |
-| | Real small parts from `cad/stl/`: `nacelle`, `nose_cap`, `camera_mount`, 2x `battery_stop`, the 4 hot-wire templates | ASA, TPU, LW-ASA, PETG | 105 g | Motor pattern, nose cap, camera holes, tray stops. These are the real parts, so a pass means they're done |
+| | Real small parts from `cad/stl/`: `nacelle`, `nose_cap`, `camera_mount`, 2x `battery_stop`, the 4 hot-wire templates | LW-ASA (nacelle unfoamed), TPU, PETG | 105 g | Motor pattern, nose cap, camera holes, tray stops. These are the real parts, so a pass means they're done |
 | **4 Tests** | Fin tape pull, panel magnet pull, boss bond push-out, hot-wire kerf | | | The M2.2 assumptions (procedures below) |
 | **5 Pod** | The four `pod_*` sections, then lids | LW-ASA | 245 g | Only after stages 1-4 pass, or after the CAD has been regenerated with the gauges' numbers |
 
@@ -70,13 +70,19 @@ it only checks the band's width.
 
 ## Slicer settings (Creality Print on the K2 Pro)
 
+Filament to buy: **two 650 g spools of LW-ASA** (pod ~245 g, test pieces ~150 g,
+reprints). No plain ASA: the nacelle prints in LW-ASA at its coolest setting and
+full flow, so it comes out nearly solid. A small spool of TPU 95A for the nose
+cap. The battery stops and templates can be PETG or whatever you have (PLA is
+fine for templates).
+
 Starting points. Stage 1 sets the LW-ASA numbers; the others are standard and
 need no calibration beyond the K2 Pro's own flow and pressure-advance run.
 
-| | LW-ASA (pod, lids, camera mount, coupons) | ASA, solid (nacelle) | TPU 95A (nose cap) | PETG (stops, templates) |
+| | LW-ASA (pod, lids, camera mount, coupons) | LW-ASA printed solid (nacelle) | TPU 95A (nose cap) | PETG (stops, templates) |
 |---|---|---|---|---|
-| Dry first | 4-6 h at 65 °C | 4 h at 65 °C | 6 h at 50-55 °C | 4 h at 65 °C |
-| Nozzle | **250 °C start**; colorFabb's range is 240-260 °C. Hotter foams more | 250-260 °C | 220-230 °C | 235-245 °C |
+| Dry first | 4-6 h at 65 °C | same spool as the pod | 6 h at 50-55 °C | 4 h at 65 °C |
+| Nozzle | **250 °C start**; colorFabb's range is 240-260 °C. Hotter foams more | **240 °C (bottom of its range), flow 100 %**: it barely foams, about 1.0 g/cm³ | 220-230 °C | 235-245 °C |
 | Flow | **set by stage 1** (start at 65 %, see below) | 100 % | 100 % | 100 % |
 | Bed | 90-100 °C, textured PEI with glue stick | 100 °C | 40-50 °C | 70-80 °C, glue stick (stops PETG pulling PEI) |
 | Chamber | door shut, heat to 50-60 °C if fitted, let it soak 15 min | 50-60 °C | door open, or lid off | door shut, no heater |

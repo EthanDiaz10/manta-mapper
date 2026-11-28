@@ -25,8 +25,8 @@
   [--- ] C3-A      C3_inner_rib_R: 10x1 carbon strip slides through floor and roof slots
   [--- ] C3-B      C3_inner_rib_R: real 14 mm tube slides through the inner rib bore
   [--- ] C4-A      C4_nose_ring + nose_cap: TPU nose cap pushes on fully and stays on when shaken
-  [--- ] P-NAC-A   nacelle (ASA): motor's M3 bolts go into the 16/19 mm pattern by hand
-  [--- ] P-NAC-B   nacelle (ASA): prop shaft / motor back clears the 10 mm centre hole
+  [--- ] P-NAC-A   nacelle (LW-ASA, solid): motor's M3 bolts go into the 16/19 mm pattern by hand
+  [--- ] P-NAC-B   nacelle (LW-ASA, solid): prop shaft / motor back clears the 10 mm centre hole
   [--- ] P-CAM-A   camera_mount: Camera Module 3 M2 holes line up (21 x 12.5 mm)
   [--- ] P-STOP-A  battery_stop (PETG): drops into a C1 tray slot without force, no rattle
   [--- ] P-KERF    EPP test cut: hot-wire kerf (template assumes 1.0 mm)
