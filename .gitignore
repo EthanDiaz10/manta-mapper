@@ -221,3 +221,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CFD meshes and fields (small results are archived in cfd/results)
+cfd/runs/
+cfd/*.stl
+cfd/sec/
