@@ -56,6 +56,9 @@ half-sections that fit the 300 mm printer, the spar sleeve mounts, hatches,
 battery tray, camera, motor nacelle and twin skid rails, automatic payload
 packing, EPP hot-wire templates, and a Fusion 360 script that builds it all
 from one recipe.
+[docs/test_prints.md](docs/test_prints.md) is the test-print plan (M2.4): coupons
+cut from the real pod parts, fit gauges, slicer settings per material, pass/fail
+checks and a weigh-in log that a script judges against the mass budget.
 
 ```bash
 pip install -e ".[dev]"
@@ -100,6 +103,7 @@ src/manta_mapper/
   cad.py                scripted CAD: print split, sleeve mounts, hatches, tray, packing, checks, recipe (M2.3)
   cad_mesh.py           builds the CAD recipe as meshes (manifold3d): STLs, masses, fit checks (M2.3)
   cad_templates.py      DXF hot-wire templates for the EPP panels, fins and skid (M2.3)
+  testprints.py         test-print coupons, fit gauges, check sheet, weigh-in log and checker (M2.4)
   validation.py         (placeholder for a later milestone)
 cad/
   fusion/MantaMapperCAD/  Fusion 360 script that builds the parts from cad/manta_cad.json
