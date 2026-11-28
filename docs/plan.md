@@ -21,7 +21,7 @@ visible and mistakes surface early.
 |---|---|
 | M2.1 CFD | final design run in OpenFOAM (or ANSYS Student) at cruise and near stall; compared with VSPAERO. OpenFOAM v2406, k-ω SST, 0° to 14°: NP 279 mm (34.8 % MAC), between AeroSandbox and VSPAERO, so the M1.4 CG band holds; cruise CD 0.028 fully turbulent (upper bound); fin junction clean; stall starts inboard as predicted, CL_max not resolvable by SST at this Re ([cfd.md](cfd.md)) (done) |
 | M2.2 Structure | spar sized for AC-10 and AC-13: telescoping pultruded 12x10 > 10x8 > 8x6 tubes in a 14x12 roll-wrapped sleeve, carbon strip carry-through; set by fin tip strikes and gusts (+5.7 g), not the 4 g manoeuvre; +32 g, +$27 ([structures.md](structures.md)) (done, analytic; joint FEA replaced by the M2.4 pull test and the AC-10 wingtip load test) |
-| M2.3 Scripted CAD | Fusion 360 Python script builds the printable sections from the pipeline output |
+| M2.3 Scripted CAD | Fusion 360 Python script builds the printable sections from the pipeline output. The layout, cut search, payload packing and checks are in `cad.py`; one recipe drives the Fusion script and a manifold3d mesh build. Four LW-ASA half-sections + TPU nose fit the K2 Pro with 22 mm spare; 23 of 23 checks pass; printed parts +67 g on M1.5 ([cad.md](cad.md)) (done in Python; first Fusion run on the laptop pending) |
 | M2.4 Test prints | joints, spar fit and hatch printed and checked; a pod section and an EPP panel weighed and fed back into `weights.py` |
 
 ## Phase 3: build, fly, validate

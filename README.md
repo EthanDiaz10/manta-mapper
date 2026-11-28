@@ -49,6 +49,11 @@ real thick shape, which settles the neutral point and brackets cruise drag.
 [docs/structures.md](docs/structures.md) covers the spar and the panel joint
 (M2.2): load cases from gusts, hand launch, catapult, belly landings and fin
 tip strikes, and a telescoping carbon spar sized from off-the-shelf tubes.
+[docs/cad.md](docs/cad.md) covers the scripted CAD (M2.3): the pod split into four
+half-sections that fit the 300 mm printer, the spar sleeve mounts, hatches,
+battery tray, camera, motor nacelle and twin skid rails, automatic payload
+packing, EPP hot-wire templates, and a Fusion 360 script that builds it all
+from one recipe.
 
 ```bash
 pip install -e ".[dev]"
@@ -59,6 +64,7 @@ python -m manta_mapper.stability config/mission.toml --plots docs/img --report d
 python -m manta_mapper.weights config/mission.toml --plots docs/img --report docs/weights_report.txt
 python -m manta_mapper.optimize config/mission.toml --report docs/optimizer_report.txt --json docs/optimizer_result.json --plots docs/img
 python -m manta_mapper.structures config/mission.toml --report docs/structures_report.txt --json docs/structures_result.json --plots docs/img
+python -m manta_mapper.cad --json cad/manta_cad.json --dxf cad/templates --stl cad/stl --render docs/img/cad_parts.png --report docs/cad_report.txt --plots docs/img
 pytest
 ```
 
@@ -89,7 +95,13 @@ src/manta_mapper/
   weights.py            weight build-up, CG placement, inertia, M1.5 report (M1.5)
   optimize.py           design-to-cost optimizer: screen + COBYLA, coarse/full VLM (M1.6)
   structures.py         load cases, telescoping spar sizing, sleeve and carry-through (M2.2)
-  cad.py, validation.py (placeholders for later milestones)
+  cad.py                scripted CAD: print split, sleeve mounts, hatches, tray, packing, checks, recipe (M2.3)
+  cad_mesh.py           builds the CAD recipe as meshes (manifold3d): STLs, masses, fit checks (M2.3)
+  cad_templates.py      DXF hot-wire templates for the EPP panels, fins and skid (M2.3)
+  validation.py         (placeholder for a later milestone)
+cad/
+  fusion/MantaMapperCAD/  Fusion 360 script that builds the parts from cad/manta_cad.json
+  manta_cad.json, stl/, templates/   generated recipe, printable STLs, DXF templates
 tests/
 ```
 
