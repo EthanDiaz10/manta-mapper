@@ -79,6 +79,30 @@ GROWTH = {"bought": 0.05, "structure": 0.20, "wiring": 0.30}
 
 
 @dataclass(frozen=True)
+class SparPiece:
+    """One tube of a telescoping spar (M2.2). Stations are fractions of the panel's
+    spar length from the panel root; negative runs into the pod sleeve."""
+
+    od_m: float
+    id_m: float
+    eta0: float
+    eta1: float
+    density: float = CARBON_DENSITY
+    usd_per_m: float = CARBON_TUBE_USD_PER_M
+    kind: str = "pultruded"
+
+
+#: M2.2 recommendation (structures.py, sized on the 1.84 m optimum, spar 770 mm): telescoping pultruded
+#: tubes 12x10 (from 100 mm inside the pod sleeve to 303 mm) > 10x8 (253-467 mm) > 8x6 (417 mm to the tip),
+#: 50 mm bonded overlaps. Stations are fractions of the panel spar so the optimizer can scale them.
+M22_SPAR = (
+    SparPiece(0.012, 0.010, -0.1299, 0.3936, CARBON_DENSITY, 8.0, "pultruded"),
+    SparPiece(0.010, 0.008, 0.3287, 0.6066, CARBON_DENSITY, 6.0, "pultruded"),
+    SparPiece(0.008, 0.006, 0.5417, 1.0, CARBON_DENSITY, 5.0, "pultruded"),
+)
+
+
+@dataclass(frozen=True)
 class BuildChoices:
     panel_foam: str = "EPP 1.9 lb"
     pod_material: str = "LW-ASA"
@@ -89,6 +113,8 @@ class BuildChoices:
     spar_od_m: float | None = None  # None: use the geometry's spar diameter
     spar_wall_m: float = 0.001  # 10 x 8 mm tube
     spar_socket_m: float = 0.10  # tube length inside the pod socket
+    #: M2.2 telescoping spar (structures.py). None: one tube of spar_od_m x spar_wall_m, full length (M1.5).
+    spar_layout: tuple[SparPiece, ...] | None = M22_SPAR
     rear_pin_d_m: float = 0.003  # anti-rotation carbon pin at ~60 % chord
     rear_pin_len_m: float = 0.15
     cg_target_x_m: float = 0.261  # M1.4: 10 % static margin end of the band (first flights)
@@ -246,23 +272,44 @@ def structure_items(geom: BWBGeometry, ch: BuildChoices, n: int = 40) -> list[It
                       2 * span_e * CARBON_ROD_USD_PER_M, "structure"))
 
     # --- spar tubes (one per panel, plugging into pod sockets) ---------------
-    od = ch.spar_od_m or geom.spar_diameter_m
-    lin = math.pi / 4 * (od**2 - (od - 2 * ch.spar_wall_m) ** 2) * CARBON_DENSITY  # kg/m
     f = geom.spar_chord_fraction
     r_le, r_c, _ = geom._outer_station(0.0)
     t_le, t_c, _ = geom._outer_station(1.0)
     p0 = r_le + np.array([f * r_c, 0, 0])
     p1 = t_le + np.array([f * t_c, 0, 0])
     d = (p1 - p0) / np.linalg.norm(p1 - p0)
-    start = p0 - d * ch.spar_socket_m
-    L = geom.spar_length_m + ch.spar_socket_m
-    s = (np.arange(10) + 0.5) / 10 * L
-    pts = start + s[:, None] * d
-    m_seg = lin * L / 10
-    sp = np.vstack([np.column_stack([np.full(10, m_seg), pts]),
-                    np.column_stack([np.full(10, m_seg), pts * [1, -1, 1]])])
-    items.append(Item(f"Spar: {od*1000:.0f} x {(od-2*ch.spar_wall_m)*1000:.0f} mm carbon tube, 2 x {L*1000:.0f} mm",
-                      "structure", sp, 2 * L * CARBON_TUBE_USD_PER_M, "bought"))
+    Lp = geom.spar_length_m
+    if ch.spar_layout is None:
+        od = ch.spar_od_m or geom.spar_diameter_m
+        pieces = (SparPiece(od, od - 2 * ch.spar_wall_m, -ch.spar_socket_m / Lp, 1.0),)
+    else:
+        pieces = ch.spar_layout
+    sp_pts, cost, names = [], 0.0, []
+    for pc in pieces:
+        lin = math.pi / 4 * (pc.od_m**2 - pc.id_m**2) * pc.density  # kg/m
+        a, b = pc.eta0 * Lp, pc.eta1 * Lp
+        s = a + (np.arange(10) + 0.5) / 10 * (b - a)
+        pts = p0 + s[:, None] * d
+        m_seg = lin * (b - a) / 10
+        sp_pts += [np.column_stack([np.full(10, m_seg), pts]), np.column_stack([np.full(10, m_seg), pts * [1, -1, 1]])]
+        sticks = 2 * (b - a) if ch.spar_layout is None else math.ceil(2 * (b - a) - 1e-6)  # M2.2: whole 1 m sticks
+        cost += pc.usd_per_m * sticks
+        names.append(f"{pc.od_m*1000:.0f}x{pc.id_m*1000:.0f}" + ("" if ch.spar_layout is None else f" {pc.kind}"))
+    L = (pieces[0].eta1 - min(pc.eta0 for pc in pieces)) * Lp
+    label = (f"Spar: {names[0]} mm carbon tube, 2 x {L*1000:.0f} mm" if len(pieces) == 1 and ch.spar_layout is None
+             else "Spar: telescoping carbon tubes " + " > ".join(names) + " mm, both panels")
+    items.append(Item(label, "structure", np.vstack(sp_pts), cost, "bought"))
+    if ch.spar_layout is not None:
+        # M2.2 joint: roll-wrapped sleeve per side (ID = root tube OD) and carbon strip caps across the pod
+        root = pieces[0]
+        sl_len = ch.spar_socket_m + 0.02
+        m_sleeve = math.pi / 4 * ((root.od_m + 0.002) ** 2 - root.od_m**2) * 1500 * sl_len
+        x_in = p0 - d * ch.spar_socket_m
+        cap_len = 2 * x_in[1] + 0.06
+        m_caps = 2 * 0.010 * 0.001 * cap_len * CARBON_DENSITY  # one in the floor, one in the roof
+        pts = np.vstack([_mirror(m_sleeve, *(p0 - d * sl_len / 2)), _lump(m_caps, x_in[0], 0, 0)])
+        items.append(Item("Spar carry-through: 2 roll-wrapped sleeves + 2 carbon strip caps (10x1 mm)", "structure",
+                          pts, 16.0 + 2 * cap_len * CARBON_ROD_USD_PER_M + 5, "bought"))
     pin = math.pi / 4 * ch.rear_pin_d_m**2 * CARBON_DENSITY * ch.rear_pin_len_m
     items.append(Item("Anti-rotation pins: 3 mm carbon rod at 60 % chord", "structure",
                       _mirror(pin, geom.root_le_x_m + 0.6 * geom.root_chord_m, geom.root_y_m, 0.0),

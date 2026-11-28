@@ -1,0 +1,86 @@
+== Manta Mapper: spar, load cases and the panel joint (M2.2) ==
+Design: span 1.836 m, 0.419 m^2, outer panel spar 770 mm swept 13.8 deg; 1182 g as built, sized at 1.5 kg
+Lift shape: AeroSandbox VLM at CL 0.9; each outer panel + fin carries 39 % of the lift (fin 1.7 %); CL_alpha 4.81/rad
+Factor of safety 1.5 on every limit load (AC-10); repeated cases (launch, landing, tip strike) hold printed parts to half their strength
+
+-- Flight envelope (limit) --
+  1.50 kg: manoeuvre +4.0 / -1.5 g
+     gust 7.6 m/s at V_C 20 m/s: +5.7 / -3.7 g (stall caps at 5.6 g) -> lift 83 / -50 N
+     gust 3.8 m/s at V_D 30 m/s: +4.5 / -2.5 g (stall caps at 12.7 g) -> lift 67 / -37 N
+  1.18 kg: manoeuvre +4.0 / -1.5 g
+     gust 7.6 m/s at V_C 20 m/s: +6.3 / -4.3 g (stall caps at 7.2 g) -> lift 73 / -50 N
+     gust 3.8 m/s at V_D 30 m/s: +5.0 / -3.0 g (stall caps at 16.1 g) -> lift 58 / -35 N
+  A wing this lightly loaded is thrown around by gusts harder than by the 4 g of AC-10, so the gust lines set the flight case. The spar is sized for both.
+
+-- Limit loads at the panel root (the joint) and where they come from --
+case                                                        M_bend  shear  torque   pull
+                                                               N m      N     N m      N
+Manoeuvre +4 g, 1.5 kg                                        6.01   17.4    1.74    0.9
+Manoeuvre -1.5 g, 1.5 kg                                      2.25    6.5    1.62   -0.4
+Gust +7.6 m/s at V_C 20 m/s, 1.50 kg                          8.47   24.6    1.82    1.3
+Gust -7.6 m/s at V_C 20 m/s, 1.50 kg                          5.08   14.7    1.71   -0.8
+Gust +7.6 m/s at V_C 20 m/s, 1.18 kg                          6.84   19.9    1.85    1.1
+Gust -7.6 m/s at V_C 20 m/s, 1.18 kg                          4.65   13.5    1.75   -0.7
+Hand launch: 13.2 g forward                                   6.03   17.6    0.02    4.2
+Bungee catapult (stretch): 14.4 g forward                     6.54   19.1    0.02    4.6
+Belly landing: 1.5 m/s sink, 10 g                             4.57   13.0    0.45   -0.7
+Hard landing (once): 2.5 m/s sink, 27 g                      12.70   36.2    1.26   -1.9
+Tip strike: fin drags back and up (30 N)                     22.60   29.4    0.00    6.2
+Tip strike: fin drags back and down (30 N)                   22.90   29.7    0.00    3.9
+
+-- Spar: 47 telescoping layouts searched; 24 pass every check --
+CHOSEN: 12x10 pultruded [-100..303 mm] -> 10x8 pultruded [+253..467 mm] -> 8x6 pultruded [+417..770 mm]
+  both panels: 86 g, $19
+  [OK ] tube buried in the foam with 2 mm cover (spare depth): +0.4 mm at the tightest station
+  [OK ] spar strength (ultimate, bending + torsion): 0.56 of allowable, limit 0.80 (Tip strike: fin drags back and down (30 N) at 0 mm)
+  [OK ] crushing at the sleeve mouth (ultimate): 0.22 of allowable, limit 0.80 (Tip strike: fin drags back and down (30 N))
+  [OK ] tip deflection, level flight 1.5 kg: 4.3 mm (limit 12.0 mm) 
+  [OK ] elevon reversal speed: 45 m/s (need 36 m/s = 1.2 x V_D)
+
+Runner-up layouts (objective = cost + $100/kg x mass + $4 per bonded joint, both panels):
+  $ 35.8    88 g  $ 19  reversal  46 m/s  defl  4.2 mm  12x10 pultruded [-100..303 mm] -> 10x8 pultruded [+253..567 mm] -> 8x6 pultruded [+517..770 mm]
+  $ 36.0    90 g  $ 19  reversal  47 m/s  defl  4.0 mm  12x10 pultruded [-100..386 mm] -> 10x8 pultruded [+336..567 mm] -> 8x6 pultruded [+517..770 mm]
+  $ 39.5    85 g  $ 23  reversal  47 m/s  defl  4.5 mm  12x10 pultruded [-100..303 mm] -> 10x8 pultruded [+253..467 mm] -> 8x6 roll-wrapped [+417..770 mm]
+  $ 39.7    87 g  $ 23  reversal  46 m/s  defl  4.2 mm  12x10 pultruded [-100..303 mm] -> 10x8 pultruded [+253..567 mm] -> 8x6 roll-wrapped [+517..770 mm]
+  $ 39.9    89 g  $ 23  reversal  47 m/s  defl  4.0 mm  12x10 pultruded [-100..386 mm] -> 10x8 pultruded [+336..567 mm] -> 8x6 roll-wrapped [+517..770 mm]
+
+M1.5 assumption, 10x8 pultruded full length: FAILS
+  fails tube buried in the foam with 2 mm cover (spare depth): -1.6 mm
+  fails spar strength (ultimate, bending + torsion): 0.85 of allowable (Tip strike: fin drags back and down (30 N) at 0 mm)
+
+-- Joint: panel spar -> sleeve -> printed ribs -> carry-through --
+Sleeve: 14x12 roll-wrapped tube, 120 mm, bonded through two printed ribs 8 mm thick at its ends, each with a 15 mm boss round the sleeve; spar goes 100 mm in
+  rib boss bearing: 0.37 of allowable (Tip strike: fin drags back and down (30 N))
+  sleeve-to-boss epoxy bond: 0.59 of allowable (Tip strike: fin drags back and down (30 N))
+  (repeated cases count against half the printed/bond strength)
+  anti-rotation pin 3 mm at 35% root chord behind the spar: bearing 0.13 of allowable (Gust +7.6 m/s at V_C 20 m/s, 1.18 kg)
+Carry-through at x = 205 mm (sleeve inner ends at y = +-74 mm): 1 x 10x1 mm carbon strip in the floor and 1 in the roof, 36 mm apart
+  ultimate cap force 801 N; bond each strip end >= 80 mm to the rib
+Panel retention: launch pulls each panel out along the swept spar with 6.2 N (limit); hold it with >= 19 N and let go above ~3x that so a cartwheel pops the panel off instead of breaking the sleeve
+
+-- Belly-landing sweep (AC-13): spar utilisation at limit, no factor --
+  sink 1.0 m/s ->   4.2 g over 12 mm: spar at  2.4 % of strength
+  sink 1.5 m/s ->   9.6 g over 12 mm: spar at  5.4 % of strength
+  sink 2.0 m/s ->  17.0 g over 12 mm: spar at  9.6 % of strength
+  sink 2.5 m/s ->  26.6 g over 12 mm: spar at 15.0 % of strength
+  sink 3.0 m/s ->  38.2 g over 12 mm: spar at 21.6 % of strength
+  sink 4.0 m/s ->  68.0 g over 12 mm: spar at 38.5 % of strength
+  The panels are light, so even a 4 m/s arrival is far from breaking the spar: landings are a skid,
+  fin and pod-floor problem, not a spar problem.
+
+-- Restraint loads for parts in the pod (ultimate) --
+part                                             g  fore-aft N   down N
+Battery                                        237        50.1     36.9
+Motor                                           71        15.1     11.1
+ESC                                             37         7.8      5.7
+Flight controller                               26         5.5      4.1
+Elevon servo                                    25         5.3      3.9
+Prop                                            20         4.2      3.1
+Raspberry Pi Zero 2 W + heatsink                14         2.9      2.1
+Airspeed                                        13         2.7      2.0
+Remote ID broadcast module                      13         2.7      2.0
+
+-- Weights feedback --
+Spar as built: 80 g (M1.5, 10x8 full length) -> 113 g (includes sleeves and carry-through caps 22 g); change +32 g
+Aircraft as built: 1182 g -> 1214 g (81% of the 1.5 kg sizing mass); parts +27 USD; battery moves +6 mm to hold the CG target
+weights.py now uses this spar by default (BuildChoices.spar_layout = M22_SPAR).

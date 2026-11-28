@@ -57,9 +57,10 @@ def test_vlm_resolution_context_restores():
 def test_baseline_evaluates_close_to_m15(ev0):
     assert not ev0.error, ev0.error
     m = ev0.metrics
-    # M1.5: 1195 g as built, ~$470, X2216 set; M1.4: stall 8.88 m/s at SM 10 %, NP 33.6 % MAC
-    assert m["mass_built_kg"] == pytest.approx(1.195, abs=0.01)
-    assert m["cost_usd"] == pytest.approx(469, abs=3)
+    # M1.5: 1195 g as built, ~$470, X2216 set; M2.2 spar (telescoping tubes, sleeves, carry-through)
+    # adds ~30 g and ~$28. M1.4: stall 8.88 m/s at SM 10 %, NP 33.6 % MAC
+    assert m["mass_built_kg"] == pytest.approx(1.225, abs=0.01)
+    assert m["cost_usd"] == pytest.approx(497, abs=3)
     assert "X2216" in ev0.propulsion
     assert m["stall_speed_m_s"] == pytest.approx(8.88, abs=0.15)
     assert m["np_pct_mac"] == pytest.approx(33.6, abs=0.5)
